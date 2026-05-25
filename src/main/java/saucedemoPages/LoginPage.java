@@ -13,15 +13,16 @@ public class LoginPage extends BasePage {
 	}
 
 	// Csak a bevitelimező "címét" (lokátorát) mentjük el az osztály tetején.
-	private By usernameInput = By.xpath("//div[@class='login-box']/form/div/input[@placeholder='Username']");
-	private By passwordInput = By.xpath("//div[@class='login-box']/form/div/input[@type='password']");
-	private By loginBtn = By.xpath("//div[@class='login-box']/form/input[@id='login-button']");
-	private By errorMessage = By.xpath("//div/form/div[@class='error-message-container error']/h3[@data-test='error']");
+	private final By usernameInput = By.xpath("//div[@class='login-box']/form/div/input[@placeholder='Username']");
+	private final By passwordInput = By.xpath("//div[@class='login-box']/form/div/input[@type='password']");
+	private final By loginBtn = By.xpath("//div[@class='login-box']/form/input[@id='login-button']");
+	private final By errorMessage = By
+			.xpath("//div/form/div[@class='error-message-container error']/h3[@data-test='error']");
 
 	public void waitsForComponents() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput));
-		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(loginBtn)));
+		wait.until(ExpectedConditions.elementToBeClickable(loginBtn));
 	}
 
 	public void fillInputs(String username, String password) {

@@ -3,8 +3,6 @@ package saucedemoTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,57 +18,58 @@ class LoginPageTest extends BaseTest {
 	LoginPage loginPage;
 
 	@Test
-	 @DisplayName("Üresen hagyott input mezőkkel történi bejelentkezés.")
+	@DisplayName("Üresen hagyott input mezőkkel történi bejelentkezés.")
 	void emptyImputFieldsAndTryToLogin() {
 		loginPage = new LoginPage(driver);
 		loginPage.openPage("https://www.saucedemo.com/");
 
 		loginPage.clickonLoginBtn();
-		
+
 		String expectedErrorMessage = "Epic sadface: Username is required";
 		String actualErrorMessage = loginPage.getErrorMessage();
 
 		assertTrue(expectedErrorMessage.equals(actualErrorMessage), "Hibaüzenet nem egyezik meg.");
-	
+
 	}
-	
+
 	@Test
 	@DisplayName("Csak felhasználónévvel törtéső belépési kísérlet.")
 	void tryToLoginWithOnlyUsername() {
 		loginPage = new LoginPage(driver);
 		loginPage.openPage("https://www.saucedemo.com/");
-		
+
 		String username = "standard_user";
 		String password = "";
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickonLoginBtn();
-		
+
 		String expectedErrorMessage = "Epic sadface: Password is required";
 		String actualErrorMessage = loginPage.getErrorMessage();
 
-		assertTrue(expectedErrorMessage.equals(actualErrorMessage), "Hibaüzenet nem egyezik meg. "+actualErrorMessage);
+		assertTrue(expectedErrorMessage.equals(actualErrorMessage),
+				"Hibaüzenet nem egyezik meg. " + actualErrorMessage);
 	}
-	
+
 	@Test
 	@DisplayName("Csak jelszóval törtéső belépési kísérlet.")
 	void tryToLoginWithOnlyPassword() {
 		loginPage = new LoginPage(driver);
 		loginPage.openPage("https://www.saucedemo.com/");
-		
+
 		String username = "";
 		String password = "secret_sauce";
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickonLoginBtn();
-		
+
 		String expectedErrorMessage = "Epic sadface: Username is required";
 		String actualErrorMessage = loginPage.getErrorMessage();
 
-		assertTrue(expectedErrorMessage.equals(actualErrorMessage), "Hibaüzenet nem egyezik meg. "+actualErrorMessage);
+		assertTrue(expectedErrorMessage.equals(actualErrorMessage),
+				"Hibaüzenet nem egyezik meg. " + actualErrorMessage);
 	}
-	
-	@Disabled
+
 	@ParameterizedTest
 	@CsvSource({ "standard_user", "problem_user", "performance_glitch_user", "error_user", "visual_user" })
 	@DisplayName("Összes felhasználónév ellenőrzése.")
@@ -92,23 +91,24 @@ class LoginPageTest extends BaseTest {
 		inventoryPage.clickonhamburgerBtn();
 		inventoryPage.clickonLogoutBtn();
 	}
-	
+
 	@Test
 	@DisplayName("Hibás felhasználónévvel törtéső belépés.")
 	void tryToLoginWithIncorrectUsername() {
 		loginPage = new LoginPage(driver);
 		loginPage.openPage("https://www.saucedemo.com/");
-		
+
 		String username = "12345";
 		String password = "secret_sauce";
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickonLoginBtn();
-		
+
 		String expectedErrorMessage = "Epic sadface: Username and password do not match any user in this service";
 		String actualErrorMessage = loginPage.getErrorMessage();
 
-		assertTrue(expectedErrorMessage.equals(actualErrorMessage), "Hibaüzenet nem egyezik meg. "+actualErrorMessage);
+		assertTrue(expectedErrorMessage.equals(actualErrorMessage),
+				"Hibaüzenet nem egyezik meg. " + actualErrorMessage);
 	}
 
 	@Test
