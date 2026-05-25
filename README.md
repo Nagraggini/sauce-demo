@@ -51,3 +51,9 @@ saucedemo/
                 ├── BaseTest.java
                 └── LoginPageTest.java
 ```
+
+# Futtatás
+
+Terminálba: mvn clean test
+
+mvn test -Dgroups="now"
