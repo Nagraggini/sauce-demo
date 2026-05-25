@@ -1,40 +1,146 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>hu.sajat.automatizazio</groupId>
-  <artifactId>saucedemo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>hu.own.automation</groupId>
+    <artifactId>saucedemo</artifactId>
+    <version>0.1.1-SNAPSHOT</version>
   
-  <dependencies>
+    <name>saucedemo</name>
+
+    <url>https://www.saucedemo.com/</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>   
+    </properties>
+
+    <dependencies>
   
-  <dependency>
-    <groupId>org.junit.platform</groupId>
-    <artifactId>junit-platform-launcher</artifactId>
-    <version>1.10.2</version> <!-- Igazítsd a többi junit-platform verziódhoz, ha szükséges -->
-    <scope>test</scope>
-</dependency>
-  		<!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-		<dependency>
-		    <groupId>org.seleniumhq.selenium</groupId>
-		    <artifactId>selenium-java</artifactId>
-		    <version>4.41.0</version>
-		    <scope>compile</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.41.0</version>
+            <scope>compile</scope>
+        </dependency>
 		
-		<!-- Source: https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
-		<dependency>
-		    <groupId>io.github.bonigarcia</groupId>
-		    <artifactId>webdrivermanager</artifactId>
-		    <version>6.3.3</version>
-		    <scope>compile</scope>
-		</dependency>
+        <!-- Source: https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>6.3.3</version>
+            <scope>compile</scope>
+        </dependency>
 		
 		
-		<!-- Source: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
-		<dependency>
-		    <groupId>org.junit.jupiter</groupId>
-		    <artifactId>junit-jupiter</artifactId>
-		    <version>6.0.3</version>
-		    <scope>test</scope>
-		</dependency>
-	</dependencies>
+        <!-- Source: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.11.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Modern AssertJ használatához.-->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.27.3</version>
+            <scope>test</scope>
+        </dependency>
+				
+    </dependencies>
+
+    <build>
+
+        <plugins>
+            <!--Surefire plugin (JUnit 5 miatt ajánlott)-->
+            <plugin>
+                <!--Új verzió kell a Java 21-től. -->
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+
+            <!--Jacoco a kódlefedettség méréséhez-->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <formats>
+                                <format>XML</format>
+                                <format>CSV</format>
+                                <format>HTML</format>
+                            </formats>
+                            <includeCurrentProject>true</includeCurrentProject>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>            
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version> 
+
+                <!--Ezzel a src/test/java mappában lévő teszteket is figyelni fogja a kód lefedettség mutatásánál.-->
+                <configuration>
+                    <argLine>${argLine}</argLine>
+                </configuration>               
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+         
+        </plugins>
+    </build>
+
 </project>
