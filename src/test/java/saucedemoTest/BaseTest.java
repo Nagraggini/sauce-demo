@@ -1,7 +1,11 @@
 package saucedemoTest;
 
+import java.io.File;
+import java.io.PrintStream;
 import java.time.Duration;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +18,9 @@ class BaseTest {
 	protected WebDriver driver;
 	// 10 másodperces várakoztatás deklarálása.
 	protected WebDriverWait wait;
+
+	// Logoláshoz.
+	protected static final Logger logger = LogManager.getLogger(BaseTest.class);
 
 	@BeforeEach
 	void setUp() {
@@ -33,8 +40,7 @@ class BaseTest {
 				.setLevel(java.util.logging.Level.OFF);
 
 		// Az összes Selenium figyelmeztetés elnémítása
-		java.util.logging.Logger.getLogger("org.openqa.selenium")
-				.setLevel(java.util.logging.Level.SEVERE);
+		java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(java.util.logging.Level.SEVERE);
 
 		// Itt inicializáljuk a LOKÁLIS drivert.
 		// Ezzel nem nyílik meg a böngésző.
@@ -50,6 +56,17 @@ class BaseTest {
 		// A GitHub Actions elhasal ezzel, mert nincsen böngésző, amit maximalizálni
 		// lehetne.
 		driver.manage().window().maximize();
+
+		// Log fájl létrehozása.
+		try {
+			// Létrehozunk egy log fájlt a projekt gyökerében
+			PrintStream fileOut = new PrintStream(new File("test_output.log"));
+
+			// Átirányítjuk a System.out-ot a fájlra.
+			System.setOut(fileOut);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@AfterEach
@@ -58,6 +75,16 @@ class BaseTest {
 		// Bezárja az összes ablakot és teljesen leállítja a WebDriver-t.
 		if (driver != null) {
 			driver.quit();
+		}
+	}
+
+	void onlyForChecking() {
+		// Csak ellenőrzéshez.
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
