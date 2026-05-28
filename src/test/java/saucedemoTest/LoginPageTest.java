@@ -88,7 +88,7 @@ class LoginPageTest extends BaseTest {
 
 		// Kijelentkezés.
 		InventoryPage inventoryPage = new InventoryPage(driver);
-		inventoryPage.clickonhamburgerBtn();
+		inventoryPage.openHamburgerMenu();
 		inventoryPage.clickonLogoutBtn();
 	}
 
