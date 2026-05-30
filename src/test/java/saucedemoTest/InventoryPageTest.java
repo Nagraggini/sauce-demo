@@ -54,6 +54,10 @@ class InventoryPageTest extends BaseTest {
         cleanUp(inventoryPage);
 
     }
+    // @Tag("homework")
+    // TODO Remove gomb megjelenik-e.
+    // TODO Üresen hagyott mező esetén hibaüzenetet dob-e a rendszer -> a chechout
+    // részen
 
     void cleanUp(InventoryPage inventoryPage) {
         logger.info("\n Before clean up current URL: {}", driver.getCurrentUrl());
