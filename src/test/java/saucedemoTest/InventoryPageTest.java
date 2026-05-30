@@ -1,5 +1,6 @@
 package saucedemoTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -42,8 +43,8 @@ class InventoryPageTest extends BaseTest {
         logger.info("\n inventoryPage.getShoppingCartBadgeNumber(): " + inventoryPage.getShoppingCartBadgeNumber());
         // onlyForChecking();
 
-        // assertEquals(2, inventoryPage.getShoppingCartBadgeNumber(),
-        // "A kosárban lévő termékek darabszáma nem egyezik az elvárttal.");
+        assertEquals(2, inventoryPage.getShoppingCartBadgeNumber(),
+                "A kosárban lévő termékek darabszáma nem egyezik az elvárttal.");
 
         // inventoryPage.clickOnshoppingCartBtn();
 
