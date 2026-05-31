@@ -148,6 +148,8 @@ Terminálba:
 mvn verify
 mvn clean test
 
+<!-- TODO paraméterezett tesztek json-el. https://mockaroo.com/>
+
 # Futtatás
 
 Terminálba: mvn clean test

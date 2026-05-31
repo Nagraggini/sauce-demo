@@ -25,8 +25,8 @@ class BaseTest {
 	@BeforeEach
 	void setUp() {
 		ChromeOptions options = new ChromeOptions();
-		// headlessMode(options);
-		headMode(); // Elhasal a GitHub Actions.
+		headlessMode(options);
+		// headMode(); // Elhasal a GitHub Actions.
 
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
