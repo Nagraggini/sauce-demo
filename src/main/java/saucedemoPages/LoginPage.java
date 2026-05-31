@@ -29,11 +29,13 @@ public class LoginPage extends BasePage {
 	}
 
 	public void fillInputs(String username, String password) {
+		waitsForComponents();
 		this.driver.findElement(usernameInput).sendKeys(username);
 		this.driver.findElement(passwordInput).sendKeys(password);
 	}
 
-	public void clickonLoginBtn() {
+	public void clickOnLoginBtn() {
+		waitsForComponents();
 		this.driver.findElement(loginBtn).click();
 	}
 

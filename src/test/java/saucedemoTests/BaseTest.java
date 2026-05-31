@@ -1,4 +1,4 @@
-package saucedemoTest;
+package saucedemoTests;
 
 import java.io.File;
 import java.io.PrintStream;
@@ -34,6 +34,7 @@ class BaseTest {
 	ChromeOptions headlessMode(ChromeOptions options) {
 		options.addArguments("--remote-allow-origins=*");
 		options.addArguments("--headless=new");
+		options.addArguments("--incognito");
 
 		// Teljesen elnémítja a CDP verziókereső hibaüzeneteit
 		java.util.logging.Logger.getLogger("org.openqa.selenium.devtools.CdpVersionFinder")
@@ -51,7 +52,11 @@ class BaseTest {
 	/** Ha ezt állítod be, akkor a headlessMode-ot ne hívd meg. */
 	void headMode() {
 		// Ezzel megnyílik a böngésző, viszont a GitHub Actions el fog hasalni!
-		driver = new ChromeDriver();
+
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--incognito");
+
+		driver = new ChromeDriver(options);
 
 		// A GitHub Actions elhasal ezzel, mert nincsen böngésző, amit maximalizálni
 		// lehetne.

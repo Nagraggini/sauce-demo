@@ -19,8 +19,8 @@
 # Források
 [EASY XPath Tutorial](https://www.youtube.com/watch?v=XyBxEnyBb0A)
 [XPath Tutorial For Beginners](https://www.youtube.com/watch?v=128luZRWOpw&list=PLmRg3gEG2XIackdOpGvb_jEX1ywaplUmh)
-https://www.youtube.com/watch?v=5LV4z_-91WY&list=PLL34mf651faO1vJWlSoYYBJejN9U_rwy-
-https://www.youtube.com/watch?v=ppnDfNuSjro&list=PL699Xf-_ilW4sqC76skEN5vHT0M1YNXoU
+[Selenium XPath Tutorial](https://www.youtube.com/watch?v=5LV4z_-91WY&list=PLL34mf651faO1vJWlSoYYBJejN9U_rwy-)
+[XPath Tutorial](https://www.youtube.com/watch?v=ppnDfNuSjro&list=PL699Xf-_ilW4sqC76skEN5vHT0M1YNXoU)
 
 [Xpath cheatsheet](https://devhints.io/xpath)
 
@@ -147,11 +147,11 @@ Terminálba:
 mvn verify
 mvn clean test
 
+<!-- TODO paraméterezett tesztek json-el. https://mockaroo.com/>
+
 # Futtatás
 
 Terminálba: mvn clean test
-
-mvn test -Dgroups="now"
 
 Házi feladat:
 mvn clean test -Dgroups="homework"

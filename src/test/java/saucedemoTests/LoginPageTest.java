@@ -1,4 +1,4 @@
-package saucedemoTest;
+package saucedemoTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -23,7 +23,7 @@ class LoginPageTest extends BaseTest {
 		loginPage = new LoginPage(driver);
 		loginPage.openPage("https://www.saucedemo.com/");
 
-		loginPage.clickonLoginBtn();
+		loginPage.clickOnLoginBtn();
 
 		String expectedErrorMessage = "Epic sadface: Username is required";
 		String actualErrorMessage = loginPage.getErrorMessage();
@@ -42,7 +42,7 @@ class LoginPageTest extends BaseTest {
 		String password = "";
 		loginPage.fillInputs(username, password);
 
-		loginPage.clickonLoginBtn();
+		loginPage.clickOnLoginBtn();
 
 		String expectedErrorMessage = "Epic sadface: Password is required";
 		String actualErrorMessage = loginPage.getErrorMessage();
@@ -61,7 +61,7 @@ class LoginPageTest extends BaseTest {
 		String password = "secret_sauce";
 		loginPage.fillInputs(username, password);
 
-		loginPage.clickonLoginBtn();
+		loginPage.clickOnLoginBtn();
 
 		String expectedErrorMessage = "Epic sadface: Username is required";
 		String actualErrorMessage = loginPage.getErrorMessage();
@@ -79,7 +79,7 @@ class LoginPageTest extends BaseTest {
 		loginPage.openPage("https://www.saucedemo.com");
 		String password = "secret_sauce";
 		loginPage.fillInputs(username, password);
-		loginPage.clickonLoginBtn();
+		loginPage.clickOnLoginBtn();
 
 		String expectedURL = "https://www.saucedemo.com/inventory.html";
 		String actualURL = loginPage.getURL();
@@ -102,7 +102,7 @@ class LoginPageTest extends BaseTest {
 		String password = "secret_sauce";
 		loginPage.fillInputs(username, password);
 
-		loginPage.clickonLoginBtn();
+		loginPage.clickOnLoginBtn();
 
 		String expectedErrorMessage = "Epic sadface: Username and password do not match any user in this service";
 		String actualErrorMessage = loginPage.getErrorMessage();
@@ -133,7 +133,7 @@ class LoginPageTest extends BaseTest {
 		String password = "secret_sauce";
 		loginPage.fillInputs(username, password);
 
-		loginPage.clickonLoginBtn();
+		loginPage.clickOnLoginBtn();
 
 		String notExpectedURL = "https://www.saucedemo.com/inventory.html";
 		String actualURL = loginPage.getURL();
@@ -151,7 +151,7 @@ class LoginPageTest extends BaseTest {
 		String password = "secret_sauce";
 		loginPage.fillInputs(username, password);
 
-		loginPage.clickonLoginBtn();
+		loginPage.clickOnLoginBtn();
 
 		String expectedErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
 		String actualErrorMessage = loginPage.getErrorMessage();
