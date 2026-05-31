@@ -1,61 +1,73 @@
 package saucedemoTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import saucedemoPages.InventoryPage;
-import saucedemoPages.LoginPage;
+import saucedemoPages.*;
 
 class InventoryPageTest extends BaseTest {
 
     LoginPage loginPage;
     InventoryPage inventoryPage;
 
-    @Test
-    @Tag("homework")
-    @DisplayName("Ellenőrizzük, hogy a kosárban is ugyanannyi a két termék ára. Felhnév: standard_user")
-    void checkCheckoutPrices() {
-        logger.info("\ncheckCheckoutPrices(): ");
-        loginPage = new LoginPage(driver);
-
+    /** Bejelentkezés. Felhnév: standard_user */
+    public void login(LoginPage loginPage) {
         loginPage.openPage("https://www.saucedemo.com");
         String username = "standard_user";
         String password = "secret_sauce";
         loginPage.fillInputs(username, password);
         loginPage.clickonLoginBtn();
+    }
+
+    @Test
+    @Tag("shoppingCart")
+    @DisplayName("Ellenőrizzük, hogy a kosárba helyezett elemek dararbszáma ugyanannyi-e, mint a kosár ikonon lévők.")
+    void checkShoppingCartBadgeNumber() {
+        loginPage = new LoginPage(driver);
+        login(loginPage);
 
         inventoryPage = new InventoryPage(driver);
 
         String firstItemName = "Sauce Labs Backpack";
         String secondItemName = "Sauce Labs Bike Light";
 
-        double firstItemPrice = inventoryPage.getPriceofAnItem(firstItemName);
-        double secondItemPrice = inventoryPage.getPriceofAnItem(secondItemName);
-
-        logger.info("\nfirst item: {} second item: {}", firstItemPrice, secondItemPrice);
-
-        // FIXME
-        inventoryPage.addToCart(firstItemName);
-        inventoryPage.addToCart(secondItemName);
-
-        logger.info("\n inventoryPage.getShoppingCartBadgeNumber(): " + inventoryPage.getShoppingCartBadgeNumber());
-        // onlyForChecking();
+        inventoryPage.addToCartOrRemove(firstItemName);
+        inventoryPage.addToCartOrRemove(secondItemName);
 
         assertEquals(2, inventoryPage.getShoppingCartBadgeNumber(),
                 "A kosárban lévő termékek darabszáma nem egyezik az elvárttal.");
 
-        // inventoryPage.clickOnshoppingCartBtn();
-
-        // TODO
-        // A kosárban lévő elemet összegét kell ellenőrizni.
         // Kijelentkezés.
         cleanUp(inventoryPage);
-
     }
-    // @Tag("homework")
-    // TODO Remove gomb megjelenik-e.
+
+    @ParameterizedTest
+    @CsvSource({ "Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt",
+            "Sauce Labs Fleece Jacket", "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)" })
+    @Tag("homework")
+    @DisplayName("Leellenőrizzük, hogy az összes terméknél megjelenik-e a Remove gomb.")
+    void checkRemoveBtn(String itemName) {
+        loginPage = new LoginPage(driver);
+        login(loginPage);
+
+        inventoryPage = new InventoryPage(driver);
+        inventoryPage.addToCartOrRemove(itemName);
+        String expectedRemoveBtnText = "Remove";
+        String actualRemoveBtnText = inventoryPage.getAddToCartOrRemoveBtnText(itemName);
+
+        assertTrue(expectedRemoveBtnText.equals(
+                actualRemoveBtnText),
+                "A gomb felirata nem Remove " + itemName + "-nél.");
+        cleanUp(inventoryPage);
+    }
+
     // TODO Üresen hagyott mező esetén hibaüzenetet dob-e a rendszer -> a chechout
     // részen
 
