@@ -1,6 +1,6 @@
 
 <!-- 1. Státusz és Minőség -->
-[![Java Selenium CI](https://github.com/Nagraggini/sauce-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/Nagraggini/selenium-playground/actions/workflows/ci.yml)
+[![Java Selenium CI](https://github.com/Nagraggini/sauce-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/Nagraggini/sauce-demo/actions/workflows/ci.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/dda8879e45944502bf5ae158c0f8374f)](https://app.codacy.com/gh/Nagraggini/sauce-demo/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 <!-- 2. Teszt adatok -->
