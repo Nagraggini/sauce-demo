@@ -23,7 +23,7 @@ class InventoryPageTest extends BaseTest {
         String username = "standard_user";
         String password = "secret_sauce";
         loginPage.fillInputs(username, password);
-        loginPage.clickonLoginBtn();
+        loginPage.clickOnLoginBtn();
     }
 
     @Test
@@ -67,9 +67,6 @@ class InventoryPageTest extends BaseTest {
                 "A gomb felirata nem Remove " + itemName + "-nél.");
         cleanUp(inventoryPage);
     }
-
-    // TODO Üresen hagyott mező esetén hibaüzenetet dob-e a rendszer -> a chechout
-    // részen
 
     void cleanUp(InventoryPage inventoryPage) {
         logger.info("\n Before clean up current URL: {}", driver.getCurrentUrl());

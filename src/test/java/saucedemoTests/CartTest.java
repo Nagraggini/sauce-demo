@@ -1,5 +1,5 @@
 package saucedemoTests;
 
-public class CartTest {
+public class CartTest extends BaseTest {
 
 }

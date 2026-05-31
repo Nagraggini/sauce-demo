@@ -22,7 +22,7 @@ public class InventoryPageE2ETest extends BaseTest {
         String username = "standard_user";
         String password = "secret_sauce";
         loginPage.fillInputs(username, password);
-        loginPage.clickonLoginBtn();
+        loginPage.clickOnLoginBtn();
 
         inventoryPage = new InventoryPage(driver);
 
