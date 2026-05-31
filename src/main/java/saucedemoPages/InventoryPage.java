@@ -89,19 +89,27 @@ public class InventoryPage extends BasePage {
 
 	public void addToCartOrRemove(String itemName) {
 
-		By addToCartBtn = By.xpath(
+		By addToCartOrRemoveBtn = By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
 						+ itemName + "']]//button");
 
-		if (this.driver.findElement(addToCartBtn).getText().equals("Add to Cart")) {
-			wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
+		if (this.driver.findElement(addToCartOrRemoveBtn).getText().equals("Add to Cart")) {
+			wait.until(ExpectedConditions.elementToBeClickable(addToCartOrRemoveBtn)).click();
 			logger.info("\n-- Add to cart -> itemName: {}, addToCartBtn text: {}", itemName,
-					this.driver.findElement(addToCartBtn).getText());
+					this.driver.findElement(addToCartOrRemoveBtn).getText());
 		} else {
-			wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
+			wait.until(ExpectedConditions.elementToBeClickable(addToCartOrRemoveBtn)).click();
 			logger.info("\n-- Remove -> itemName: {}, addToCartBtn text: {}", itemName,
-					this.driver.findElement(addToCartBtn).getText());
+					this.driver.findElement(addToCartOrRemoveBtn).getText());
 		}
+	}
+
+	public String getAddToCartOrRemoveBtnText(String itemName) {
+		By addToCartOrRemoveBtn = By.xpath(
+				"//div[@class='inventory_item' and .//div[normalize-space()='"
+						+ itemName + "']]//button");
+
+		return this.driver.findElement(addToCartOrRemoveBtn).getText();
 	}
 
 	public void changeOrderingAtoZ() {
