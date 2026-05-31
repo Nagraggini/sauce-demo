@@ -1,4 +1,4 @@
-package saucedemoTest;
+package saucedemoTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
