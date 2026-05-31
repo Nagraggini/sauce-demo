@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 public class InventoryPage extends BasePage {
 	// ctrl+shift+c -> A chromeban megnyílik a dev tools és rögtön lokátort tudsz
@@ -23,35 +24,39 @@ public class InventoryPage extends BasePage {
 	// Fejléc és logó.
 	private final By appLogo = By.xpath("//div[@class='app_logo' and contains(text(),'Swag')]");
 	private final By productsLbl = By.xpath("//*/span[contains(text(),'Products')]");
+	private final By changeOrderingSelect = By.cssSelector("product_sort_container");
 
 	// Kosár elemek.
 	private final By shoppingCartBtn = By.className("shopping_cart_link");
 	private final By shoppingCartBadge = By.cssSelector("span[data-test='shopping-cart-badge']");
 
-	// TODO
+	// Lábléc.
+	private final By twitterIcon = By.cssSelector("[data-test='social-twitter']");
+	private final By fbIcon = By.cssSelector("[data-test='social-facebook']");
+	private final By linkedinIcon = By.cssSelector("[data-test='social-linkedin']");
+
+	private final By copyRightlbl = By.className("footer_copy");
+
 	public void openHamburgerMenu() {
 		WebElement menu = driver.findElement(hamburgerBtn);
 		logger.info("\n menu.isDisplayed() : {}, menu.isEnabled()) : {}", menu.isDisplayed(), menu.isEnabled());
-		// this.wait.until(ExpectedConditions.elementToBeClickable(hamburgerBtn));
+
 		this.driver.findElement(hamburgerBtn).click();
 	}
 
 	public void clickonLogoutBtn() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(logoutBtn));
-		this.wait.until(ExpectedConditions.elementToBeClickable(logoutBtn)).click();
+		this.wait.until(ExpectedConditions.visibilityOfElementLocated(logoutBtn)).click();
 	}
 
 	public void clickonResetAppStateBtn() {
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(resetAppStateBtn));
-
-		wait.until(ExpectedConditions.elementToBeClickable(resetAppStateBtn))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(resetAppStateBtn))
 				.click();
 	}
 
-	// TODO FIXME
 	public void clickOnshoppingCartBtn() {
-		logger.info("\n Expected: https://www.saucedemo.com/cart.html ; Current URL: {}", driver.getCurrentUrl());
+
 		this.wait.until(ExpectedConditions.elementToBeClickable(shoppingCartBtn)).click();
+		logger.info("\n Expected: https://www.saucedemo.com/cart.html ; Current URL: {}", driver.getCurrentUrl());
 	}
 
 	public int getShoppingCartBadgeNumber() {
@@ -68,18 +73,9 @@ public class InventoryPage extends BasePage {
 	}
 
 	public double getPriceofAnItem(String itemName) {
-		// * // div[@data-test='inventory-list']//div[text()='Sauce Labs Backpack']
 		By label = By.xpath("//div[@data-test='inventory-list']//div[text()='" + itemName + "']");
 
 		this.wait.until(ExpectedConditions.visibilityOfElementLocated(label));
-
-		// $29.99
-		/*
-		 * String priceWithDollar = this.driver.findElement(By.xpath(
-		 * "//div[@data-test='inventory-list']//div[text()='" + itemName
-		 * + "']/following::div/div[@class='inventory_item_price']"))
-		 * .getText();
-		 */
 
 		String priceWithDollar = this.driver.findElement(By.xpath(
 				"//div[@class='inventory_item' and .//div[text()='" + itemName
@@ -91,23 +87,41 @@ public class InventoryPage extends BasePage {
 		return price;
 	}
 
-	// TODO FIXME
-	public void addToCart(String itemName) {
-		/*
-		 * By addToCartBtn = By
-		 * .xpath("//div[@data-test='inventory-list']//div[text()='" + itemName
-		 * + "']/following::button[1][text()='Add to cart']");
-		 */
+	public void addToCartOrRemove(String itemName) {
+
 		By addToCartBtn = By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
 						+ itemName + "']]//button");
 
-		logger.info("\n-- Add to cart -> itemName: {}, addToCartBtn text: {}", itemName,
-				this.driver.findElement(addToCartBtn).getText());
+		if (this.driver.findElement(addToCartBtn).getText().equals("Add to Cart")) {
+			wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
+			logger.info("\n-- Add to cart -> itemName: {}, addToCartBtn text: {}", itemName,
+					this.driver.findElement(addToCartBtn).getText());
+		} else {
+			wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
+			logger.info("\n-- Remove -> itemName: {}, addToCartBtn text: {}", itemName,
+					this.driver.findElement(addToCartBtn).getText());
+		}
+	}
 
-		wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
-		logger.info("\n-- Expected btn text: Remove -> itemName: {}, actual btn text: {}", itemName,
-				this.driver.findElement(addToCartBtn).getText());
+	public void changeOrderingAtoZ() {
+		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
+		changeOrderingSel.selectByValue("az");
+	}
+
+	public void changeOrderingZtoA() {
+		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
+		changeOrderingSel.selectByValue("za");
+	}
+
+	public void changeOrderingLowtoHigh() {
+		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
+		changeOrderingSel.selectByValue("lohi");
+	}
+
+	public void changeOrderingHightoLow() {
+		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
+		changeOrderingSel.selectByValue("hilo");
 	}
 
 }
