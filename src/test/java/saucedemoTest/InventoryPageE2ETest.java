@@ -13,7 +13,6 @@ public class InventoryPageE2ETest extends BaseTest {
     InventoryPage inventoryPage;
 
     @Test
-    @Tag("homework")
     @DisplayName("Ellenőrizzük, hogy a kosárban is ugyanannyi a két termék ára. Felhnév: standard_user")
     void checkCheckoutPrices() {
         logger.info("\ncheckCheckoutPrices(): ");
