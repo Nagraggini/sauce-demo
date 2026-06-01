@@ -19,7 +19,7 @@ public class InventoryPageE2ETest extends BaseTest {
 
         loginPage.openPage("https://www.saucedemo.com");
         String username = "standard_user";
-        String password = "secret_sauce";
+        String password = System.getenv("PASSWORD");
         loginPage.fillInputs(username, password);
         loginPage.clickOnLoginBtn();
 
