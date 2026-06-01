@@ -2,33 +2,23 @@ package saucedemoTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import saucedemoPages.*;
+import saucedemoPages.InventoryPage;
+import saucedemoPages.LoginPage;
 
 class InventoryPageTest extends BaseTest {
 
     LoginPage loginPage;
     InventoryPage inventoryPage;
 
-    /** Bejelentkezés. Felhnév: standard_user */
-    public void login(LoginPage loginPage) {
-        loginPage.openPage("https://www.saucedemo.com");
-        String username = "standard_user";
-        String password = "secret_sauce";
-        loginPage.fillInputs(username, password);
-        loginPage.clickOnLoginBtn();
-    }
-
     @Test
     @Tag("shoppingCart")
-    @DisplayName("Ellenőrizzük, hogy a kosárba helyezett elemek dararbszáma ugyanannyi-e, mint a kosár ikonon lévők.")
+    @DisplayName("Ellenőrizzük, hogy a kosárba helyezett elemek darabszáma ugyanannyi-e, mint a kosár ikonon lévők.")
     void checkShoppingCartBadgeNumber() {
         loginPage = new LoginPage(driver);
         login(loginPage);
@@ -68,16 +58,25 @@ class InventoryPageTest extends BaseTest {
         cleanUp(inventoryPage);
     }
 
-    void cleanUp(InventoryPage inventoryPage) {
-        logger.info("\n Before clean up current URL: {}", driver.getCurrentUrl());
+    @ParameterizedTest
+    @CsvSource({ "Sauce Labs Backpack , 29.99", "Sauce Labs Bike Light , 9.99", "Sauce Labs Bolt T-Shirt , 15.99",
+            "Sauce Labs Fleece Jacket , 49.99", "Sauce Labs Onesie , 7.99",
+            "Test.allTheThings() T-Shirt (Red) , 15.99" })
+    @Tag("homework")
+    @DisplayName("Leellenőrizzük az összes termék árát.")
+    void checkThePriceOfItems(String itemName, double expectedPrice) {
+        loginPage = new LoginPage(driver);
+        login(loginPage);
 
-        // Takarítás.
-        inventoryPage.openHamburgerMenu();
-        inventoryPage.clickonResetAppStateBtn();
+        inventoryPage = new InventoryPage(driver);
 
-        // Kijelentkezés
-        inventoryPage.clickonLogoutBtn();
+        double actualPrice = inventoryPage.getPriceofAnItem(itemName);
 
+        // 0.01 a tolerancia küszöb.
+        assertEquals(expectedPrice, actualPrice, 0.01,
+                "A \"" + itemName + "\"-nél nem jó az ár, mert az elvárt ár: " + expectedPrice + " , az aktuális ár: "
+                        + actualPrice);
+        cleanUp(inventoryPage);
     }
 
 }

@@ -13,6 +13,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import saucedemoPages.InventoryPage;
+import saucedemoPages.LoginPage;
+
 class BaseTest {
 
 	protected WebDriver driver;
@@ -74,6 +77,15 @@ class BaseTest {
 		}
 	}
 
+	/** Bejelentkezés. Felhnév: standard_user */
+	public void login(LoginPage loginPage) {
+		loginPage.openPage("https://www.saucedemo.com");
+		String username = "standard_user";
+		String password = "secret_sauce";
+		loginPage.fillInputs(username, password);
+		loginPage.clickOnLoginBtn();
+	}
+
 	@AfterEach
 	void tearDown() {
 
@@ -81,6 +93,18 @@ class BaseTest {
 		if (driver != null) {
 			driver.quit();
 		}
+	}
+
+	void cleanUp(InventoryPage inventoryPage) {
+		logger.info("\n -- Before clean up current URL: {}", driver.getCurrentUrl());
+
+		// Takarítás.
+		inventoryPage.openHamburgerMenu();
+		inventoryPage.clickonResetAppStateBtn();
+
+		// Kijelentkezés
+		inventoryPage.clickonLogoutBtn();
+
 	}
 
 	void onlyForChecking() {

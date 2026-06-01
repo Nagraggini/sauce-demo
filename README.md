@@ -147,11 +147,13 @@ Terminálba:
 mvn verify
 mvn clean test
 
-<!-- TODO paraméterezett tesztek json-el. https://mockaroo.com/>
+<!-- TODO paraméterezett tesztek json-el. https://mockaroo.com/-->
 
 # Futtatás
 
 Terminálba: mvn clean test
+
+Egy konkrét teszt futtatása: mvn -Dtest=CheckoutStepOnePageTest#shouldDisplayErrorMessageForPostalCode test
 
 Házi feladat:
 mvn clean test -Dgroups="homework"

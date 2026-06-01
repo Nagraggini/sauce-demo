@@ -73,7 +73,7 @@ class LoginPageTest extends BaseTest {
 	@ParameterizedTest
 	@CsvSource({ "standard_user", "problem_user", "performance_glitch_user", "error_user", "visual_user" })
 	@DisplayName("Összes felhasználónév ellenőrzése.")
-	void checkLoginWithAllUsernamesAndPws(String username) {
+	void succesfulLoginWithAllUsernamesAndPws(String username) {
 		loginPage = new LoginPage(driver);
 
 		loginPage.openPage("https://www.saucedemo.com");
@@ -93,7 +93,7 @@ class LoginPageTest extends BaseTest {
 	}
 
 	@Test
-	@DisplayName("Hibás felhasználónévvel törtéső belépés.")
+	@DisplayName("Hibás felhasználónévvel történő belépés.")
 	void tryToLoginWithIncorrectUsername() {
 		loginPage = new LoginPage(driver);
 		loginPage.openPage("https://www.saucedemo.com/");

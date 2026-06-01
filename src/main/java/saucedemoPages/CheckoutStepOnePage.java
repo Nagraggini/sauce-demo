@@ -35,8 +35,8 @@ public class CheckoutStepOnePage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameInput)).sendKeys(firstName);
     }
 
-    public void fillLastNameInput(String firstName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameInput)).sendKeys(firstName);
+    public void fillLastNameInput(String lastName) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameInput)).sendKeys(lastName);
     }
 
     public void fillPostalCodeInput(String postalCode) {
@@ -48,11 +48,11 @@ public class CheckoutStepOnePage extends BasePage {
     }
 
     public void clickOnCancelBtn() {
-        // TODO
+        wait.until(ExpectedConditions.elementToBeClickable(cancelBtn)).click();
     }
 
     public void clickOnContinueBtn() {
-        // TODO
+        wait.until(ExpectedConditions.elementToBeClickable(continueBtn)).click();
     }
 
 }

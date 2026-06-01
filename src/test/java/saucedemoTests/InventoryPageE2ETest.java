@@ -1,12 +1,11 @@
 package saucedemoTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import saucedemoPages.*;
+import saucedemoPages.InventoryPage;
+import saucedemoPages.LoginPage;
 
 public class InventoryPageE2ETest extends BaseTest {
     LoginPage loginPage;
@@ -49,15 +48,4 @@ public class InventoryPageE2ETest extends BaseTest {
 
     }
 
-    void cleanUp(InventoryPage inventoryPage) {
-        logger.info("\n Before clean up current URL: {}", driver.getCurrentUrl());
-
-        // Takarítás.
-        inventoryPage.openHamburgerMenu();
-        inventoryPage.clickonResetAppStateBtn();
-
-        // Kijelentkezés
-        inventoryPage.clickonLogoutBtn();
-
-    }
 }
