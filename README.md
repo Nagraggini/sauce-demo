@@ -154,6 +154,7 @@ A gyökérkönyvtárba hozd létre a .env fájlt.
 A fájl tartalma (a jobb oldali részt töltsd ki.):
 USERNAME=
 PASSWORD=
+WRONG_PASSWORD=
 BASE_URL=
 
 .gitignore fájlba ezt írd be: .env

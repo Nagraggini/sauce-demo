@@ -99,7 +99,7 @@ class LoginPageTest extends BaseTest {
 		loginPage.openPage("https://www.saucedemo.com/");
 
 		String username = "12345";
-		String password = "password";
+		String password = System.getenv("PASSWORD");
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickOnLoginBtn();

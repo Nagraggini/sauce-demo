@@ -65,6 +65,7 @@ jobs:
               env:
                   USERNAME: ${{ secrets.USERNAME }}
                   PASSWORD: ${{ secrets.PASSWORD }}
+                  WRONG_PASSWORD: ${{ secrets.WRONG_PASSWORD }}
                   BASE_URL: ${{ secrets.BASE_URL }}
               run: mvn -B verify
 
