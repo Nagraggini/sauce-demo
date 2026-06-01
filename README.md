@@ -147,6 +147,46 @@ Terminálba:
 mvn verify
 mvn clean test
 
+# .env fájl
+
+A gyökérkönyvtárba hozd létre a .env fájlt.
+
+A fájl tartalma (a jobb oldali részt töltsd ki.):
+USERNAME=
+PASSWORD=
+BASE_URL=
+
+.gitignore fájlba ezt írd be: .env
+
+Használat a tesztben:
+```java
+String username = System.getenv("USERNAME");
+String password = System.getenv("PASSWORD");
+String baseUrl = System.getenv("BASE_URL");
+```
+
+A .github/workflows/ci.yml-be írd be a Run Tests alá az env és a többi sorokat:
+```yml  
+            # =========================
+            # 5. Run Tests 
+            # =========================
+            # Tesztek futtatása
+            - name: Run Tests     
+              env:                
+                USERNAME: ${{ secrets.USERNAME }}
+                PASSWORD: ${{ secrets.PASSWORD }}
+                BASE_URL: ${{ secrets.BASE_URL }}                  
+              run: mvn -B verify 
+```
+
+Github-on is hozzá kell adni az fenti változókat, így:
+Nyisd meg a repod:
+Settings -> Secrets and variables → New repository secret.
+
+USERNAME = 
+PASSWORD = 
+BASE_URL = 
+
 <!-- TODO paraméterezett tesztek json-el. https://mockaroo.com/-->
 
 # Futtatás

@@ -58,11 +58,15 @@ jobs:
               run: mvn -B clean compile
 
             # =========================
-            # 5. Run Tests 
+            # 5. Run Tests
             # =========================
             # Tesztek futtatása
-            - name: Run Tests             
-              run: mvn -B verify 
+            - name: Run Tests
+              env:
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PASSWORD: ${{ secrets.PASSWORD }}
+                  BASE_URL: ${{ secrets.BASE_URL }}
+              run: mvn -B verify
 
             # =========================
             # 6. Generate JaCoCo Badges

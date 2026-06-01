@@ -58,7 +58,7 @@ class LoginPageTest extends BaseTest {
 		loginPage.openPage("https://www.saucedemo.com/");
 
 		String username = "";
-		String password = "secret_sauce";
+		String password = System.getenv("PASSWORD");
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickOnLoginBtn();
@@ -77,7 +77,7 @@ class LoginPageTest extends BaseTest {
 		loginPage = new LoginPage(driver);
 
 		loginPage.openPage("https://www.saucedemo.com");
-		String password = "secret_sauce";
+		String password = System.getenv("PASSWORD");
 		loginPage.fillInputs(username, password);
 		loginPage.clickOnLoginBtn();
 
@@ -99,7 +99,7 @@ class LoginPageTest extends BaseTest {
 		loginPage.openPage("https://www.saucedemo.com/");
 
 		String username = "12345";
-		String password = "secret_sauce";
+		String password = "password";
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickOnLoginBtn();
@@ -130,7 +130,7 @@ class LoginPageTest extends BaseTest {
 		loginPage.openPage("https://www.saucedemo.com");
 
 		String username = "locked_out_user";
-		String password = "secret_sauce";
+		String password = System.getenv("PASSWORD");
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickOnLoginBtn();
@@ -148,7 +148,7 @@ class LoginPageTest extends BaseTest {
 		loginPage.openPage("https://www.saucedemo.com");
 
 		String username = "locked_out_user";
-		String password = "secret_sauce";
+		String password = System.getenv("PASSWORD");
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickOnLoginBtn();
