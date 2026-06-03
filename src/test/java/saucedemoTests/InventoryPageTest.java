@@ -106,6 +106,7 @@ class InventoryPageTest extends BaseTest {
                 List<WebElement> btns = driver.findElements(By.cssSelector("button[data-test^='add-to-cart']"));
                 assertEquals(items.size(), btns.size(),
                                 Math.abs(items.size() - btns.size()) + " db terméknek nincsen hozzáadás gombja.");
+                cleanUp(inventoryPage);
         }
 
         @Test
@@ -120,6 +121,8 @@ class InventoryPageTest extends BaseTest {
                                 By.xpath("//div[@class='inventory_item' and .//div[normalize-space()='" + termeknev
                                                 + "']]//button"));
                 assertTrue(hozzaAdasGomb.isDisplayed(), "Nem jelenik meg az adott termékhez tartozó hozzáadás gomb.");
+                cleanUp(inventoryPage);
+
         }
         // TODO a sorrend változtató gomb mind a négy opciójának tesztelése.
         // TODO legdrágább és legolcsóbb termék neve
