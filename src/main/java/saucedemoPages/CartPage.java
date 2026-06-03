@@ -15,4 +15,18 @@ public class CartPage extends BasePage {
     public void clickOnCheckout() {
         wait.until(ExpectedConditions.elementToBeClickable(checkoutBtn)).click();
     }
+
+    public double getPriceofAnItem(String itemName) {
+        /* .[] -> Pont az aktuálisre hivatkozik a kapcsoszárójelben van a feltétel. */
+        double itemPrice = Double
+                .parseDouble(wait
+                        .until(ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath(
+                                        "//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='"
+                                                + itemName + "']]//div[@class='inventory_item_price']")))
+                        .getText()
+                        .replace("$", ""));
+
+        return itemPrice;
+    }
 }

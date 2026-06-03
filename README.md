@@ -127,7 +127,7 @@ Ezt másold bele:
         </Console>
 
         <RollingFile name="FileAppender"                
-                     filePattern="logs/teszt-%d{yyyy-MM-dd-HH-mm-ss}.log">
+                     filePattern="logs/test-%d{yyyy-MM-dd-HH-mm-ss}.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
             <Policies>
                 <OnStartupTriggeringPolicy />
@@ -147,23 +147,71 @@ Terminálba:
 mvn verify
 mvn clean test
 
-# .env fájl
+# Konfig fájl és használata
 
-A gyökérkönyvtárba hozd létre a .env fájlt.
+Amikor GitHubon fut:
+ConfigReader.get("PASSWORD") → Secretből olvassa ki a jelszót.
 
-A fájl tartalma (a jobb oldali részt töltsd ki.):
+Amikor a gépen fut:
+ConfigReader.get("PASSWORD") → config.properties-ból olvassa ki a jelszót.
+
+A config.properties fájlt ide hozd létre: src/test/resources/
+
+config.properties fájl tartalma (a jobb oldali részt töltsd ki.):
+BASE_URL=
 USERNAME=
 PASSWORD=
 WRONG_PASSWORD=
-BASE_URL=
 
-.gitignore fájlba ezt írd be: .env
+
+Az osztály tartalma:
+```java
+//package utils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class ConfigReader {
+
+    private static final Properties properties = new Properties();
+
+    static {
+        try (InputStream input = ConfigReader.class
+                .getClassLoader()
+                .getResourceAsStream("config.properties")) {
+
+            if (input != null) {
+                properties.load(input);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException("Nem sikerült betölteni a config.properties fájlt.", e);
+        }
+    }
+
+    public static String get(String key) {
+
+        // Először környezeti változó (GitHub Secrets)
+        String envValue = System.getenv(key);
+
+        if (envValue != null && !envValue.isBlank()) {
+            return envValue;
+        }
+
+        // Ha nincs, akkor config.properties
+        return properties.getProperty(key);
+    }
+}
+```
+
+.gitignore fájlba ezt írd be: config.properties
 
 Használat a tesztben:
 ```java
-String username = System.getenv("USERNAME");
-String password = System.getenv("PASSWORD");
-String baseUrl = System.getenv("BASE_URL");
+String password = ConfigReader.get("PASSWORD");
+String username = ConfigReader.get("USERNAME");
+String baseUrl = ConfigReader.get("BASE_URL");
 ```
 
 A .github/workflows/ci.yml-be írd be a Run Tests alá az env és a többi sorokat:
