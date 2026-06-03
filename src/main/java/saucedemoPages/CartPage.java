@@ -1,6 +1,8 @@
 package saucedemoPages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartPage extends BasePage {
 
@@ -8,4 +10,23 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
+    private final By checkoutBtn = By.cssSelector("#checkout");
+
+    public void clickOnCheckout() {
+        wait.until(ExpectedConditions.elementToBeClickable(checkoutBtn)).click();
+    }
+
+    public double getPriceofAnItem(String itemName) {
+        /* .[] -> Pont az aktuálisre hivatkozik a kapcsoszárójelben van a feltétel. */
+        double itemPrice = Double
+                .parseDouble(wait
+                        .until(ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath(
+                                        "//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='"
+                                                + itemName + "']]//div[@class='inventory_item_price']")))
+                        .getText()
+                        .replace("$", ""));
+
+        return itemPrice;
+    }
 }

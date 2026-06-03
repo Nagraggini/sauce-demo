@@ -74,6 +74,8 @@ jacoco.exec
 *.swp
 
 # =========================
-# Secrets
+# Secrets and env, config.properties
 # =========================
+.env
 .secrets
+config.properties

@@ -31,7 +31,6 @@ jobs:
               with:
                   java-version: 21
                   distribution: temurin
-                  cache: maven
                   cache-dependency-path: "**/pom.xml"
 
             # =========================
@@ -58,11 +57,16 @@ jobs:
               run: mvn -B clean compile
 
             # =========================
-            # 5. Run Tests 
+            # 5. Run Tests
             # =========================
             # Tesztek futtatása
-            - name: Run Tests             
-              run: mvn -B verify 
+            - name: Run Tests
+              env:
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PASSWORD: ${{ secrets.PASSWORD }}
+                  WRONG_PASSWORD: ${{ secrets.WRONG_PASSWORD }}
+                  BASE_URL: ${{ secrets.BASE_URL }}
+              run: mvn -B verify
 
             # =========================
             # 6. Generate JaCoCo Badges
@@ -96,3 +100,4 @@ jobs:
               with:
                   name: surefire-reports
                   path: target/surefire-reports
+# TODO egész workflow javítása.

@@ -58,7 +58,7 @@ class LoginPageTest extends BaseTest {
 		loginPage.openPage("https://www.saucedemo.com/");
 
 		String username = "";
-		String password = "secret_sauce";
+		String password = ConfigReader.get("PASSWORD");
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickOnLoginBtn();
@@ -70,14 +70,52 @@ class LoginPageTest extends BaseTest {
 				"Hibaüzenet nem egyezik meg. " + actualErrorMessage);
 	}
 
+	@Test
+	@DisplayName("Hibás felhasználónévvel történő belépés.")
+	void tryToLoginWithIncorrectUsername() {
+		loginPage = new LoginPage(driver);
+		loginPage.openPage("https://www.saucedemo.com/");
+
+		String username = "12345";
+		String password = ConfigReader.get("PASSWORD");
+		loginPage.fillInputs(username, password);
+
+		loginPage.clickOnLoginBtn();
+
+		String expectedErrorMessage = "Epic sadface: Username and password do not match any user in this service";
+		String actualErrorMessage = loginPage.getErrorMessage();
+
+		assertTrue(expectedErrorMessage.equals(actualErrorMessage),
+				"Hibaüzenet nem egyezik meg, ha hibás a felhasználónév. " + actualErrorMessage);
+	}
+
+	@Test
+	@DisplayName("Hibás jelszóval történő belépés.")
+	void tryToLoginWithIncorrectPassword() {
+		loginPage = new LoginPage(driver);
+		loginPage.openPage("https://www.saucedemo.com/");
+
+		String username = ConfigReader.get("USERNAME");
+		String password = ConfigReader.get("WRONG_PASSWORD");
+		loginPage.fillInputs(username, password);
+
+		loginPage.clickOnLoginBtn();
+
+		String expectedErrorMessage = "Epic sadface: Username and password do not match any user in this service";
+		String actualErrorMessage = loginPage.getErrorMessage();
+
+		assertTrue(expectedErrorMessage.equals(actualErrorMessage),
+				"Hibaüzenet nem egyezik meg, ha hibás a jelszó. " + actualErrorMessage);
+	}
+
 	@ParameterizedTest
 	@CsvSource({ "standard_user", "problem_user", "performance_glitch_user", "error_user", "visual_user" })
 	@DisplayName("Összes felhasználónév ellenőrzése.")
-	void checkLoginWithAllUsernamesAndPws(String username) {
+	void succesfulLoginWithAllUsernamesAndPws(String username) {
 		loginPage = new LoginPage(driver);
 
 		loginPage.openPage("https://www.saucedemo.com");
-		String password = "secret_sauce";
+		String password = ConfigReader.get("PASSWORD");
 		loginPage.fillInputs(username, password);
 		loginPage.clickOnLoginBtn();
 
@@ -93,44 +131,13 @@ class LoginPageTest extends BaseTest {
 	}
 
 	@Test
-	@DisplayName("Hibás felhasználónévvel törtéső belépés.")
-	void tryToLoginWithIncorrectUsername() {
-		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com/");
-
-		String username = "12345";
-		String password = "secret_sauce";
-		loginPage.fillInputs(username, password);
-
-		loginPage.clickOnLoginBtn();
-
-		String expectedErrorMessage = "Epic sadface: Username and password do not match any user in this service";
-		String actualErrorMessage = loginPage.getErrorMessage();
-
-		assertTrue(expectedErrorMessage.equals(actualErrorMessage),
-				"Hibaüzenet nem egyezik meg. " + actualErrorMessage);
-	}
-
-	@Test
-	@DisplayName("Lecsekkoljuk, hogy betöltödik-e az inventory oldal, ha nem vagyunk belépve.")
-	void checkLockedOutUserLoginRefreshAndErrorMessage() {
-		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com/inventory.html");
-
-		String expectedErrorMessage = "Epic sadface: You can only access '/inventory.html' when you are logged in.";
-		String actualErrorMessage = loginPage.getErrorMessage();
-
-		assertTrue(expectedErrorMessage.equals(actualErrorMessage), "Hibaüzenet nem egyezik meg.");
-	}
-
-	@Test
 	@DisplayName("Zárolt felhasználó ellenőrzése.")
 	void checkLockedOutUserLogin() {
 		loginPage = new LoginPage(driver);
 		loginPage.openPage("https://www.saucedemo.com");
 
 		String username = "locked_out_user";
-		String password = "secret_sauce";
+		String password = ConfigReader.get("PASSWORD");
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickOnLoginBtn();
@@ -148,7 +155,7 @@ class LoginPageTest extends BaseTest {
 		loginPage.openPage("https://www.saucedemo.com");
 
 		String username = "locked_out_user";
-		String password = "secret_sauce";
+		String password = ConfigReader.get("PASSWORD");
 		loginPage.fillInputs(username, password);
 
 		loginPage.clickOnLoginBtn();
@@ -158,6 +165,18 @@ class LoginPageTest extends BaseTest {
 
 		assertTrue(expectedErrorMessage.equals(actualErrorMessage),
 				"Nem jelent meg a hibaüzenet, amikor a zárolt felhasználóval próbált belépni.");
+	}
+
+	@Test
+	@DisplayName("Lecsekkoljuk, hogy betöltödik-e az inventory oldal, ha nem vagyunk belépve.")
+	void checkLockedOutUserLoginRefreshAndErrorMessage() {
+		loginPage = new LoginPage(driver);
+		loginPage.openPage("https://www.saucedemo.com/inventory.html");
+
+		String expectedErrorMessage = "Epic sadface: You can only access '/inventory.html' when you are logged in.";
+		String actualErrorMessage = loginPage.getErrorMessage();
+
+		assertTrue(expectedErrorMessage.equals(actualErrorMessage), "Hibaüzenet nem egyezik meg.");
 	}
 
 }

@@ -39,8 +39,6 @@ public class InventoryPage extends BasePage {
 
 	public void openHamburgerMenu() {
 		WebElement menu = driver.findElement(hamburgerBtn);
-		logger.info("\n menu.isDisplayed() : {}, menu.isEnabled()) : {}", menu.isDisplayed(), menu.isEnabled());
-
 		this.driver.findElement(hamburgerBtn).click();
 	}
 
@@ -54,9 +52,7 @@ public class InventoryPage extends BasePage {
 	}
 
 	public void clickOnshoppingCartBtn() {
-
 		this.wait.until(ExpectedConditions.elementToBeClickable(shoppingCartBtn)).click();
-		logger.info("\n Expected: https://www.saucedemo.com/cart.html ; Current URL: {}", driver.getCurrentUrl());
 	}
 
 	public int getShoppingCartBadgeNumber() {
@@ -95,12 +91,8 @@ public class InventoryPage extends BasePage {
 
 		if (this.driver.findElement(addToCartOrRemoveBtn).getText().equals("Add to Cart")) {
 			wait.until(ExpectedConditions.elementToBeClickable(addToCartOrRemoveBtn)).click();
-			logger.info("\n-- Add to cart -> itemName: {}, addToCartBtn text: {}", itemName,
-					this.driver.findElement(addToCartOrRemoveBtn).getText());
 		} else {
 			wait.until(ExpectedConditions.elementToBeClickable(addToCartOrRemoveBtn)).click();
-			logger.info("\n-- Remove -> itemName: {}, addToCartBtn text: {}", itemName,
-					this.driver.findElement(addToCartOrRemoveBtn).getText());
 		}
 	}
 

@@ -127,7 +127,7 @@ Ezt másold bele:
         </Console>
 
         <RollingFile name="FileAppender"                
-                     filePattern="logs/teszt-%d{yyyy-MM-dd-HH-mm-ss}.log">
+                     filePattern="logs/test-%d{yyyy-MM-dd-HH-mm-ss}.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
             <Policies>
                 <OnStartupTriggeringPolicy />
@@ -147,11 +147,102 @@ Terminálba:
 mvn verify
 mvn clean test
 
-<!-- TODO paraméterezett tesztek json-el. https://mockaroo.com/>
+# Konfig fájl és használata
+
+Amikor GitHubon fut:
+ConfigReader.get("PASSWORD") → Secretből olvassa ki a jelszót.
+
+Amikor a gépen fut:
+ConfigReader.get("PASSWORD") → config.properties-ból olvassa ki a jelszót.
+
+A config.properties fájlt ide hozd létre: src/test/resources/
+
+config.properties fájl tartalma (a jobb oldali részt töltsd ki.):
+BASE_URL=
+USERNAME=
+PASSWORD=
+WRONG_PASSWORD=
+
+
+Az osztály tartalma:
+```java
+//package utils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class ConfigReader {
+
+    private static final Properties properties = new Properties();
+
+    static {
+        try (InputStream input = ConfigReader.class
+                .getClassLoader()
+                .getResourceAsStream("config.properties")) {
+
+            if (input != null) {
+                properties.load(input);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException("Nem sikerült betölteni a config.properties fájlt.", e);
+        }
+    }
+
+    public static String get(String key) {
+
+        // Először környezeti változó (GitHub Secrets)
+        String envValue = System.getenv(key);
+
+        if (envValue != null && !envValue.isBlank()) {
+            return envValue;
+        }
+
+        // Ha nincs, akkor config.properties
+        return properties.getProperty(key);
+    }
+}
+```
+
+.gitignore fájlba ezt írd be: config.properties
+
+Használat a tesztben:
+```java
+String password = ConfigReader.get("PASSWORD");
+String username = ConfigReader.get("USERNAME");
+String baseUrl = ConfigReader.get("BASE_URL");
+```
+
+A .github/workflows/ci.yml-be írd be a Run Tests alá az env és a többi sorokat:
+```yml  
+            # =========================
+            # 5. Run Tests 
+            # =========================
+            # Tesztek futtatása
+            - name: Run Tests     
+              env:                
+                USERNAME: ${{ secrets.USERNAME }}
+                PASSWORD: ${{ secrets.PASSWORD }}
+                BASE_URL: ${{ secrets.BASE_URL }}                  
+              run: mvn -B verify 
+```
+
+Github-on is hozzá kell adni az fenti változókat, így:
+Nyisd meg a repod:
+Settings -> Secrets and variables → New repository secret.
+
+USERNAME = 
+PASSWORD = 
+BASE_URL = 
+
+<!-- TODO paraméterezett tesztek json-el. https://mockaroo.com/-->
 
 # Futtatás
 
 Terminálba: mvn clean test
+
+Egy konkrét teszt futtatása: mvn -Dtest=CheckoutStepOnePageTest#shouldDisplayErrorMessageForPostalCode test
 
 Házi feladat:
 mvn clean test -Dgroups="homework"
