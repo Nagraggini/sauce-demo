@@ -14,9 +14,6 @@ import saucedemoPages.LoginPage;
 
 public class CheckoutStepOnePageTest extends BaseTest {
 
-    // TODO Üresen hagyott mező esetén hibaüzenetet dob-e a rendszer -> a chechout
-    // részen
-
     LoginPage loginPage;
     InventoryPage inventoryPage;
     CartPage cartPage;

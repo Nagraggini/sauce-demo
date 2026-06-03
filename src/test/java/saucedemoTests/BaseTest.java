@@ -79,9 +79,10 @@ class BaseTest {
 
 	/** Bejelentkezés. Felhnév: standard_user */
 	public void login(LoginPage loginPage) {
+		// TODO mindenhol a base url-t kéne használni.
 		loginPage.openPage("https://www.saucedemo.com");
 		String username = "standard_user";
-		String password = System.getenv("PASSWORD");
+		String password = ConfigReader.get("PASSWORD");
 		loginPage.fillInputs(username, password);
 		loginPage.clickOnLoginBtn();
 	}
@@ -112,8 +113,8 @@ class BaseTest {
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
 }
