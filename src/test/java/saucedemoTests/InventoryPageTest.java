@@ -115,6 +115,8 @@ class InventoryPageTest extends BaseTest {
                 loginPage = new LoginPage(driver);
                 login(loginPage);
 
+                inventoryPage = new InventoryPage(driver);
+
                 String termeknev = "Sauce Labs Backpack";
 
                 WebElement hozzaAdasGomb = driver.findElement(
