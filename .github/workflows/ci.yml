@@ -31,7 +31,6 @@ jobs:
               with:
                   java-version: 21
                   distribution: temurin
-                  cache: maven
                   cache-dependency-path: "**/pom.xml"
 
             # =========================
@@ -101,3 +100,4 @@ jobs:
               with:
                   name: surefire-reports
                   path: target/surefire-reports
+# TODO egész workflow javítása.
