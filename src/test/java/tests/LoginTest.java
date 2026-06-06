@@ -1,4 +1,4 @@
-package saucedemoTests;
+package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import saucedemoPages.InventoryPage;
-import saucedemoPages.LoginPage;
+import base.BaseTest;
+import config.ConfigReader;
+import pages.InventoryPage;
+import pages.LoginPage;
 
 //https://www.youtube.com/watch?v=XyBxEnyBb0A
 
-class LoginPageTest extends BaseTest {
+class LoginTest extends BaseTest {
 
 	LoginPage loginPage;
 

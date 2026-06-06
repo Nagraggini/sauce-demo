@@ -1,4 +1,4 @@
-package saucedemoPages;
+package pages;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+
+import base.BasePage;
 
 public class InventoryPage extends BasePage {
 	// ctrl+shift+c -> A chromeban megnyílik a dev tools és rögtön lokátort tudsz

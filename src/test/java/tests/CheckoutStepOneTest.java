@@ -1,4 +1,4 @@
-package saucedemoTests;
+package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -7,12 +7,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import saucedemoPages.CartPage;
-import saucedemoPages.CheckoutStepOnePage;
-import saucedemoPages.InventoryPage;
-import saucedemoPages.LoginPage;
+import base.BaseTest;
+import pages.CartPage;
+import pages.CheckoutStepOnePage;
+import pages.InventoryPage;
+import pages.LoginPage;
 
-public class CheckoutStepOnePageTest extends BaseTest {
+public class CheckoutStepOneTest extends BaseTest {
 
     LoginPage loginPage;
     InventoryPage inventoryPage;

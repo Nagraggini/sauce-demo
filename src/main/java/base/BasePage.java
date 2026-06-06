@@ -1,4 +1,4 @@
-package saucedemoPages;
+package base;
 
 import java.time.Duration;
 

@@ -1,4 +1,4 @@
-package saucedemoTests;
+package tests;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,10 +17,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import saucedemoPages.InventoryPage;
-import saucedemoPages.LoginPage;
+import base.BaseTest;
+import pages.InventoryPage;
+import pages.LoginPage;
 
-class InventoryPageTest extends BaseTest {
+class InventoryTest extends BaseTest {
 
         LoginPage loginPage;
         InventoryPage inventoryPage;
