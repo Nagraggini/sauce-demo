@@ -4,7 +4,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/dda8879e45944502bf5ae158c0f8374f)](https://app.codacy.com/gh/Nagraggini/sauce-demo/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 <!-- 2. Teszt adatok -->
-<!-- [Coverage](.github/badges/jacoco.svg) -->
+![Coverage](.github/badges/jacoco.svg)
 ![Branches](.github/badges/branches.svg)
 
 <!-- 3. Technológia és Eszközök -->
@@ -17,16 +17,16 @@
 [![](https://mermaid.ink/img/pako:eNqtVllP4zAQ_iuWV0hFPdQE6JGHlTgWqRKoFQtCWvXFJENikdjR2KHbZeG3r3M0zVFaHjYPcTzzzfXNjNo36koPqEPdkCl1xZmPLFoKYp6jI3IHIdNcChXwWBEmPDITASDXTLigctgFU3APSpN-_-93ciN9LhbMz0UO4Vv8LvhMvILQEteHTFJ9I8JhaM37LvhS5GdW_Da1t1yaPt8e4ekK-Ssg8bJjl-qRcU1W5rVVfijQD3HnmLxK7lXEATAvBKVuDeudywBlBPM4o5jI_DwmNXHDNrNredXA8EquRE3zXq-u3plKiR9bRsPyK2enhEAU6_UsihN9zSH01Lnw7nF9LzPTHfmUukeug7kI1w8KULAIvoJdmHRXEr021g3AfSmx52G4cZsmtFipzk-NXPgkKcQHgs2EKxHB1Z9nV0R0X8CbJxkus76DZwQVmKg_ECXemo4a1r5s_gmw6uuAUaO57T060OCKtr4lvHprJniZvmSiF8jN_rerIKBdMhgMyL5cyx39D2vW3TjrNB0cV0AyhqzocjwwbKbe9c2-3t2YvHNMRYN5rxfNBn-2X9W6-hfrchhnwqxPXRUXk75DlXXqQou6FCoTUkmxjL2XhpQ6dS3xUkaxFKbL7Q52n3kYZtm0dqlXMFMm3bJ1Q26mQ9wUmXd2cdxYlyrZ-0a6yWnAoqcEfcAWQ4Y3M6A1cbfmai9FRQlV9509deaR6lNBe9RH7lFHYwI9GgFGLL3SrIQl1QFEsKSO-fQYvizpUqQ2MRO_pIw2ZigTP9hckthjGoof5xIBwgPTy0Ro6pzaZ5kL6rzR39Tpj6YDezK1xiej8Xg6ss-sHl1Tx7JGA9saT-3hcDydDE8t-71H_2RRrcHwZDIa2hNjNp6eTm27R8HjhrTb4v9Berz_A5pTnwE?type=png)](https://mermaid.live/edit#pako:eNqtVllP4zAQ_iuWV0hFPdQE6JGHlTgWqRKoFQtCWvXFJENikdjR2KHbZeG3r3M0zVFaHjYPcTzzzfXNjNo36koPqEPdkCl1xZmPLFoKYp6jI3IHIdNcChXwWBEmPDITASDXTLigctgFU3APSpN-_-93ciN9LhbMz0UO4Vv8LvhMvILQEteHTFJ9I8JhaM37LvhS5GdW_Da1t1yaPt8e4ekK-Ssg8bJjl-qRcU1W5rVVfijQD3HnmLxK7lXEATAvBKVuDeudywBlBPM4o5jI_DwmNXHDNrNredXA8EquRE3zXq-u3plKiR9bRsPyK2enhEAU6_UsihN9zSH01Lnw7nF9LzPTHfmUukeug7kI1w8KULAIvoJdmHRXEr021g3AfSmx52G4cZsmtFipzk-NXPgkKcQHgs2EKxHB1Z9nV0R0X8CbJxkus76DZwQVmKg_ECXemo4a1r5s_gmw6uuAUaO57T060OCKtr4lvHprJniZvmSiF8jN_rerIKBdMhgMyL5cyx39D2vW3TjrNB0cV0AyhqzocjwwbKbe9c2-3t2YvHNMRYN5rxfNBn-2X9W6-hfrchhnwqxPXRUXk75DlXXqQou6FCoTUkmxjL2XhpQ6dS3xUkaxFKbL7Q52n3kYZtm0dqlXMFMm3bJ1Q26mQ9wUmXd2cdxYlyrZ-0a6yWnAoqcEfcAWQ4Y3M6A1cbfmai9FRQlV9509deaR6lNBe9RH7lFHYwI9GgFGLL3SrIQl1QFEsKSO-fQYvizpUqQ2MRO_pIw2ZigTP9hckthjGoof5xIBwgPTy0Ro6pzaZ5kL6rzR39Tpj6YDezK1xiej8Xg6ss-sHl1Tx7JGA9saT-3hcDydDE8t-71H_2RRrcHwZDIa2hNjNp6eTm27R8HjhrTb4v9Berz_A5pTnwE)
 
 # Források
-[EASY XPath Tutorial](https://www.youtube.com/watch?v=XyBxEnyBb0A)
-[XPath Tutorial For Beginners](https://www.youtube.com/watch?v=128luZRWOpw&list=PLmRg3gEG2XIackdOpGvb_jEX1ywaplUmh)
-[Selenium XPath Tutorial](https://www.youtube.com/watch?v=5LV4z_-91WY&list=PLL34mf651faO1vJWlSoYYBJejN9U_rwy-)
-[XPath Tutorial](https://www.youtube.com/watch?v=ppnDfNuSjro&list=PL699Xf-_ilW4sqC76skEN5vHT0M1YNXoU)
+[EASY XPath Tutorial](https://www.youtube.com/watch?v=XyBxEnyBb0A)              
+[XPath Tutorial For Beginners](https://www.youtube.com/watch?v=128luZRWOpw&list=PLmRg3gEG2XIackdOpGvb_jEX1ywaplUmh)             
+[Selenium XPath Tutorial](https://www.youtube.com/watch?v=5LV4z_-91WY&list=PLL34mf651faO1vJWlSoYYBJejN9U_rwy-)              
+[XPath Tutorial](https://www.youtube.com/watch?v=ppnDfNuSjro&list=PL699Xf-_ilW4sqC76skEN5vHT0M1YNXoU)           
 
-[Xpath cheatsheet](https://devhints.io/xpath)
+[Xpath cheatsheet](https://devhints.io/xpath)           
 
-A projekt létrehozása és minden beállításhoz való útmutatót [itt](https://github.com/Nagraggini/selenium-playground/blob/main/README.md) találsz. 
+A projekt létrehozása és minden beállításhoz való útmutatót [itt](https://github.com/Nagraggini/selenium-playground/blob/main/README.md) találsz.       
 
-[Programozásról szóló jegyzeteim](https://nagraggini.github.io/my-awesome-book/)
+[Programozásról szóló jegyzeteim](https://nagraggini.github.io/my-awesome-book/)            
 
 # Eclipse
 
