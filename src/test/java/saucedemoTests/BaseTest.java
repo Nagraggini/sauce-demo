@@ -97,7 +97,7 @@ class BaseTest {
 	}
 
 	void cleanUp(InventoryPage inventoryPage) {
-		logger.info("\n -- Before clean up current URL: {}", driver.getCurrentUrl());
+		// logger.info("\n -- Before clean up current URL: {}", driver.getCurrentUrl());
 
 		// Takarítás.
 		inventoryPage.openHamburgerMenu();

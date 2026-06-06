@@ -1,5 +1,9 @@
 package saucedemoPages;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,14 +28,14 @@ public class InventoryPage extends BasePage {
 	// Fejléc és logó.
 	private final By appLogo = By.xpath("//div[@class='app_logo' and contains(text(),'Swag')]");
 	private final By productsLbl = By.xpath("//*/span[contains(text(),'Products')]");
-	private final By changeOrderingSelect = By.cssSelector("product_sort_container");
+	private final By changeOrderingSelect = By.cssSelector("[class='product_sort_container']");
 
 	// Kosár elemek.
 	private final By shoppingCartBtn = By.className("shopping_cart_link");
 	private final By shoppingCartBadge = By.cssSelector("span[data-test='shopping-cart-badge']");
 
 	// Lábléc.
-	private final By twitterIcon = By.cssSelector("[data-test='social-twitter']");
+	private final By twitterIcon = By.linkText("Twitter");
 	private final By fbIcon = By.cssSelector("[data-test='social-facebook']");
 	private final By linkedinIcon = By.cssSelector("[data-test='social-linkedin']");
 
@@ -105,23 +109,59 @@ public class InventoryPage extends BasePage {
 	}
 
 	public void changeOrderingAtoZ() {
+		wait.until(ExpectedConditions.elementToBeClickable(changeOrderingSelect));
 		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
 		changeOrderingSel.selectByValue("az");
 	}
 
 	public void changeOrderingZtoA() {
+		wait.until(ExpectedConditions.elementToBeClickable(changeOrderingSelect));
 		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
 		changeOrderingSel.selectByValue("za");
 	}
 
 	public void changeOrderingLowtoHigh() {
+		wait.until(ExpectedConditions.elementToBeClickable(changeOrderingSelect));
 		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
 		changeOrderingSel.selectByValue("lohi");
 	}
 
 	public void changeOrderingHightoLow() {
+		wait.until(ExpectedConditions.elementToBeClickable(changeOrderingSelect));
 		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
 		changeOrderingSel.selectByValue("hilo");
+	}
+
+	public LinkedHashMap<String, Double> getAllItemnamesAndTheirPrices() {
+
+		// Megvárjuk, hogy megjelenjenek az árak.
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("inventory_item_price")));
+
+		// Lekérjük az összes termék nevét.
+		List<WebElement> itemNames = this.driver.findElements(By.xpath("//div[@class='inventory_item_name ']"));
+
+		// Beszúrási sorrend meg marad a LinkedHashMap-el.
+		LinkedHashMap<String, Double> itemsAndPrices = new LinkedHashMap<>();
+
+		for (WebElement itemName : itemNames) {
+			itemsAndPrices.put(itemName.getText(), getPriceofAnItem(itemName.getText()));
+		}
+
+		return itemsAndPrices;
+	}
+
+	public List<String> getAllItemName() {
+		// Megvárjuk, hogy megjelenjenek az árak.
+		// wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("inventory_item_name
+		// ")));
+		List<WebElement> allItemName = this.driver.findElements(By.cssSelector("[class='inventory_item_name']"));
+
+		List<String> onlyAllItemName = new ArrayList<>();
+		for (WebElement itemName : allItemName) {
+			onlyAllItemName.add(itemName.getText());
+
+		}
+		return onlyAllItemName;
 	}
 
 }
