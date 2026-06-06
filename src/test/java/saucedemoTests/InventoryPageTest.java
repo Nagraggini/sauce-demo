@@ -1,6 +1,11 @@
 package saucedemoTests;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -126,6 +131,115 @@ class InventoryPageTest extends BaseTest {
                 cleanUp(inventoryPage);
 
         }
-        // TODO a sorrend változtató gomb mind a négy opciójának tesztelése.
-        // TODO legdrágább és legolcsóbb termék neve
+
+        @Test
+        @DisplayName("Legdrágább elem megkeresése.")
+        void mostExpensiveItem() {
+                loginPage = new LoginPage(driver);
+                login(loginPage);
+
+                inventoryPage = new InventoryPage(driver);
+                var itemsAndPrices = inventoryPage.getAllItemnamesAndTheirPrices();
+
+                // Ez, csak akkor működik, hacsak egy termék a legdrágább.
+                String maxItemName = null;
+                Double maxItemPrice = 0.0;
+                for (Map.Entry<String, Double> entry : itemsAndPrices.entrySet()) {
+                        if (entry.getValue() > maxItemPrice) {
+                                maxItemPrice = entry.getValue();
+                                maxItemName = entry.getKey();
+                        }
+                }
+                String expectedMaxItemName = "Sauce Labs Fleece Jacket";
+                Double expectedMaxItemPrice = 49.99;
+                assertEquals(expectedMaxItemName, maxItemName,
+                                "Nem a " + expectedMaxItemName + " a legdrágább termék.");
+
+                assertEquals(expectedMaxItemPrice,
+                                maxItemPrice,
+                                "Nem a $" + maxItemPrice + " értékű termék a legdrágább.");
+                cleanUp(inventoryPage);
+        }
+
+        @Test
+        @DisplayName("Legolcsóbb elem megkeresése.")
+        void cheapestItem() {
+                loginPage = new LoginPage(driver);
+                login(loginPage);
+
+                inventoryPage = new InventoryPage(driver);
+                LinkedHashMap<String, Double> itemsAndPrices = inventoryPage.getAllItemnamesAndTheirPrices();
+
+                // Ez, csak akkor működik, hacsak egy termék a legdrágább.
+                String maxItemName = null;
+                // Az első elem értékét adjuk meg neki.
+                Double maxItemPrice = itemsAndPrices.values().stream()
+                                .findFirst()
+                                .orElse(null); // Akkor fut le, ha a Map üres lenne
+                for (Map.Entry<String, Double> entry : itemsAndPrices.entrySet()) {
+                        if (entry.getValue() < maxItemPrice) {
+                                maxItemPrice = entry.getValue();
+                                maxItemName = entry.getKey();
+                        }
+                }
+                String expectedMaxItemName = "Sauce Labs Onesie";
+                Double expectedMaxItemPrice = 7.99;
+                assertEquals(expectedMaxItemName, maxItemName,
+                                "Nem a " + expectedMaxItemName + " a legolcsóbb termék.");
+
+                assertEquals(expectedMaxItemPrice,
+                                maxItemPrice,
+                                "Nem a $" + maxItemPrice + " értékű termék a legolcsóbb.");
+                cleanUp(inventoryPage);
+        }
+
+        @Test
+        @DisplayName("Leellenőrizzük, hogy az ABC sorrend jó-e.")
+        void checkABCSort() {
+                loginPage = new LoginPage(driver);
+                login(loginPage);
+
+                inventoryPage = new InventoryPage(driver);
+
+                inventoryPage.changeOrderingAtoZ();
+
+                // Lekérjük az aktuális listát.
+                List<String> allItemName = inventoryPage.getAllItemName();
+
+                // Hacsak az egyenlőség jel után teszed a változót, akkor nem hozol létre új
+                // listát.
+                List<String> orderedItemName = new ArrayList<>(allItemName);
+
+                // A lista rendezése.
+                Collections.sort(orderedItemName);
+
+                assertEquals(allItemName, orderedItemName, "A termékek lista nincsen rendezve A-Z-ig.");
+                cleanUp(inventoryPage);
+        }
+
+        @Test
+        @DisplayName("Leellenőrizzük, hogy az ABC csökkenő sorrend jó-e.")
+        void checkACSReverseSort() {
+                loginPage = new LoginPage(driver);
+                login(loginPage);
+
+                inventoryPage = new InventoryPage(driver);
+
+                inventoryPage.changeOrderingZtoA();
+
+                // Lekérjük az aktuális listát.
+                List<String> allItemName = inventoryPage.getAllItemName();
+
+                // Hacsak az egyenlőség jel után teszed a változót, akkor nem hozol létre új
+                // listát.
+                List<String> orderedItemName = new ArrayList<>(allItemName);
+
+                // A lista rendezése.
+                Collections.sort(orderedItemName, Comparator.reverseOrder());
+
+                assertEquals(allItemName, orderedItemName, "A termékek lista nincsen rendezve Z-A-ig.");
+                cleanUp(inventoryPage);
+        }
+        // TODO a sorrend változtató gomb kettő árszerinti rendezés opciójának
+        // tesztelése.
 }
