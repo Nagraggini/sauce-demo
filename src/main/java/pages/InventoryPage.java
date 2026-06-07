@@ -7,7 +7,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import base.BasePage;
@@ -44,103 +43,87 @@ public class InventoryPage extends BasePage {
 	private final By copyRightlbl = By.className("footer_copy");
 
 	public void openHamburgerMenu() {
-		WebElement menu = driver.findElement(hamburgerBtn);
-		this.driver.findElement(hamburgerBtn).click();
+		click(hamburgerBtn);
 	}
 
 	public void clickonLogoutBtn() {
-		this.wait.until(ExpectedConditions.visibilityOfElementLocated(logoutBtn)).click();
+		click(logoutBtn);
 	}
 
 	public void clickonResetAppStateBtn() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(resetAppStateBtn))
-				.click();
+		click(resetAppStateBtn);
 	}
 
 	public void clickOnshoppingCartBtn() {
-		this.wait.until(ExpectedConditions.elementToBeClickable(shoppingCartBtn)).click();
+		click(shoppingCartBtn);
 	}
 
 	public int getShoppingCartBadgeNumber() {
-
 		// Ha üres a kosár, akkor sem lesz error.
 		if (driver.findElements(shoppingCartBadge).isEmpty()) {
 			return 0;
 		}
 
-		int shoppingCartBadgeNumber = Integer.parseInt(
-				this.wait.until(ExpectedConditions.elementToBeClickable(shoppingCartBadge))
-						.getText());
-		return shoppingCartBadgeNumber;
+		return Integer.parseInt(
+				getText(shoppingCartBadge));
 	}
 
 	public double getPriceofAnItem(String itemName) {
-		By label = By.xpath("//div[@data-test='inventory-list']//div[text()='" + itemName + "']");
-
-		this.wait.until(ExpectedConditions.visibilityOfElementLocated(label));
-
-		String priceWithDollar = this.driver.findElement(By.xpath(
+		return Double.parseDouble(getText(By.xpath(
 				"//div[@class='inventory_item' and .//div[text()='" + itemName
 						+ "']]//div[@class='inventory_item_price']"))
-				.getText();
-
-		double price = Double.parseDouble(priceWithDollar.substring(1));
-
-		return price;
+				.substring(1));
 	}
 
 	public void addToCartOrRemove(String itemName) {
-
 		By addToCartOrRemoveBtn = By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
 						+ itemName + "']]//button");
 
-		if (this.driver.findElement(addToCartOrRemoveBtn).getText().equals("Add to Cart")) {
-			wait.until(ExpectedConditions.elementToBeClickable(addToCartOrRemoveBtn)).click();
+		if (getText(addToCartOrRemoveBtn).equals("Add to Cart")) {
+			click(addToCartOrRemoveBtn);
 		} else {
-			wait.until(ExpectedConditions.elementToBeClickable(addToCartOrRemoveBtn)).click();
+			click(addToCartOrRemoveBtn);
 		}
 	}
 
 	public String getAddToCartOrRemoveBtnText(String itemName) {
-		By addToCartOrRemoveBtn = By.xpath(
+		return getText(By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
-						+ itemName + "']]//button");
-
-		return this.driver.findElement(addToCartOrRemoveBtn).getText();
+						+ itemName + "']]//button"));
 	}
 
 	public void changeOrderingAtoZ() {
-		wait.until(ExpectedConditions.elementToBeClickable(changeOrderingSelect));
-		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
 		changeOrderingSel.selectByValue("az");
 	}
 
 	public void changeOrderingZtoA() {
-		wait.until(ExpectedConditions.elementToBeClickable(changeOrderingSelect));
-		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
 		changeOrderingSel.selectByValue("za");
 	}
 
 	public void changeOrderingLowtoHigh() {
-		wait.until(ExpectedConditions.elementToBeClickable(changeOrderingSelect));
-		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
 		changeOrderingSel.selectByValue("lohi");
 	}
 
 	public void changeOrderingHightoLow() {
-		wait.until(ExpectedConditions.elementToBeClickable(changeOrderingSelect));
-		Select changeOrderingSel = new Select(this.driver.findElement(changeOrderingSelect));
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
 		changeOrderingSel.selectByValue("hilo");
 	}
 
 	public LinkedHashMap<String, Double> getAllItemnamesAndTheirPrices() {
 
 		// Megvárjuk, hogy megjelenjenek az árak.
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("inventory_item_price")));
+		waitForAllElementsPresent(By.className("inventory_item_price"));
 
 		// Lekérjük az összes termék nevét.
-		List<WebElement> itemNames = this.driver.findElements(By.xpath("//div[@class='inventory_item_name ']"));
+		List<WebElement> itemNames = findAll(By.xpath("//div[@class='inventory_item_name ']"));
 
 		// Beszúrási sorrend meg marad a LinkedHashMap-el.
 		LinkedHashMap<String, Double> itemsAndPrices = new LinkedHashMap<>();
@@ -156,12 +139,11 @@ public class InventoryPage extends BasePage {
 		// Megvárjuk, hogy megjelenjenek az árak.
 		// wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("inventory_item_name
 		// ")));
-		List<WebElement> allItemName = this.driver.findElements(By.cssSelector("[class='inventory_item_name']"));
+		List<WebElement> allItemName = findAll(By.cssSelector("[class='inventory_item_name']"));
 
 		List<String> onlyAllItemName = new ArrayList<>();
 		for (WebElement itemName : allItemName) {
 			onlyAllItemName.add(itemName.getText());
-
 		}
 		return onlyAllItemName;
 	}

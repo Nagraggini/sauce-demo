@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import base.BasePage;
 
@@ -24,26 +23,17 @@ public class LoginPage extends BasePage {
 	private final By errorMessage = By
 			.xpath("//div/form/div[@class='error-message-container error']/h3[@data-test='error']");
 
-	public void waitsForComponents() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput));
-		wait.until(ExpectedConditions.elementToBeClickable(loginBtn));
-	}
-
 	public void fillInputs(String username, String password) {
-		waitsForComponents();
-		this.driver.findElement(usernameInput).sendKeys(username);
-		this.driver.findElement(passwordInput).sendKeys(password);
+		type(usernameInput, username);
+		type(passwordInput, password);
 	}
 
 	public void clickOnLoginBtn() {
-		waitsForComponents();
-		this.driver.findElement(loginBtn).click();
+		click(loginBtn);
 	}
 
 	public String getErrorMessage() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage));
-		return this.driver.findElement(errorMessage).getText();
+		return getText(errorMessage);
 	}
 
 }
