@@ -35,25 +35,18 @@ jobs:
                   cache-dependency-path: "**/pom.xml"
 
             # =========================
-            # 3. Build project
+            # 3. Run Tests & Generate JaCoCo Report
             # =========================
-            - name: Build
-              run: mvn -B clean compile
-
-            # =========================
-            # 4. Run Tests
-            # =========================
-            # Tesztek futtatása
-            - name: Run Tests
+            - name: Run Tests and Coverage
               env:
                   USERNAME: ${{ secrets.USERNAME }}
                   PASSWORD: ${{ secrets.PASSWORD }}
                   WRONG_PASSWORD: ${{ secrets.WRONG_PASSWORD }}
                   BASE_URL: ${{ secrets.BASE_URL }}
-              run: mvn -B verify jacoco:report
+              run: mvn -B clean verify jacoco:report
 
             # =========================
-            # 5. Generate JaCoCo Badges
+            # 4. Generate JaCoCo Badges (Directly into README)
             # =========================
             - name: Generate JaCoCo Badge
               id: jacoco
@@ -61,22 +54,21 @@ jobs:
               with:
                   generate-branches-badge: true
                   jacoco-csv-file: target/site/jacoco/jacoco.csv
-                  badges-directory: .github/badges
 
             # =========================
-            # 6. Commit and Push the Badges back to repo
+            # 5. Commit and Push the README back to repo
             # =========================
             - name: Commit and push badges
               if: ${{ github.event_name == 'push' }}
               run: |
                   git config --local user.email "action@github.com"
                   git config --local user.name "GitHub Action"
-                  git add .github/badges/*.svg
-                  git diff --staged --quiet || git commit -m "chore: update jacoco coverage badges"
+                  git add README.md
+                  git diff --staged --quiet || git commit -m "chore: update jacoco coverage badges in README"
                   git push
 
             # =========================
-            # 7. Test reports
+            # 6. Test reports artifact upload
             # =========================
             - name: Upload test reports
               if: always()
