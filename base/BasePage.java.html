@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasePage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">saucedemo</a> &gt; <a href="index.source.html" class="el_package">base</a> &gt; <span class="el_source">BasePage.java</span></div><h1>BasePage.java</h1><pre class="source lang-java linenums">package base;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public abstract class BasePage {
+
+	protected final WebDriver driver;
+	protected final WebDriverWait wait;
+
+	// Logoláshoz.
+<span class="fc" id="L25">	protected static final Logger logger = LogManager.getLogger(BasePage.class);</span>
+
+	// KONSTRUKTOR: Ezen keresztül adjuk át a futó böngészőt a tesztből.
+<span class="fc" id="L28">	public BasePage(WebDriver driver) {</span>
+<span class="fc" id="L29">		this.driver = driver;</span>
+<span class="fc" id="L30">		this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));</span>
+<span class="fc" id="L31">	}</span>
+
+	// I. find() - legalacsonyabb szintű művelet
+	protected WebElement find(By locator) {
+<span class="fc" id="L35">		return driver.findElement(locator);</span>
+	}
+
+	protected List&lt;WebElement&gt; findAll(By locator) {
+<span class="fc" id="L39">		return driver.findElements(locator);</span>
+	}
+
+	// II. &quot;okos réteg&quot; a Wait wrapperek, a várakoztatások:
+	protected WebElement waitUntilVisible(By locator) {
+<span class="fc" id="L44">		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));</span>
+	}
+
+	protected WebElement waitUntilClickable(By locator) {
+<span class="fc" id="L48">		return wait.until(ExpectedConditions.elementToBeClickable(locator));</span>
+	}
+
+	protected WebElement waitUntilPresent(By locator) {
+<span class="nc" id="L52">		return wait.until(ExpectedConditions.presenceOfElementLocated(locator));</span>
+	}
+
+	protected List&lt;WebElement&gt; waitForAllElementsPresent(By locator) {
+<span class="fc" id="L56">		return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));</span>
+	}
+
+	protected void waitAttribute(By locator, String attribute, String value) {
+<span class="nc" id="L60">		wait.until(ExpectedConditions.attributeToBe(locator, attribute, value));</span>
+<span class="nc" id="L61">	}</span>
+
+	// III. kényelmi metódusok, interakciók
+	protected void click(By locator) {
+<span class="fc" id="L65">		logger.info(&quot; --- Clicking on element: {}&quot;, locator);</span>
+<span class="fc" id="L66">		waitUntilClickable(locator).click();</span>
+<span class="fc" id="L67">	}</span>
+
+	protected void type(By locator, String text) {
+<span class="fc" id="L70">		waitUntilVisible(locator).sendKeys(text);</span>
+<span class="fc" id="L71">	}</span>
+
+	protected void clearAndType(By locator, String text) {
+<span class="nc" id="L74">		WebElement element = waitUntilVisible(locator);</span>
+<span class="nc" id="L75">		element.clear();</span>
+<span class="nc" id="L76">		element.sendKeys(text);</span>
+<span class="nc" id="L77">	}</span>
+
+	protected String getText(By locator) {
+<span class="fc" id="L80">		return waitUntilVisible(locator).getText();</span>
+	}
+
+	protected boolean isDisplayed(By locator) {
+		try {
+<span class="nc" id="L85">			return waitUntilVisible(locator).isDisplayed();</span>
+<span class="nc" id="L86">		} catch (TimeoutException | NoSuchElementException | StaleElementReferenceException e) {</span>
+<span class="nc" id="L87">			return false;</span>
+		}
+	}
+
+	/** Egy HTML elem valamelyik attribútumának értékének kiolvasásához. */
+	protected String getAttribute(By locator, String attribute) {
+<span class="nc" id="L93">		return waitUntilVisible(locator).getAttribute(attribute);</span>
+	}
+
+	/** Középre görgetés. */
+	// Ez is kell hozzá: import org.openqa.selenium.JavascriptExecutor;
+	protected void scrollToElement(By locator) {
+<span class="nc" id="L99">		WebElement element = waitUntilVisible(locator);</span>
+
+<span class="nc" id="L101">		JavascriptExecutor js = (JavascriptExecutor) driver;</span>
+<span class="nc" id="L102">		js.executeScript(</span>
+				&quot;arguments[0].scrollIntoView({block: 'center'});&quot;,
+				element);
+<span class="nc" id="L105">	}</span>
+
+	// IV. select
+	protected Select select(By locator) {
+<span class="nc" id="L109">		return new Select(waitUntilVisible(locator));</span>
+	}
+
+	protected void selectByValue(By locator, String value) {
+<span class="nc" id="L113">		select(locator).selectByValue(value);</span>
+<span class="nc" id="L114">	}</span>
+
+	protected void selectByVisibleText(By locator, String text) {
+<span class="nc" id="L117">		select(locator).selectByVisibleText(text);</span>
+<span class="nc" id="L118">	}</span>
+
+	// V. URL műveletek
+	public void openPage(String url) {
+<span class="fc" id="L122">		this.driver.get(url);</span>
+<span class="fc" id="L123">	}</span>
+
+	public void clearCookies() {
+<span class="nc" id="L126">		driver.manage().deleteAllCookies();</span>
+<span class="nc" id="L127">	}</span>
+
+	public String getCurrentUrl() {
+<span class="fc" id="L130">		return driver.getCurrentUrl();</span>
+	}
+
+	public void refreshPage() {
+<span class="nc" id="L134">		this.driver.navigate().refresh();</span>
+<span class="nc" id="L135">	}</span>
+
+	public String getTitle() {
+<span class="nc" id="L138">		return driver.getTitle();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

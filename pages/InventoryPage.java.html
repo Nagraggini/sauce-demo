@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InventoryPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">saucedemo</a> &gt; <a href="index.source.html" class="el_package">pages</a> &gt; <span class="el_source">InventoryPage.java</span></div><h1>InventoryPage.java</h1><pre class="source lang-java linenums">package pages;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import base.BasePage;
+
+public class InventoryPage extends BasePage {
+	// ctrl+shift+c -&gt; A chromeban megnyílik a dev tools és rögtön lokátort tudsz
+	// keresni.
+	public InventoryPage(WebDriver driver) {
+<span class="fc" id="L18">		super(driver);</span>
+<span class="fc" id="L19">	}</span>
+
+	// Hamburger menü elemek.
+<span class="fc" id="L22">	private final By hamburgerBtn = By.id(&quot;react-burger-menu-btn&quot;);</span>
+<span class="fc" id="L23">	private final By allItemsBtn = By.id(&quot;inventory_sidebar_link&quot;);</span>
+<span class="fc" id="L24">	private final By aboutBtn = By.id(&quot;about_sidebar_link&quot;);</span>
+<span class="fc" id="L25">	private final By logoutBtn = By.id(&quot;logout_sidebar_link&quot;);</span>
+<span class="fc" id="L26">	private final By resetAppStateBtn = By.id(&quot;reset_sidebar_link&quot;);</span>
+<span class="fc" id="L27">	private final By closeHamburgerMenu = By.id(&quot;react-burger-cross-btn&quot;);</span>
+
+	// Fejléc és logó.
+<span class="fc" id="L30">	private final By appLogo = By.xpath(&quot;//div[@class='app_logo' and contains(text(),'Swag')]&quot;);</span>
+<span class="fc" id="L31">	private final By productsLbl = By.xpath(&quot;//*/span[contains(text(),'Products')]&quot;);</span>
+<span class="fc" id="L32">	private final By changeOrderingSelect = By.cssSelector(&quot;[class='product_sort_container']&quot;);</span>
+
+	// Kosár elemek.
+<span class="fc" id="L35">	private final By shoppingCartBtn = By.className(&quot;shopping_cart_link&quot;);</span>
+<span class="fc" id="L36">	private final By shoppingCartBadge = By.cssSelector(&quot;span[data-test='shopping-cart-badge']&quot;);</span>
+
+	// Lábléc.
+<span class="fc" id="L39">	private final By twitterIcon = By.linkText(&quot;Twitter&quot;);</span>
+<span class="fc" id="L40">	private final By fbIcon = By.cssSelector(&quot;[data-test='social-facebook']&quot;);</span>
+<span class="fc" id="L41">	private final By linkedinIcon = By.cssSelector(&quot;[data-test='social-linkedin']&quot;);</span>
+
+<span class="fc" id="L43">	private final By copyRightlbl = By.className(&quot;footer_copy&quot;);</span>
+
+	public void openHamburgerMenu() {
+<span class="fc" id="L46">		click(hamburgerBtn);</span>
+<span class="fc" id="L47">	}</span>
+
+	public void clickOnLogoutBtn() {
+<span class="fc" id="L50">		click(logoutBtn);</span>
+<span class="fc" id="L51">	}</span>
+
+	public void clickOnResetAppStateBtn() {
+<span class="fc" id="L54">		click(resetAppStateBtn);</span>
+<span class="fc" id="L55">	}</span>
+
+	public void clickOnShoppingCartBtn() {
+<span class="fc" id="L58">		click(shoppingCartBtn);</span>
+<span class="fc" id="L59">	}</span>
+
+	public int getShoppingCartBadgeNumber() {
+		// Ha üres a kosár, akkor sem lesz error.
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">		if (driver.findElements(shoppingCartBadge).isEmpty()) {</span>
+<span class="nc" id="L64">			return 0;</span>
+		}
+
+<span class="fc" id="L67">		return Integer.parseInt(</span>
+<span class="fc" id="L68">				getText(shoppingCartBadge));</span>
+	}
+
+	public double getPriceofAnItem(String itemName) {
+<span class="fc" id="L72">		return Double.parseDouble(getText(By.xpath(</span>
+				&quot;//div[@class='inventory_item' and .//div[text()='&quot; + itemName
+						+ &quot;']]//div[@class='inventory_item_price']&quot;))
+<span class="fc" id="L75">				.substring(1));</span>
+	}
+
+	public void addToCartOrRemove(String itemName) {
+<span class="fc" id="L79">		By addToCartOrRemoveBtn = By.xpath(</span>
+				&quot;//div[@class='inventory_item' and .//div[normalize-space()='&quot;
+						+ itemName + &quot;']]//button&quot;);
+
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">		if (getText(addToCartOrRemoveBtn).equals(&quot;Add to Cart&quot;)) {</span>
+<span class="nc" id="L84">			click(addToCartOrRemoveBtn);</span>
+		} else {
+<span class="fc" id="L86">			click(addToCartOrRemoveBtn);</span>
+		}
+<span class="fc" id="L88">	}</span>
+
+	public String getAddToCartOrRemoveBtnText(String itemName) {
+<span class="fc" id="L91">		return getText(By.xpath(</span>
+				&quot;//div[@class='inventory_item' and .//div[normalize-space()='&quot;
+						+ itemName + &quot;']]//button&quot;));
+	}
+
+	public void changeOrderingAtoZ() {
+<span class="fc" id="L97">		waitUntilClickable(changeOrderingSelect);</span>
+<span class="fc" id="L98">		Select changeOrderingSel = new Select(find(changeOrderingSelect));</span>
+<span class="fc" id="L99">		changeOrderingSel.selectByValue(&quot;az&quot;);</span>
+<span class="fc" id="L100">	}</span>
+
+	public void changeOrderingZtoA() {
+<span class="fc" id="L103">		waitUntilClickable(changeOrderingSelect);</span>
+<span class="fc" id="L104">		Select changeOrderingSel = new Select(find(changeOrderingSelect));</span>
+<span class="fc" id="L105">		changeOrderingSel.selectByValue(&quot;za&quot;);</span>
+<span class="fc" id="L106">	}</span>
+
+	public void changeOrderingLowtoHigh() {
+<span class="nc" id="L109">		waitUntilClickable(changeOrderingSelect);</span>
+<span class="nc" id="L110">		Select changeOrderingSel = new Select(find(changeOrderingSelect));</span>
+<span class="nc" id="L111">		changeOrderingSel.selectByValue(&quot;lohi&quot;);</span>
+<span class="nc" id="L112">	}</span>
+
+	public void changeOrderingHightoLow() {
+<span class="nc" id="L115">		waitUntilClickable(changeOrderingSelect);</span>
+<span class="nc" id="L116">		Select changeOrderingSel = new Select(find(changeOrderingSelect));</span>
+<span class="nc" id="L117">		changeOrderingSel.selectByValue(&quot;hilo&quot;);</span>
+<span class="nc" id="L118">	}</span>
+
+	public LinkedHashMap&lt;String, Double&gt; getAllItemnamesAndTheirPrices() {
+
+		// Megvárjuk, hogy megjelenjenek az árak.
+<span class="fc" id="L123">		waitForAllElementsPresent(By.className(&quot;inventory_item_price&quot;));</span>
+
+		// Lekérjük az összes termék nevét.
+<span class="fc" id="L126">		List&lt;WebElement&gt; itemNames = findAll(By.xpath(&quot;//div[@class='inventory_item_name ']&quot;));</span>
+
+		// Beszúrási sorrend meg marad a LinkedHashMap-el.
+<span class="fc" id="L129">		LinkedHashMap&lt;String, Double&gt; itemsAndPrices = new LinkedHashMap&lt;&gt;();</span>
+
+<span class="fc bfc" id="L131" title="All 2 branches covered.">		for (WebElement itemName : itemNames) {</span>
+<span class="fc" id="L132">			itemsAndPrices.put(itemName.getText(), getPriceofAnItem(itemName.getText()));</span>
+<span class="fc" id="L133">		}</span>
+
+<span class="fc" id="L135">		return itemsAndPrices;</span>
+	}
+
+	public List&lt;String&gt; getAllItemName() {
+		// Megvárjuk, hogy megjelenjenek az árak.
+		// wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className(&quot;inventory_item_name
+		// &quot;)));
+<span class="fc" id="L142">		List&lt;WebElement&gt; allItemName = findAll(By.cssSelector(&quot;[class='inventory_item_name']&quot;));</span>
+
+<span class="fc" id="L144">		List&lt;String&gt; onlyAllItemName = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L145" title="1 of 2 branches missed.">		for (WebElement itemName : allItemName) {</span>
+<span class="nc" id="L146">			onlyAllItemName.add(itemName.getText());</span>
+<span class="nc" id="L147">		}</span>
+<span class="fc" id="L148">		return onlyAllItemName;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
