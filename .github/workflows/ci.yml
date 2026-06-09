@@ -9,6 +9,8 @@ on:
 
 permissions:
     contents: write
+    pages: write # Ez is kell a Pages-hez
+    id-token: write # Ez is szükséges a biztonságos deploy-hoz
 
 jobs:
     build-test:
@@ -76,3 +78,12 @@ jobs:
               with:
                   name: surefire-reports
                   path: target/surefire-reports
+
+            # =========================
+            # 7. Deploy JaCoCo Report to GitHub Pages
+            # =========================
+            - name: Deploy JaCoCo Report to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: target/site/jacoco # A mappa, amit publikálni szeretnél
+                  branch: gh-pages

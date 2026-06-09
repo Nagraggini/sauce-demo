@@ -44,7 +44,7 @@
 
 [Xpath cheatsheet](https://devhints.io/xpath)           
 
-A projekt létrehozása és minden beállításhoz való útmutatót [itt](https://github.com/Nagraggini/selenium-playground/blob/main/README.md) találsz.       
+Az első selenium webdriver-es projekt létrehozásához való tészletes útmutatót [itt](https://github.com/Nagraggini/selenium-playground/blob/main/README.md) találsz (projekt létrehozása, verziókezelés,  feltöltése github-ra, CI/CD beállítása.)       
 
 [Programozásról szóló jegyzeteim](https://nagraggini.github.io/my-awesome-book/)            
 
@@ -258,14 +258,26 @@ BASE_URL =
 
 <!-- TODO paraméterezett tesztek json-el. https://mockaroo.com/-->
 
+# Jacoco report beállítása külön weboldalként
+
+ci.yml fájl végére:
+```yml
+            # =========================
+            # 7. Deploy JaCoCo Report to GitHub Pages
+            # =========================
+            - name: Deploy JaCoCo Report to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: target/site/jacoco # A mappa, amit publikálni szeretnél
+                  branch: gh-pages
+```
+
+
 # Futtatás
 
 Terminálba: mvn clean test
 
 Egy konkrét teszt futtatása: mvn -Dtest=CheckoutStepOnePageTest#shouldDisplayErrorMessageForPostalCode test
-
-Teszt report generálása:
-mvn jacoco:report
 
 Itt találod a fájlt: target/site/jacoco/index.html -> Jobb klikk Open with Live Server
 
