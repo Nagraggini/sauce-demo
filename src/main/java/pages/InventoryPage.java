@@ -54,7 +54,7 @@ public class InventoryPage extends BasePage {
 		click(resetAppStateBtn);
 	}
 
-	public void clickOnshoppingCartBtn() {
+	public void clickOnShoppingCartBtn() {
 		click(shoppingCartBtn);
 	}
 

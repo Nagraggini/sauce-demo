@@ -18,7 +18,7 @@ public class CartPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(checkoutBtn)).click();
     }
 
-    public double getPriceofAnItem(String itemName) {
+    public double getPriceOfAnItem(String itemName) {
         /* .[] -> Pont az aktuálisre hivatkozik a kapcsoszárójelben van a feltétel. */
         double itemPrice = Double
                 .parseDouble(wait
