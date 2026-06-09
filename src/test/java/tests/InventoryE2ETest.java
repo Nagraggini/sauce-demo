@@ -11,6 +11,7 @@ import pages.CheckoutStepOnePage;
 import pages.CheckoutStepTwoPage;
 import pages.InventoryPage;
 import pages.LoginPage;
+import utils.TestDataUtil;
 
 public class InventoryE2ETest extends BaseTest {
         LoginPage loginPage;
@@ -59,9 +60,11 @@ public class InventoryE2ETest extends BaseTest {
                 cartPage.clickOnCheckout();
 
                 checkoutStepOnePage = new CheckoutStepOnePage(driver);
-                checkoutStepOnePage.fillFirstNameInput("Jane");
-                checkoutStepOnePage.fillLastNameInput("Doe");
-                checkoutStepOnePage.fillPostalCodeInput("9999");
+                TestDataUtil testDataUtil = new TestDataUtil();
+
+                checkoutStepOnePage.fillFirstNameInput(testDataUtil.firstName());
+                checkoutStepOnePage.fillLastNameInput(testDataUtil.lastName());
+                checkoutStepOnePage.fillPostalCodeInput(testDataUtil.zip());
 
                 checkoutStepOnePage.clickOnContinueBtn();
 
