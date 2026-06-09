@@ -2,16 +2,16 @@ package utils;
 
 /** Teszt adatok. */
 public class TestDataUtil {
-    // TODO
-    public static String firstName() {
-        return "John";
+
+    public String firstName() {
+        return "Jane";
     }
 
-    public static String lastName() {
+    public String lastName() {
         return "Doe";
     }
 
-    public static String zip() {
-        return "12345";
+    public String zip() {
+        return "99999";
     }
 }
