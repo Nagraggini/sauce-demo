@@ -36,4 +36,16 @@ public class LoginPage extends BasePage {
 		return getText(errorMessage);
 	}
 
+	// POM alapelve szerint az oldalváltó műveletek adják vissza eredményül a
+	// következő oldal Page objektumát.
+
+	public InventoryPage login(String username, String password) {
+
+		type(usernameInput, username);
+		type(passwordInput, password);
+		click(loginBtn);
+
+		return new InventoryPage(driver);
+	}
+
 }
