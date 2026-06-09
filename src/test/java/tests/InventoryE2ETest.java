@@ -52,10 +52,10 @@ public class InventoryE2ETest extends BaseTest {
                 double secondItemPriceOnCartPage = cartPage.getPriceofAnItem(secondItemName);
 
                 assertEquals(firstItemPriceOnIntentoryPage, firstItemPriceOnCartPage,
-                                "A" + firstItemName + " ára nem egyezik meg az Inventory és a Cart oldalon.");
+                                "A " + firstItemName + " ára nem egyezik meg az Inventory és a Cart oldalon.");
 
                 assertEquals(secondItemPriceOnIntentoryPage, secondItemPriceOnCartPage,
-                                "A" + secondItemName + " ára nem egyezik meg az Inventory és a Cart oldalon.");
+                                "A " + secondItemName + " ára nem egyezik meg az Inventory és a Cart oldalon.");
 
                 cartPage.clickOnCheckout();
 
