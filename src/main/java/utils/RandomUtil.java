@@ -1,16 +1,17 @@
 package utils;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 /** Random adatok generálása. */
 public class RandomUtil {
-    // TODO
+    private static final SecureRandom random = new SecureRandom();
+
     public static String randomString(int length) {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < length; i++) {
-            sb.append(chars.charAt(new Random().nextInt(chars.length())));
+            sb.append(chars.charAt(random.nextInt(chars.length())));
         }
 
         return sb.toString();
@@ -21,7 +22,7 @@ public class RandomUtil {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < length; i++) {
-            sb.append(chars.charAt(new Random().nextInt(chars.length())));
+            sb.append(chars.charAt(random.nextInt(chars.length())));
         }
 
         return sb.toString();
