@@ -9,20 +9,14 @@ import pages.CartPage;
 import pages.CheckoutStepOnePage;
 import pages.CheckoutStepTwoPage;
 import pages.InventoryPage;
-import pages.LoginPage;
 import utils.TestDataUtil;
 
 public class InventoryE2ETest extends BaseTest {
-        LoginPage loginPage;
-        InventoryPage inventoryPage;
-        CartPage cartPage;
-        CheckoutStepOnePage checkoutStepOnePage;
-        CheckoutStepTwoPage checkoutStepTwoPage;
 
         @Test
         @DisplayName("Ellenőrizzük, hogy a kosárban is ugyanannyi a két termék ára, mint a főoldalon, meg a legvégén. Felhnév: standard_user")
         void checkPricesOnThreePages() {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
 
                 String firstItemName = "Sauce Labs Backpack";
                 String secondItemName = "Sauce Labs Bike Light";
@@ -36,11 +30,11 @@ public class InventoryE2ETest extends BaseTest {
                 assertEquals(2, inventoryPage.getShoppingCartBadgeNumber(),
                                 "A kosárban lévő termékek darabszáma nem egyezik az elvárttal.");
 
-                inventoryPage.clickOnshoppingCartBtn();
+                inventoryPage.clickOnShoppingCartBtn();
 
-                cartPage = new CartPage(driver);
-                double firstItemPriceOnCartPage = cartPage.getPriceofAnItem(firstItemName);
-                double secondItemPriceOnCartPage = cartPage.getPriceofAnItem(secondItemName);
+                CartPage cartPage = new CartPage(driver);
+                double firstItemPriceOnCartPage = cartPage.getPriceOfAnItem(firstItemName);
+                double secondItemPriceOnCartPage = cartPage.getPriceOfAnItem(secondItemName);
 
                 assertEquals(firstItemPriceOnIntentoryPage, firstItemPriceOnCartPage,
                                 "A " + firstItemName + " ára nem egyezik meg az Inventory és a Cart oldalon.");
@@ -50,7 +44,7 @@ public class InventoryE2ETest extends BaseTest {
 
                 cartPage.clickOnCheckout();
 
-                checkoutStepOnePage = new CheckoutStepOnePage(driver);
+                CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
                 TestDataUtil testDataUtil = new TestDataUtil();
 
                 checkoutStepOnePage.fillFirstNameInput(testDataUtil.firstName());
@@ -59,7 +53,7 @@ public class InventoryE2ETest extends BaseTest {
 
                 checkoutStepOnePage.clickOnContinueBtn();
 
-                checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
+                CheckoutStepTwoPage checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
 
                 // TODO Árak csekkolása elemenként az utolsó oldalon.
                 double itemTotal = checkoutStepTwoPage.getItemTotal();

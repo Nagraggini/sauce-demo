@@ -19,18 +19,14 @@ import org.openqa.selenium.WebElement;
 
 import base.BaseTest;
 import pages.InventoryPage;
-import pages.LoginPage;
 
 class InventoryTest extends BaseTest {
-
-        LoginPage loginPage;
-        InventoryPage inventoryPage;
 
         @Test
         @Tag("shoppingCart")
         @DisplayName("Ellenőrizzük, hogy a kosárba helyezett elemek darabszáma ugyanannyi-e, mint a kosár ikonon lévők.")
         void checkShoppingCartBadgeNumber() {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
 
                 String firstItemName = "Sauce Labs Backpack";
                 String secondItemName = "Sauce Labs Bike Light";
@@ -51,7 +47,7 @@ class InventoryTest extends BaseTest {
         @Tag("homework")
         @DisplayName("Leellenőrizzük, hogy az összes terméknél megjelenik-e a Remove gomb.")
         void checkRemoveBtn(String itemName) {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
 
                 inventoryPage.addToCartOrRemove(itemName);
                 String expectedRemoveBtnText = "Remove";
@@ -70,7 +66,7 @@ class InventoryTest extends BaseTest {
         @Tag("homework")
         @DisplayName("Leellenőrizzük az összes termék árát.")
         void checkThePriceOfItems(String itemName, double expectedPrice) {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
 
                 double actualPrice = inventoryPage.getPriceofAnItem(itemName);
 
@@ -85,7 +81,7 @@ class InventoryTest extends BaseTest {
         @Test
         @DisplayName("Minden termékhez tartozik-e kosárhoz hozzáadás gomb.")
         void allItemsHaveAButton() {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
 
                 List<WebElement> items = driver.findElements(By.className("inventory_item"));
 
@@ -107,7 +103,7 @@ class InventoryTest extends BaseTest {
         @Test
         @DisplayName("Megjelenik-e az adott termékhez tartozó hozzáadás gomb.")
         void addToCartBtnIsDisplayed() {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
 
                 String termeknev = "Sauce Labs Backpack";
 
@@ -122,7 +118,7 @@ class InventoryTest extends BaseTest {
         @Test
         @DisplayName("Legdrágább elem megkeresése.")
         void mostExpensiveItem() {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
 
                 var itemsAndPrices = inventoryPage.getAllItemnamesAndTheirPrices();
 
@@ -149,7 +145,7 @@ class InventoryTest extends BaseTest {
         @Test
         @DisplayName("Legolcsóbb elem megkeresése.")
         void cheapestItem() {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
                 LinkedHashMap<String, Double> itemsAndPrices = inventoryPage.getAllItemnamesAndTheirPrices();
 
                 // Ez, csak akkor működik, hacsak egy termék a legdrágább.
@@ -178,7 +174,7 @@ class InventoryTest extends BaseTest {
         @Test
         @DisplayName("Leellenőrizzük, hogy az ABC sorrend jó-e.")
         void checkABCSort() {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
 
                 inventoryPage.changeOrderingAtoZ();
 
@@ -199,7 +195,7 @@ class InventoryTest extends BaseTest {
         @Test
         @DisplayName("Leellenőrizzük, hogy az ABC csökkenő sorrend jó-e.")
         void checkACSReverseSort() {
-                inventoryPage = login();
+                InventoryPage inventoryPage = login();
 
                 inventoryPage.changeOrderingZtoA();
 

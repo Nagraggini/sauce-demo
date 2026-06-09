@@ -19,12 +19,10 @@ import pages.LoginPage;
 
 class LoginTest extends BaseTest {
 
-	LoginPage loginPage;
-
 	@Test
 	@DisplayName("Üresen hagyott input mezőkkel történi bejelentkezés.")
 	void emptyInputFieldsAndTryToLogin() {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		loginPage.clickOnLoginBtn();
@@ -39,7 +37,7 @@ class LoginTest extends BaseTest {
 	@Test
 	@DisplayName("Csak felhasználónévvel törtéső belépési kísérlet.")
 	void tryToLoginWithOnlyUsername() {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "standard_user";
@@ -58,7 +56,7 @@ class LoginTest extends BaseTest {
 	@Test
 	@DisplayName("Csak jelszóval törtéső belépési kísérlet.")
 	void tryToLoginWithOnlyPassword() {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "";
@@ -77,7 +75,7 @@ class LoginTest extends BaseTest {
 	@Test
 	@DisplayName("Hibás felhasználónévvel történő belépés.")
 	void tryToLoginWithIncorrectUsername() {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "12345";
@@ -96,7 +94,7 @@ class LoginTest extends BaseTest {
 	@Test
 	@DisplayName("Hibás jelszóval történő belépés.")
 	void tryToLoginWithIncorrectPassword() {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = ConfigReader.get("USERNAME");
@@ -116,7 +114,7 @@ class LoginTest extends BaseTest {
 	@CsvSource({ "standard_user", "problem_user", "performance_glitch_user", "error_user", "visual_user" })
 	@DisplayName("Összes felhasználónév ellenőrzése.")
 	void succesfulLoginWithAllUsernamesAndPws(String username) {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 
 		loginPage.openPage(ConfigReader.get("BASE_URL"));
 		String password = ConfigReader.get("PASSWORD");
@@ -138,7 +136,7 @@ class LoginTest extends BaseTest {
 	@ArgumentsSource(UserDataProvider.class)
 	@DisplayName("Bejelentkezések ellenőrzése UserDataProvider segítségével.")
 	void loginWithProvider(String username, String password, String expectedResult, boolean shouldSucceed) {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		loginPage.fillInputs(username, password);
@@ -161,7 +159,7 @@ class LoginTest extends BaseTest {
 	@Test
 	@DisplayName("Zárolt felhasználó ellenőrzése.")
 	void checkLockedOutUserLogin() {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "locked_out_user";
@@ -179,7 +177,7 @@ class LoginTest extends BaseTest {
 	@Test
 	@DisplayName("Zárolt felhasználó belépési kísérlet esetén megjelenik-e a hibaüzenet.")
 	void checkErrorMessageLockedOutUserLogin() {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "locked_out_user";
@@ -198,7 +196,7 @@ class LoginTest extends BaseTest {
 	@Test
 	@DisplayName("Lecsekkoljuk, hogy betöltödik-e az inventory oldal, ha nem vagyunk belépve.")
 	void checkLockedOutUserLoginRefreshAndErrorMessage() {
-		loginPage = new LoginPage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL") + "/inventory.html");
 
 		String expectedErrorMessage = "Epic sadface: You can only access '/inventory.html' when you are logged in.";

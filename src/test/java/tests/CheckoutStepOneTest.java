@@ -11,23 +11,17 @@ import base.BaseTest;
 import pages.CartPage;
 import pages.CheckoutStepOnePage;
 import pages.InventoryPage;
-import pages.LoginPage;
 import utils.TestDataUtil;
 
 public class CheckoutStepOneTest extends BaseTest {
-
-    LoginPage loginPage;
-    InventoryPage inventoryPage;
-    CartPage cartPage;
-    CheckoutStepOnePage checkoutStepOnePage;
 
     @Test
     @Tag("homework")
     @DisplayName("A checkout részen minden mezőt üresen hagyva.")
     void checkoutWithAllFieldsEmpty() {
-        inventoryPage = login();
-        cartPage = new CartPage(driver);
-        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        InventoryPage inventoryPage = login();
+        CartPage cartPage = new CartPage(driver);
+        CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
         fromLoginUntilCheckout();
@@ -51,10 +45,9 @@ public class CheckoutStepOneTest extends BaseTest {
     @Tag("homework")
     @DisplayName("Ellenőrizzük a hibaüzenet szövegét keresztnév beviteli mező kihagyása esetén.")
     void shouldDisplayErrorMessageForFirstName() {
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        InventoryPage inventoryPage = login();
+        CartPage cartPage = new CartPage(driver);
+        CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
         fromLoginUntilCheckout();
@@ -82,10 +75,9 @@ public class CheckoutStepOneTest extends BaseTest {
     @Tag("homework")
     @DisplayName("Ellenőrizzük a hibaüzenet szövegét vezetéknév beviteli mező kihagyása esetén.")
     void shouldDisplayErrorMessageForLastName() {
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        InventoryPage inventoryPage = login();
+        CartPage cartPage = new CartPage(driver);
+        CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
         fromLoginUntilCheckout();
@@ -112,9 +104,9 @@ public class CheckoutStepOneTest extends BaseTest {
     @Tag("homework")
     @DisplayName("Ellenőrizzük a hibaüzenet szövegét irányítószám beviteli mező kihagyása esetén.")
     void shouldDisplayErrorMessageForPostalCode() {
-        inventoryPage = login();
-        cartPage = new CartPage(driver);
-        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        InventoryPage inventoryPage = login();
+        CartPage cartPage = new CartPage(driver);
+        CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
         fromLoginUntilCheckout();
@@ -139,14 +131,14 @@ public class CheckoutStepOneTest extends BaseTest {
     }
 
     public void fromLoginUntilCheckout() {
-        inventoryPage = login();
+        InventoryPage inventoryPage = login();
 
         // Egy elemez rakunk a kosárba.
         inventoryPage.addToCartOrRemove("Sauce Labs Bike Light");
 
         // Rákattintunk a koásr ikonra.
-        inventoryPage.clickOnshoppingCartBtn();
-        cartPage = new CartPage(driver);
+        inventoryPage.clickOnShoppingCartBtn();
+        CartPage cartPage = new CartPage(driver);
 
         // A Checkout gombra kattintunk.
         cartPage.clickOnCheckout();
