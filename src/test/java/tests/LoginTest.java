@@ -23,9 +23,9 @@ class LoginTest extends BaseTest {
 
 	@Test
 	@DisplayName("Üresen hagyott input mezőkkel történi bejelentkezés.")
-	void emptyImputFieldsAndTryToLogin() {
+	void emptyInputFieldsAndTryToLogin() {
 		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com/");
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		loginPage.clickOnLoginBtn();
 
@@ -40,7 +40,7 @@ class LoginTest extends BaseTest {
 	@DisplayName("Csak felhasználónévvel törtéső belépési kísérlet.")
 	void tryToLoginWithOnlyUsername() {
 		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com/");
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "standard_user";
 		String password = "";
@@ -59,7 +59,7 @@ class LoginTest extends BaseTest {
 	@DisplayName("Csak jelszóval törtéső belépési kísérlet.")
 	void tryToLoginWithOnlyPassword() {
 		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com/");
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "";
 		String password = ConfigReader.get("PASSWORD");
@@ -78,7 +78,7 @@ class LoginTest extends BaseTest {
 	@DisplayName("Hibás felhasználónévvel történő belépés.")
 	void tryToLoginWithIncorrectUsername() {
 		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com/");
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "12345";
 		String password = ConfigReader.get("PASSWORD");
@@ -97,7 +97,7 @@ class LoginTest extends BaseTest {
 	@DisplayName("Hibás jelszóval történő belépés.")
 	void tryToLoginWithIncorrectPassword() {
 		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com/");
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = ConfigReader.get("USERNAME");
 		String password = ConfigReader.get("WRONG_PASSWORD");
@@ -118,12 +118,12 @@ class LoginTest extends BaseTest {
 	void succesfulLoginWithAllUsernamesAndPws(String username) {
 		loginPage = new LoginPage(driver);
 
-		loginPage.openPage("https://www.saucedemo.com");
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
 		String password = ConfigReader.get("PASSWORD");
 		loginPage.fillInputs(username, password);
 		loginPage.clickOnLoginBtn();
 
-		String expectedURL = "https://www.saucedemo.com/inventory.html";
+		String expectedURL = ConfigReader.get("BASE_URL") + "/inventory.html";
 		String actualURL = loginPage.getCurrentUrl();
 
 		assertEquals(expectedURL, actualURL, "Nem sikerült bejelentkezni.");
@@ -131,7 +131,7 @@ class LoginTest extends BaseTest {
 		// Kijelentkezés.
 		InventoryPage inventoryPage = new InventoryPage(driver);
 		inventoryPage.openHamburgerMenu();
-		inventoryPage.clickonLogoutBtn();
+		inventoryPage.clickOnLogoutBtn();
 	}
 
 	@ParameterizedTest
@@ -139,7 +139,7 @@ class LoginTest extends BaseTest {
 	@DisplayName("Bejelentkezések ellenőrzése UserDataProvider segítségével.")
 	void loginWithProvider(String username, String password, String expectedResult, boolean shouldSucceed) {
 		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com");
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		loginPage.fillInputs(username, password);
 		loginPage.clickOnLoginBtn();
@@ -151,7 +151,7 @@ class LoginTest extends BaseTest {
 			// Kijelentkezés a takarításhoz
 			InventoryPage inventoryPage = new InventoryPage(driver);
 			inventoryPage.openHamburgerMenu();
-			inventoryPage.clickonLogoutBtn();
+			inventoryPage.clickOnLogoutBtn();
 		} else {
 			// Ha sikertelen (pl. locked_out_user), a hibaüzenetet ellenőrizzük
 			assertEquals(expectedResult, loginPage.getErrorMessage(), "Nem a várt hibaüzenet jelent meg: " + username);
@@ -162,7 +162,7 @@ class LoginTest extends BaseTest {
 	@DisplayName("Zárolt felhasználó ellenőrzése.")
 	void checkLockedOutUserLogin() {
 		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com");
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "locked_out_user";
 		String password = ConfigReader.get("PASSWORD");
@@ -170,7 +170,7 @@ class LoginTest extends BaseTest {
 
 		loginPage.clickOnLoginBtn();
 
-		String notExpectedURL = "https://www.saucedemo.com/inventory.html";
+		String notExpectedURL = ConfigReader.get("BASE_URL") + "/inventory.html";
 		String actualURL = loginPage.getCurrentUrl();
 
 		assertFalse(notExpectedURL.equals(actualURL), "Sikerült bejelentkezni a zárolt felhasználóval");
@@ -180,7 +180,7 @@ class LoginTest extends BaseTest {
 	@DisplayName("Zárolt felhasználó belépési kísérlet esetén megjelenik-e a hibaüzenet.")
 	void checkErrorMessageLockedOutUserLogin() {
 		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com");
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
 
 		String username = "locked_out_user";
 		String password = ConfigReader.get("PASSWORD");
@@ -199,7 +199,7 @@ class LoginTest extends BaseTest {
 	@DisplayName("Lecsekkoljuk, hogy betöltödik-e az inventory oldal, ha nem vagyunk belépve.")
 	void checkLockedOutUserLoginRefreshAndErrorMessage() {
 		loginPage = new LoginPage(driver);
-		loginPage.openPage("https://www.saucedemo.com/inventory.html");
+		loginPage.openPage(ConfigReader.get("BASE_URL") + "/inventory.html");
 
 		String expectedErrorMessage = "Epic sadface: You can only access '/inventory.html' when you are logged in.";
 		String actualErrorMessage = loginPage.getErrorMessage();
