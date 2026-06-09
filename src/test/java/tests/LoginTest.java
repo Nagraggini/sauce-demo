@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import base.BaseTest;
 import config.ConfigReader;
+import data.UserDataProvider;
 import pages.InventoryPage;
 import pages.LoginPage;
 
@@ -122,7 +124,7 @@ class LoginTest extends BaseTest {
 		loginPage.clickOnLoginBtn();
 
 		String expectedURL = "https://www.saucedemo.com/inventory.html";
-		String actualURL = loginPage.getURL();
+		String actualURL = loginPage.getCurrentUrl();
 
 		assertEquals(expectedURL, actualURL, "Nem sikerült bejelentkezni.");
 
@@ -130,6 +132,30 @@ class LoginTest extends BaseTest {
 		InventoryPage inventoryPage = new InventoryPage(driver);
 		inventoryPage.openHamburgerMenu();
 		inventoryPage.clickonLogoutBtn();
+	}
+
+	@ParameterizedTest
+	@ArgumentsSource(UserDataProvider.class)
+	@DisplayName("Bejelentkezések ellenőrzése UserDataProvider segítségével.")
+	void loginWithProvider(String username, String password, String expectedResult, boolean shouldSucceed) {
+		loginPage = new LoginPage(driver);
+		loginPage.openPage("https://www.saucedemo.com");
+
+		loginPage.fillInputs(username, password);
+		loginPage.clickOnLoginBtn();
+
+		if (shouldSucceed) {
+			// Ha sikeresnek kell lennie, az URL-t ellenőrizzük
+			assertEquals(expectedResult, loginPage.getCurrentUrl(), "Nem sikerült a bejelentkezés: " + username);
+
+			// Kijelentkezés a takarításhoz
+			InventoryPage inventoryPage = new InventoryPage(driver);
+			inventoryPage.openHamburgerMenu();
+			inventoryPage.clickonLogoutBtn();
+		} else {
+			// Ha sikertelen (pl. locked_out_user), a hibaüzenetet ellenőrizzük
+			assertEquals(expectedResult, loginPage.getErrorMessage(), "Nem a várt hibaüzenet jelent meg: " + username);
+		}
 	}
 
 	@Test
@@ -145,7 +171,7 @@ class LoginTest extends BaseTest {
 		loginPage.clickOnLoginBtn();
 
 		String notExpectedURL = "https://www.saucedemo.com/inventory.html";
-		String actualURL = loginPage.getURL();
+		String actualURL = loginPage.getCurrentUrl();
 
 		assertFalse(notExpectedURL.equals(actualURL), "Sikerült bejelentkezni a zárolt felhasználóval");
 	}
