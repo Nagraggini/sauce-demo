@@ -14,13 +14,7 @@
 <!-- 4. Egyéb -->
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## Code Coverage
-
-<!-- Jacoco Badge -->
-<!-- End Jacoco Badge -->
-
-<!-- Jacoco Branches Badge -->
-<!-- End Jacoco Branches Badge -->
+📊 [View the JaCoCo Coverage Report](https://nagraggini.github.io/sauce-demo/)
 
 # UML Diagrams
 
@@ -272,6 +266,25 @@ ci.yml fájl végére:
                   branch: gh-pages
 ```
 
+A ci.yml fájl elejét módosítsd erre:
+```yml
+permissions:
+    contents: write
+    pages: write      # Ez is kell a Pages-hez
+    id-token: write   # Ez is szükséges a biztonságos deploy-hoz
+```
+
+Commitold a fenti új workflow-t.
+
+Külön weboldal beállítása:
+A GitHub Pages működéséhez egyetlen dolgot kell még beállítanod a GitHubon (ezt csak egyszer kell):
+
+Menj a repository-d Settings fülére.
+Bal oldali menü: Pages.
+A Build and deployment rész alatt a Source legördülőnél válaszd ki a Deploy from Branchlehetőséget.
+Branch: gh-pages és /root.
+Majd menj a Save gombra.
+Aztán meg fog jelenni felül a linket.
 
 # Futtatás
 
