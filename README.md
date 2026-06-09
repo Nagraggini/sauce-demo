@@ -14,7 +14,27 @@
 <!-- 4. Egyéb -->
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-[![](https://mermaid.ink/img/pako:eNqtVllP4zAQ_iuWV0hFPdQE6JGHlTgWqRKoFQtCWvXFJENikdjR2KHbZeG3r3M0zVFaHjYPcTzzzfXNjNo36koPqEPdkCl1xZmPLFoKYp6jI3IHIdNcChXwWBEmPDITASDXTLigctgFU3APSpN-_-93ciN9LhbMz0UO4Vv8LvhMvILQEteHTFJ9I8JhaM37LvhS5GdW_Da1t1yaPt8e4ekK-Ssg8bJjl-qRcU1W5rVVfijQD3HnmLxK7lXEATAvBKVuDeudywBlBPM4o5jI_DwmNXHDNrNredXA8EquRE3zXq-u3plKiR9bRsPyK2enhEAU6_UsihN9zSH01Lnw7nF9LzPTHfmUukeug7kI1w8KULAIvoJdmHRXEr021g3AfSmx52G4cZsmtFipzk-NXPgkKcQHgs2EKxHB1Z9nV0R0X8CbJxkus76DZwQVmKg_ECXemo4a1r5s_gmw6uuAUaO57T060OCKtr4lvHprJniZvmSiF8jN_rerIKBdMhgMyL5cyx39D2vW3TjrNB0cV0AyhqzocjwwbKbe9c2-3t2YvHNMRYN5rxfNBn-2X9W6-hfrchhnwqxPXRUXk75DlXXqQou6FCoTUkmxjL2XhpQ6dS3xUkaxFKbL7Q52n3kYZtm0dqlXMFMm3bJ1Q26mQ9wUmXd2cdxYlyrZ-0a6yWnAoqcEfcAWQ4Y3M6A1cbfmai9FRQlV9509deaR6lNBe9RH7lFHYwI9GgFGLL3SrIQl1QFEsKSO-fQYvizpUqQ2MRO_pIw2ZigTP9hckthjGoof5xIBwgPTy0Ro6pzaZ5kL6rzR39Tpj6YDezK1xiej8Xg6ss-sHl1Tx7JGA9saT-3hcDydDE8t-71H_2RRrcHwZDIa2hNjNp6eTm27R8HjhrTb4v9Berz_A5pTnwE?type=png)](https://mermaid.live/edit#pako:eNqtVllP4zAQ_iuWV0hFPdQE6JGHlTgWqRKoFQtCWvXFJENikdjR2KHbZeG3r3M0zVFaHjYPcTzzzfXNjNo36koPqEPdkCl1xZmPLFoKYp6jI3IHIdNcChXwWBEmPDITASDXTLigctgFU3APSpN-_-93ciN9LhbMz0UO4Vv8LvhMvILQEteHTFJ9I8JhaM37LvhS5GdW_Da1t1yaPt8e4ekK-Ssg8bJjl-qRcU1W5rVVfijQD3HnmLxK7lXEATAvBKVuDeudywBlBPM4o5jI_DwmNXHDNrNredXA8EquRE3zXq-u3plKiR9bRsPyK2enhEAU6_UsihN9zSH01Lnw7nF9LzPTHfmUukeug7kI1w8KULAIvoJdmHRXEr021g3AfSmx52G4cZsmtFipzk-NXPgkKcQHgs2EKxHB1Z9nV0R0X8CbJxkus76DZwQVmKg_ECXemo4a1r5s_gmw6uuAUaO57T060OCKtr4lvHprJniZvmSiF8jN_rerIKBdMhgMyL5cyx39D2vW3TjrNB0cV0AyhqzocjwwbKbe9c2-3t2YvHNMRYN5rxfNBn-2X9W6-hfrchhnwqxPXRUXk75DlXXqQou6FCoTUkmxjL2XhpQ6dS3xUkaxFKbL7Q52n3kYZtm0dqlXMFMm3bJ1Q26mQ9wUmXd2cdxYlyrZ-0a6yWnAoqcEfcAWQ4Y3M6A1cbfmai9FRQlV9509deaR6lNBe9RH7lFHYwI9GgFGLL3SrIQl1QFEsKSO-fQYvizpUqQ2MRO_pIw2ZigTP9hckthjGoof5xIBwgPTy0Ro6pzaZ5kL6rzR39Tpj6YDezK1xiej8Xg6ss-sHl1Tx7JGA9saT-3hcDydDE8t-71H_2RRrcHwZDIa2hNjNp6eTm27R8HjhrTb4v9Berz_A5pTnwE)
+## Code Coverage
+
+<!-- Jacoco Badge -->
+<!-- End Jacoco Badge -->
+
+<!-- Jacoco Branches Badge -->
+<!-- End Jacoco Branches Badge -->
+
+# UML Diagrams
+
+## 1. Core Framework & Utilities (Infrastructure Layer)
+   
+[![](https://mermaid.ink/img/pako:eNp1Uk1Pg0AQ_SubiQeM2JTy0cLV6k1jrMbEcNnCCJvCLlkGY236312gVFp1Lzszb968gX07SFSKEEFS8LpeCp5pXsaSmdNV2FKLD9R3PCGlt2zXQ-25SjRywh631koVyCXLkacF1vUle8V1j130nP146o2S7yJ7Ms2ox0OvH7WqUJPAmlXH8GKkmiFZK9JCZmyD20vWx39pPGNNS078hURxsvi70DU98BKtgT4CDfVf7EtUZ-UTwScuU1X-ktNduWdZQhIrUGaUn60-an1oyrX5pf-2noiuzDOgrHNFv4SJb_AHto4PwtLusg9TmTSfey4BNmRapBCRbtCGEnXJ2xQ6gRgoxxJjiEyYcr2JIZYtp-LyTalyoGnVZPmQNFXa-qW32LEDpbHAjWokQRS4bjcCoh18QnTthO5kNveC-cKfh9NZ4NuwhchxvMk09MIwDMLA9YPQ39vw1ak6k8Cbeu4imPuLhQlmjg2YCmPd-4PL22tY5bZDhk14Q2q1lUmf778B5t76Hw?type=png)](https://mermaid.live/edit#pako:eNp1Uk1Pg0AQ_SubiQeM2JTy0cLV6k1jrMbEcNnCCJvCLlkGY236312gVFp1Lzszb968gX07SFSKEEFS8LpeCp5pXsaSmdNV2FKLD9R3PCGlt2zXQ-25SjRywh631koVyCXLkacF1vUle8V1j130nP146o2S7yJ7Ms2ox0OvH7WqUJPAmlXH8GKkmiFZK9JCZmyD20vWx39pPGNNS078hURxsvi70DU98BKtgT4CDfVf7EtUZ-UTwScuU1X-ktNduWdZQhIrUGaUn60-an1oyrX5pf-2noiuzDOgrHNFv4SJb_AHto4PwtLusg9TmTSfey4BNmRapBCRbtCGEnXJ2xQ6gRgoxxJjiEyYcr2JIZYtp-LyTalyoGnVZPmQNFXa-qW32LEDpbHAjWokQRS4bjcCoh18QnTthO5kNveC-cKfh9NZ4NuwhchxvMk09MIwDMLA9YPQ39vw1ak6k8Cbeu4imPuLhQlmjg2YCmPd-4PL22tY5bZDhk14Q2q1lUmf778B5t76Hw)
+
+## 2. Page Objects Architecture (Application Layer)
+
+[![](https://mermaid.ink/img/pako:eNqlVd9v2jAQ_lcibw-pBlXCj0CjvRTaSUhtQYOu0sSLGx_BwrGji0PHWPu3zwmEJpBtrZaHOPZ9393n852zJYFiQHwSCJokV5yGSKO5tMwzoAlMaAjW51_NpnWjQi7zqW-N5BKQ66QON5JrkFrh5g3YIUX9FtgSgpVK9VRDPJbwTsbsSZ0wdpx8y6_M7W41ez5YD_B4hXwNaLF8qLU9UK6tJ_MqW02iQkMT-fCxbFlwyezBxpgCajJ0ljm6FhCZfB3DLoWoIG94ol9e4S9lfCbgXmouvvGEPwr4Z4hPloohP0t7qpHL0EpRnFlrxVkZFIIepoiGeo_CPrN22DIiEEBxqNSKQ2KXHTyXE_xaOdsyecGFGMk41clBRQIoaQSNfSgrNvQnhexUWyB4sBrL3PVAS7tW_TWiwltIkmynVf0VgdWSrYikjM1UVqZj_AqRWh8yxjVEd0ZrbeDpUsWxQWXEAWUh3KXRI6DRwKvnYLAT5AGMF5dyZDyeemcqNUd6xDHVMdoj7H1t7IgvNbs7NNm2JoFFo9Qn8B3aqiFrGvbk7L9wTHTmKC-CwvuiWD0VlJFuaA1H0L9RJirRVAzNLVchxYflP1bXUJmukin8d4HVXUfbI19ZimfKSLKPEksaJETOiK8xhQaJACOaTUnuYU700rT3nPjmk1FczclcZpyYyu9KRQUNVRoui0kaM6phf9kfECAZmG5OpSZ-t-PmLoi_JT-I33Sdi_NWr9NreY7T7buu1yAb4nda585F13E9r93qtbttz3tukJ95VPfc6ziddr_nuO1-v--0uw0CjJsuu93_b7KhkHKdWwolNNVqupHBbv78G586G5M?type=png)](https://mermaid.live/edit#pako:eNqlVd9v2jAQ_lcibw-pBlXCj0CjvRTaSUhtQYOu0sSLGx_BwrGji0PHWPu3zwmEJpBtrZaHOPZ9393n852zJYFiQHwSCJokV5yGSKO5tMwzoAlMaAjW51_NpnWjQi7zqW-N5BKQ66QON5JrkFrh5g3YIUX9FtgSgpVK9VRDPJbwTsbsSZ0wdpx8y6_M7W41ez5YD_B4hXwNaLF8qLU9UK6tJ_MqW02iQkMT-fCxbFlwyezBxpgCajJ0ljm6FhCZfB3DLoWoIG94ol9e4S9lfCbgXmouvvGEPwr4Z4hPloohP0t7qpHL0EpRnFlrxVkZFIIepoiGeo_CPrN22DIiEEBxqNSKQ2KXHTyXE_xaOdsyecGFGMk41clBRQIoaQSNfSgrNvQnhexUWyB4sBrL3PVAS7tW_TWiwltIkmynVf0VgdWSrYikjM1UVqZj_AqRWh8yxjVEd0ZrbeDpUsWxQWXEAWUh3KXRI6DRwKvnYLAT5AGMF5dyZDyeemcqNUd6xDHVMdoj7H1t7IgvNbs7NNm2JoFFo9Qn8B3aqiFrGvbk7L9wTHTmKC-CwvuiWD0VlJFuaA1H0L9RJirRVAzNLVchxYflP1bXUJmukin8d4HVXUfbI19ZimfKSLKPEksaJETOiK8xhQaJACOaTUnuYU700rT3nPjmk1FczclcZpyYyu9KRQUNVRoui0kaM6phf9kfECAZmG5OpSZ-t-PmLoi_JT-I33Sdi_NWr9NreY7T7buu1yAb4nda585F13E9r93qtbttz3tukJ95VPfc6ziddr_nuO1-v--0uw0CjJsuu93_b7KhkHKdWwolNNVqupHBbv78G586G5M)
+
+## 3. Test Execution Layer (Test Layer)
+
+[![](https://mermaid.ink/img/pako:eNqdVW1v2jAQ_iuRtw90pQhCoQVV1ShQCYkOVIqQJr648ZFYTezIdngpY799diAhLCnqlg8Y3z2Pn_Pd5bJFDieA2sjxsZQ9il2Bgzmz9POAJbyAVNbdr6sra8hdyuJt2xowDwRVsgg3YEtgiovNv2D7dv8T8K4HzhuP1ERBOGLwGQYWKgfbAzvCjQKtLseCLykBoRmVijWVIHpY4dSqmUHoQwzdM4-ZqFTuiwg9CIERYM5mPmel76nShEfCgYskgjjjBXFs927z3N1RpkAssAP390fzZbjHptxSf62AScpZl2vCWlnOfr34Zk2UgKSku1PtXOzb_9I4J5HWI3P0F2sGrz1Bl1qRxEuhb4apslb6J-vVyXc1zY-Xr0fPb0uCmoalC2vJKcnaFWDR4yuWc12aU6ixp304xi5k1RwfMNOnngAsmt1lT_3r7sdG2WYDgiBUmwELI_VIwSeyw8iLfl348BBN7gKpc0aVN2L-xtSN4QAKwDJyHJCLyE8JHd9P8EZqvJIlXS_KXCs6mMvWwRDqqFdckNQA6xAcBWT6PCxbr5ybdBwkZF7bMe9nXwgunrRf52bInTcgo0iZAD66XszKI59hIUB6OuLsiaUz6T6dPNucxsTjYahvZYbCAyYu_IiCVxAfhdTpTp5Bt6GECRfqnHDRXMrLa8ChHPuy900bFFXQ45FPelSGPt5k7_7IxZhLhf2untgF3bwQPIhTN2WK-klQn8pYMn_zUY8F1cUesRdPAJh-l2czkczbkxk2G4yT6bVDZeQKSlBbiQjKKAARYLNFMWOOlKdH7Ry19V-CxdsczZnhhJj95DxIaIJHrpdsopBgBYdPV4owE1h0ecQUajdbzfgI1N6iNWpf2a1mpXlTb9qtar1q12u1RhltjP22Um01bPv61r6uG_-ujN5jWbvSaNWqtVa9eW3Xmo2afVNGQKjO3dPh82mWJJZ-7ElCwZHikw1z9vvdH7u5cqw?type=png)](https://mermaid.live/edit#pako:eNqdVW1v2jAQ_iuRtw90pQhCoQVV1ShQCYkOVIqQJr648ZFYTezIdngpY799diAhLCnqlg8Y3z2Pn_Pd5bJFDieA2sjxsZQ9il2Bgzmz9POAJbyAVNbdr6sra8hdyuJt2xowDwRVsgg3YEtgiovNv2D7dv8T8K4HzhuP1ERBOGLwGQYWKgfbAzvCjQKtLseCLykBoRmVijWVIHpY4dSqmUHoQwzdM4-ZqFTuiwg9CIERYM5mPmel76nShEfCgYskgjjjBXFs927z3N1RpkAssAP390fzZbjHptxSf62AScpZl2vCWlnOfr34Zk2UgKSku1PtXOzb_9I4J5HWI3P0F2sGrz1Bl1qRxEuhb4apslb6J-vVyXc1zY-Xr0fPb0uCmoalC2vJKcnaFWDR4yuWc12aU6ixp304xi5k1RwfMNOnngAsmt1lT_3r7sdG2WYDgiBUmwELI_VIwSeyw8iLfl348BBN7gKpc0aVN2L-xtSN4QAKwDJyHJCLyE8JHd9P8EZqvJIlXS_KXCs6mMvWwRDqqFdckNQA6xAcBWT6PCxbr5ybdBwkZF7bMe9nXwgunrRf52bInTcgo0iZAD66XszKI59hIUB6OuLsiaUz6T6dPNucxsTjYahvZYbCAyYu_IiCVxAfhdTpTp5Bt6GECRfqnHDRXMrLa8ChHPuy900bFFXQ45FPelSGPt5k7_7IxZhLhf2untgF3bwQPIhTN2WK-klQn8pYMn_zUY8F1cUesRdPAJh-l2czkczbkxk2G4yT6bVDZeQKSlBbiQjKKAARYLNFMWOOlKdH7Ry19V-CxdsczZnhhJj95DxIaIJHrpdsopBgBYdPV4owE1h0ecQUajdbzfgI1N6iNWpf2a1mpXlTb9qtar1q12u1RhltjP22Um01bPv61r6uG_-ujN5jWbvSaNWqtVa9eW3Xmo2afVNGQKjO3dPh82mWJJZ-7ElCwZHikw1z9vvdH7u5cqw)
 
 # Források
 [EASY XPath Tutorial](https://www.youtube.com/watch?v=XyBxEnyBb0A)              
@@ -217,15 +237,15 @@ String baseUrl = ConfigReader.get("BASE_URL");
 A .github/workflows/ci.yml-be írd be a Run Tests alá az env és a többi sorokat:
 ```yml  
             # =========================
-            # 5. Run Tests 
+            # 3. Run Tests & Generate JaCoCo Report
             # =========================
-            # Tesztek futtatása
-            - name: Run Tests     
-              env:                
-                USERNAME: ${{ secrets.USERNAME }}
-                PASSWORD: ${{ secrets.PASSWORD }}
-                BASE_URL: ${{ secrets.BASE_URL }}                  
-              run: mvn -B verify 
+            - name: Run Tests and Coverage
+              env:
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PASSWORD: ${{ secrets.PASSWORD }}
+                  WRONG_PASSWORD: ${{ secrets.WRONG_PASSWORD }}
+                  BASE_URL: ${{ secrets.BASE_URL }}
+              run: mvn -B clean verify jacoco:report
 ```
 
 Github-on is hozzá kell adni az fenti változókat, így:
@@ -243,6 +263,11 @@ BASE_URL =
 Terminálba: mvn clean test
 
 Egy konkrét teszt futtatása: mvn -Dtest=CheckoutStepOnePageTest#shouldDisplayErrorMessageForPostalCode test
+
+Teszt report generálása:
+mvn jacoco:report
+
+Itt találod a fájlt: target/site/jacoco/index.html -> Jobb klikk Open with Live Server
 
 Házi feladat:
 mvn clean test -Dgroups="homework"

@@ -1,4 +1,4 @@
-package saucedemoTests;
+package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -7,29 +7,24 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import saucedemoPages.CartPage;
-import saucedemoPages.CheckoutStepOnePage;
-import saucedemoPages.InventoryPage;
-import saucedemoPages.LoginPage;
+import base.BaseTest;
+import pages.CartPage;
+import pages.CheckoutStepOnePage;
+import pages.InventoryPage;
+import utils.TestDataUtil;
 
-public class CheckoutStepOnePageTest extends BaseTest {
-
-    LoginPage loginPage;
-    InventoryPage inventoryPage;
-    CartPage cartPage;
-    CheckoutStepOnePage checkoutStepOnePage;
+public class CheckoutStepOneTest extends BaseTest {
 
     @Test
     @Tag("homework")
     @DisplayName("A checkout részen minden mezőt üresen hagyva.")
     void checkoutWithAllFieldsEmpty() {
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        InventoryPage inventoryPage = login();
+        CartPage cartPage = new CartPage(driver);
+        CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
-        fromLoginUntilCheckout(loginPage, inventoryPage, cartPage);
+        fromLoginUntilCheckout();
 
         // Üresen hagyjuk a három input mezőt.
         // Rákattintunk a Continue gombra.
@@ -50,17 +45,18 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Tag("homework")
     @DisplayName("Ellenőrizzük a hibaüzenet szövegét keresztnév beviteli mező kihagyása esetén.")
     void shouldDisplayErrorMessageForFirstName() {
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        InventoryPage inventoryPage = login();
+        CartPage cartPage = new CartPage(driver);
+        CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
-        fromLoginUntilCheckout(loginPage, inventoryPage, cartPage);
+        fromLoginUntilCheckout();
 
         // Csak a keresztnév beviteli mező marad üresen.
-        checkoutStepOnePage.fillLastNameInput("Doe");
-        checkoutStepOnePage.fillPostalCodeInput("9999");
+        TestDataUtil testDataUtil = new TestDataUtil();
+
+        checkoutStepOnePage.fillLastNameInput(testDataUtil.lastName());
+        checkoutStepOnePage.fillPostalCodeInput(testDataUtil.zip());
 
         // Rákattintunk a Continue gombra.
         checkoutStepOnePage.clickOnContinueBtn();
@@ -79,17 +75,17 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Tag("homework")
     @DisplayName("Ellenőrizzük a hibaüzenet szövegét vezetéknév beviteli mező kihagyása esetén.")
     void shouldDisplayErrorMessageForLastName() {
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        InventoryPage inventoryPage = login();
+        CartPage cartPage = new CartPage(driver);
+        CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
-        fromLoginUntilCheckout(loginPage, inventoryPage, cartPage);
+        fromLoginUntilCheckout();
 
         // Csak a vezetélnév beviteli mező marad üresen.
-        checkoutStepOnePage.fillFirstNameInput("Jane");
-        checkoutStepOnePage.fillPostalCodeInput("9999");
+        TestDataUtil testDataUtil = new TestDataUtil();
+        checkoutStepOnePage.fillFirstNameInput(testDataUtil.firstName());
+        checkoutStepOnePage.fillPostalCodeInput(testDataUtil.zip());
 
         // Rákattintunk a Continue gombra.
         checkoutStepOnePage.clickOnContinueBtn();
@@ -108,17 +104,18 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Tag("homework")
     @DisplayName("Ellenőrizzük a hibaüzenet szövegét irányítószám beviteli mező kihagyása esetén.")
     void shouldDisplayErrorMessageForPostalCode() {
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        InventoryPage inventoryPage = login();
+        CartPage cartPage = new CartPage(driver);
+        CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
-        fromLoginUntilCheckout(loginPage, inventoryPage, cartPage);
+        fromLoginUntilCheckout();
 
         // Csak az irányítószám beviteli mező marad üresen.
-        checkoutStepOnePage.fillFirstNameInput("Jane");
-        checkoutStepOnePage.fillLastNameInput("Doe");
+        TestDataUtil testDataUtil = new TestDataUtil();
+
+        checkoutStepOnePage.fillFirstNameInput(testDataUtil.firstName());
+        checkoutStepOnePage.fillLastNameInput(testDataUtil.lastName());
 
         // Rákattintunk a Continue gombra.
         checkoutStepOnePage.clickOnContinueBtn();
@@ -133,17 +130,15 @@ public class CheckoutStepOnePageTest extends BaseTest {
         cleanUp(inventoryPage);
     }
 
-    public void fromLoginUntilCheckout(LoginPage loginPage,
-            InventoryPage inventoryPage,
-            CartPage cartPage) {
-        // Bejelentkezés.
-        login(loginPage);
+    public void fromLoginUntilCheckout() {
+        InventoryPage inventoryPage = login();
 
         // Egy elemez rakunk a kosárba.
         inventoryPage.addToCartOrRemove("Sauce Labs Bike Light");
 
         // Rákattintunk a koásr ikonra.
-        inventoryPage.clickOnshoppingCartBtn();
+        inventoryPage.clickOnShoppingCartBtn();
+        CartPage cartPage = new CartPage(driver);
 
         // A Checkout gombra kattintunk.
         cartPage.clickOnCheckout();

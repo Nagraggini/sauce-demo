@@ -31,45 +31,22 @@ jobs:
               with:
                   java-version: 21
                   distribution: temurin
+                  cache: "maven"
                   cache-dependency-path: "**/pom.xml"
 
             # =========================
-            # 3. Cache Maven
+            # 3. Run Tests & Generate JaCoCo Report
             # =========================
-            - name: Cache Maven dependencies
-              uses: actions/cache@v4
-              with:
-                  path: ~/.m2
-                  key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-
-            # =========================
-            # NEW: Install Maven (csak ha helyi 'act'-ot használsz, GitHub-on alapból van)
-            # =========================
-            - name: Install Maven
-              run: |
-                  sudo apt-get update
-                  sudo apt-get install -y maven
-
-            # =========================
-            # 4. Build project
-            # =========================
-            - name: Build
-              run: mvn -B clean compile
-
-            # =========================
-            # 5. Run Tests
-            # =========================
-            # Tesztek futtatása
-            - name: Run Tests
+            - name: Run Tests and Coverage
               env:
                   USERNAME: ${{ secrets.USERNAME }}
                   PASSWORD: ${{ secrets.PASSWORD }}
                   WRONG_PASSWORD: ${{ secrets.WRONG_PASSWORD }}
                   BASE_URL: ${{ secrets.BASE_URL }}
-              run: mvn -B verify
+              run: mvn -B clean verify jacoco:report
 
             # =========================
-            # 6. Generate JaCoCo Badges
+            # 4. Generate JaCoCo Badges (Directly into README)
             # =========================
             - name: Generate JaCoCo Badge
               id: jacoco
@@ -77,22 +54,21 @@ jobs:
               with:
                   generate-branches-badge: true
                   jacoco-csv-file: target/site/jacoco/jacoco.csv
-                  badges-directory: .github/badges
 
             # =========================
-            # 7. Commit and Push the Badges back to repo
+            # 5. Commit and Push the README back to repo
             # =========================
             - name: Commit and push badges
               if: ${{ github.event_name == 'push' }}
               run: |
                   git config --local user.email "action@github.com"
                   git config --local user.name "GitHub Action"
-                  git add .github/badges/*.svg
-                  git diff --staged --quiet || git commit -m "chore: update jacoco coverage badges"
+                  git add README.md
+                  git diff --staged --quiet || git commit -m "chore: update jacoco coverage badges in README"
                   git push
 
             # =========================
-            # 8. Test reports
+            # 6. Test reports artifact upload
             # =========================
             - name: Upload test reports
               if: always()
@@ -100,4 +76,3 @@ jobs:
               with:
                   name: surefire-reports
                   path: target/surefire-reports
-# TODO egész workflow javítása.

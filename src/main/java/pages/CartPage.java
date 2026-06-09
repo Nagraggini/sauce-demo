@@ -1,8 +1,10 @@
-package saucedemoPages;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import base.BasePage;
 
 public class CartPage extends BasePage {
 
@@ -16,7 +18,7 @@ public class CartPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(checkoutBtn)).click();
     }
 
-    public double getPriceofAnItem(String itemName) {
+    public double getPriceOfAnItem(String itemName) {
         /* .[] -> Pont az aktuálisre hivatkozik a kapcsoszárójelben van a feltétel. */
         double itemPrice = Double
                 .parseDouble(wait

@@ -1,4 +1,4 @@
-package saucedemoTests;
+package tests;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,22 +17,16 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import saucedemoPages.InventoryPage;
-import saucedemoPages.LoginPage;
+import base.BaseTest;
+import pages.InventoryPage;
 
-class InventoryPageTest extends BaseTest {
-
-        LoginPage loginPage;
-        InventoryPage inventoryPage;
+class InventoryTest extends BaseTest {
 
         @Test
         @Tag("shoppingCart")
         @DisplayName("Ellenőrizzük, hogy a kosárba helyezett elemek darabszáma ugyanannyi-e, mint a kosár ikonon lévők.")
         void checkShoppingCartBadgeNumber() {
-                loginPage = new LoginPage(driver);
-                login(loginPage);
-
-                inventoryPage = new InventoryPage(driver);
+                InventoryPage inventoryPage = login();
 
                 String firstItemName = "Sauce Labs Backpack";
                 String secondItemName = "Sauce Labs Bike Light";
@@ -53,10 +47,8 @@ class InventoryPageTest extends BaseTest {
         @Tag("homework")
         @DisplayName("Leellenőrizzük, hogy az összes terméknél megjelenik-e a Remove gomb.")
         void checkRemoveBtn(String itemName) {
-                loginPage = new LoginPage(driver);
-                login(loginPage);
+                InventoryPage inventoryPage = login();
 
-                inventoryPage = new InventoryPage(driver);
                 inventoryPage.addToCartOrRemove(itemName);
                 String expectedRemoveBtnText = "Remove";
                 String actualRemoveBtnText = inventoryPage.getAddToCartOrRemoveBtnText(itemName);
@@ -74,10 +66,7 @@ class InventoryPageTest extends BaseTest {
         @Tag("homework")
         @DisplayName("Leellenőrizzük az összes termék árát.")
         void checkThePriceOfItems(String itemName, double expectedPrice) {
-                loginPage = new LoginPage(driver);
-                login(loginPage);
-
-                inventoryPage = new InventoryPage(driver);
+                InventoryPage inventoryPage = login();
 
                 double actualPrice = inventoryPage.getPriceofAnItem(itemName);
 
@@ -92,10 +81,7 @@ class InventoryPageTest extends BaseTest {
         @Test
         @DisplayName("Minden termékhez tartozik-e kosárhoz hozzáadás gomb.")
         void allItemsHaveAButton() {
-                loginPage = new LoginPage(driver);
-                login(loginPage);
-
-                inventoryPage = new InventoryPage(driver);
+                InventoryPage inventoryPage = login();
 
                 List<WebElement> items = driver.findElements(By.className("inventory_item"));
 
@@ -117,10 +103,7 @@ class InventoryPageTest extends BaseTest {
         @Test
         @DisplayName("Megjelenik-e az adott termékhez tartozó hozzáadás gomb.")
         void addToCartBtnIsDisplayed() {
-                loginPage = new LoginPage(driver);
-                login(loginPage);
-
-                inventoryPage = new InventoryPage(driver);
+                InventoryPage inventoryPage = login();
 
                 String termeknev = "Sauce Labs Backpack";
 
@@ -135,10 +118,8 @@ class InventoryPageTest extends BaseTest {
         @Test
         @DisplayName("Legdrágább elem megkeresése.")
         void mostExpensiveItem() {
-                loginPage = new LoginPage(driver);
-                login(loginPage);
+                InventoryPage inventoryPage = login();
 
-                inventoryPage = new InventoryPage(driver);
                 var itemsAndPrices = inventoryPage.getAllItemnamesAndTheirPrices();
 
                 // Ez, csak akkor működik, hacsak egy termék a legdrágább.
@@ -164,10 +145,7 @@ class InventoryPageTest extends BaseTest {
         @Test
         @DisplayName("Legolcsóbb elem megkeresése.")
         void cheapestItem() {
-                loginPage = new LoginPage(driver);
-                login(loginPage);
-
-                inventoryPage = new InventoryPage(driver);
+                InventoryPage inventoryPage = login();
                 LinkedHashMap<String, Double> itemsAndPrices = inventoryPage.getAllItemnamesAndTheirPrices();
 
                 // Ez, csak akkor működik, hacsak egy termék a legdrágább.
@@ -196,10 +174,7 @@ class InventoryPageTest extends BaseTest {
         @Test
         @DisplayName("Leellenőrizzük, hogy az ABC sorrend jó-e.")
         void checkABCSort() {
-                loginPage = new LoginPage(driver);
-                login(loginPage);
-
-                inventoryPage = new InventoryPage(driver);
+                InventoryPage inventoryPage = login();
 
                 inventoryPage.changeOrderingAtoZ();
 
@@ -220,10 +195,7 @@ class InventoryPageTest extends BaseTest {
         @Test
         @DisplayName("Leellenőrizzük, hogy az ABC csökkenő sorrend jó-e.")
         void checkACSReverseSort() {
-                loginPage = new LoginPage(driver);
-                login(loginPage);
-
-                inventoryPage = new InventoryPage(driver);
+                InventoryPage inventoryPage = login();
 
                 inventoryPage.changeOrderingZtoA();
 
