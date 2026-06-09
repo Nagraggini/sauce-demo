@@ -267,7 +267,7 @@ Egy konkrét teszt futtatása: mvn -Dtest=CheckoutStepOnePageTest#shouldDisplayE
 Teszt report generálása:
 mvn jacoco:report
 
-Itt találod a fájlt: target/site/jacoco/index.html
+Itt találod a fájlt: target/site/jacoco/index.html -> Jobb klikk Open with Live Server
 
 Házi feladat:
 mvn clean test -Dgroups="homework"
