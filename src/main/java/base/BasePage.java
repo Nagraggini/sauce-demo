@@ -126,7 +126,7 @@ public abstract class BasePage {
 		driver.manage().deleteAllCookies();
 	}
 
-	protected String getCurrentUrl() {
+	public String getCurrentUrl() {
 		return driver.getCurrentUrl();
 	}
 
@@ -134,7 +134,7 @@ public abstract class BasePage {
 		this.driver.navigate().refresh();
 	}
 
-	protected String getTitle() {
+	public String getTitle() {
 		return driver.getTitle();
 	}
 
