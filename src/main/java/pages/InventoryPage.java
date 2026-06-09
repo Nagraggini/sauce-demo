@@ -46,11 +46,11 @@ public class InventoryPage extends BasePage {
 		click(hamburgerBtn);
 	}
 
-	public void clickonLogoutBtn() {
+	public void clickOnLogoutBtn() {
 		click(logoutBtn);
 	}
 
-	public void clickonResetAppStateBtn() {
+	public void clickOnResetAppStateBtn() {
 		click(resetAppStateBtn);
 	}
 

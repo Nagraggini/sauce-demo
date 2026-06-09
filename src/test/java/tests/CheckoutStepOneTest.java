@@ -12,6 +12,7 @@ import pages.CartPage;
 import pages.CheckoutStepOnePage;
 import pages.InventoryPage;
 import pages.LoginPage;
+import utils.TestDataUtil;
 
 public class CheckoutStepOneTest extends BaseTest {
 
@@ -24,13 +25,12 @@ public class CheckoutStepOneTest extends BaseTest {
     @Tag("homework")
     @DisplayName("A checkout részen minden mezőt üresen hagyva.")
     void checkoutWithAllFieldsEmpty() {
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
+        inventoryPage = login();
         cartPage = new CartPage(driver);
         checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
-        fromLoginUntilCheckout(loginPage, inventoryPage, cartPage);
+        fromLoginUntilCheckout();
 
         // Üresen hagyjuk a három input mezőt.
         // Rákattintunk a Continue gombra.
@@ -57,11 +57,13 @@ public class CheckoutStepOneTest extends BaseTest {
         checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
-        fromLoginUntilCheckout(loginPage, inventoryPage, cartPage);
+        fromLoginUntilCheckout();
 
         // Csak a keresztnév beviteli mező marad üresen.
-        checkoutStepOnePage.fillLastNameInput("Doe");
-        checkoutStepOnePage.fillPostalCodeInput("9999");
+        TestDataUtil testDataUtil = new TestDataUtil();
+
+        checkoutStepOnePage.fillLastNameInput(testDataUtil.lastName());
+        checkoutStepOnePage.fillPostalCodeInput(testDataUtil.zip());
 
         // Rákattintunk a Continue gombra.
         checkoutStepOnePage.clickOnContinueBtn();
@@ -86,11 +88,12 @@ public class CheckoutStepOneTest extends BaseTest {
         checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
-        fromLoginUntilCheckout(loginPage, inventoryPage, cartPage);
+        fromLoginUntilCheckout();
 
         // Csak a vezetélnév beviteli mező marad üresen.
-        checkoutStepOnePage.fillFirstNameInput("Jane");
-        checkoutStepOnePage.fillPostalCodeInput("9999");
+        TestDataUtil testDataUtil = new TestDataUtil();
+        checkoutStepOnePage.fillFirstNameInput(testDataUtil.firstName());
+        checkoutStepOnePage.fillPostalCodeInput(testDataUtil.zip());
 
         // Rákattintunk a Continue gombra.
         checkoutStepOnePage.clickOnContinueBtn();
@@ -109,17 +112,18 @@ public class CheckoutStepOneTest extends BaseTest {
     @Tag("homework")
     @DisplayName("Ellenőrizzük a hibaüzenet szövegét irányítószám beviteli mező kihagyása esetén.")
     void shouldDisplayErrorMessageForPostalCode() {
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
+        inventoryPage = login();
         cartPage = new CartPage(driver);
         checkoutStepOnePage = new CheckoutStepOnePage(driver);
 
         // A bejelentkezéstől a Checkout gombig.
-        fromLoginUntilCheckout(loginPage, inventoryPage, cartPage);
+        fromLoginUntilCheckout();
 
         // Csak az irányítószám beviteli mező marad üresen.
-        checkoutStepOnePage.fillFirstNameInput("Jane");
-        checkoutStepOnePage.fillLastNameInput("Doe");
+        TestDataUtil testDataUtil = new TestDataUtil();
+
+        checkoutStepOnePage.fillFirstNameInput(testDataUtil.firstName());
+        checkoutStepOnePage.fillLastNameInput(testDataUtil.lastName());
 
         // Rákattintunk a Continue gombra.
         checkoutStepOnePage.clickOnContinueBtn();
@@ -134,17 +138,15 @@ public class CheckoutStepOneTest extends BaseTest {
         cleanUp(inventoryPage);
     }
 
-    public void fromLoginUntilCheckout(LoginPage loginPage,
-            InventoryPage inventoryPage,
-            CartPage cartPage) {
-        // Bejelentkezés.
-        login(loginPage);
+    public void fromLoginUntilCheckout() {
+        inventoryPage = login();
 
         // Egy elemez rakunk a kosárba.
         inventoryPage.addToCartOrRemove("Sauce Labs Bike Light");
 
         // Rákattintunk a koásr ikonra.
         inventoryPage.clickOnshoppingCartBtn();
+        cartPage = new CartPage(driver);
 
         // A Checkout gombra kattintunk.
         cartPage.clickOnCheckout();

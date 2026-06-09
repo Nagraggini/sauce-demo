@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
-import config.ConfigReader;
 import pages.CartPage;
 import pages.CheckoutStepOnePage;
 import pages.CheckoutStepTwoPage;
@@ -23,15 +22,7 @@ public class InventoryE2ETest extends BaseTest {
         @Test
         @DisplayName("Ellenőrizzük, hogy a kosárban is ugyanannyi a két termék ára, mint a főoldalon, meg a legvégén. Felhnév: standard_user")
         void checkPricesOnThreePages() {
-                loginPage = new LoginPage(driver);
-
-                loginPage.openPage("https://www.saucedemo.com");
-                String username = ConfigReader.get("USERNAME");
-                String password = ConfigReader.get("PASSWORD");
-                loginPage.fillInputs(username, password);
-                loginPage.clickOnLoginBtn();
-
-                inventoryPage = new InventoryPage(driver);
+                inventoryPage = login();
 
                 String firstItemName = "Sauce Labs Backpack";
                 String secondItemName = "Sauce Labs Bike Light";

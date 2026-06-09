@@ -40,9 +40,7 @@ public class LoginPage extends BasePage {
 	// következő oldal Page objektumát.
 
 	public InventoryPage login(String username, String password) {
-
-		type(usernameInput, username);
-		type(passwordInput, password);
+		fillInputs(username, password);
 		click(loginBtn);
 
 		return new InventoryPage(driver);

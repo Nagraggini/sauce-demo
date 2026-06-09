@@ -29,14 +29,21 @@ public class BaseTest {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 
-	/** Bejelentkezés. Felhnév: standard_user */
-	public void login(LoginPage loginPage) {
-		// TODO mindenhol a base url-t kéne használni.
-		loginPage.openPage("https://www.saucedemo.com");
-		String username = "standard_user";
+	// POM alapelve szerint az oldalváltó műveletek adják vissza eredményül a
+	// következő oldal Page objektumát.
+	/**
+	 * Bejelentkezés alapértelmezett standard felhasználóval.
+	 * Visszaadja az InventoryPage-et a könnyebb láncolhatóságért.
+	 */
+	public InventoryPage login() {
+		LoginPage loginPage = new LoginPage(driver);
+		loginPage.openPage(ConfigReader.get("BASE_URL"));
+
+		String username = ConfigReader.get("USERNAME"); // Érdemes ezt is configból olvasni
 		String password = ConfigReader.get("PASSWORD");
-		loginPage.fillInputs(username, password);
-		loginPage.clickOnLoginBtn();
+
+		// A LoginPage saját beépített logikáját hívjuk meg!
+		return loginPage.login(username, password);
 	}
 
 	@AfterEach
@@ -53,10 +60,10 @@ public class BaseTest {
 
 		// Takarítás.
 		inventoryPage.openHamburgerMenu();
-		inventoryPage.clickonResetAppStateBtn();
+		inventoryPage.clickOnResetAppStateBtn();
 
 		// Kijelentkezés
-		inventoryPage.clickonLogoutBtn();
+		inventoryPage.clickOnLogoutBtn();
 
 	}
 
