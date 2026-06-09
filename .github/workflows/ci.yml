@@ -43,7 +43,7 @@ jobs:
                   PASSWORD: ${{ secrets.PASSWORD }}
                   WRONG_PASSWORD: ${{ secrets.WRONG_PASSWORD }}
                   BASE_URL: ${{ secrets.BASE_URL }}
-              run: mvn -B clean verify jacoco:report
+              run: mvn -B clean verify
 
             # =========================
             # 4. Generate JaCoCo Badges (Directly into README)
