@@ -35,22 +35,13 @@ jobs:
                   cache-dependency-path: "**/pom.xml"
 
             # =========================
-            # 3. Cache Maven
-            # =========================
-            - name: Cache Maven dependencies
-              uses: actions/cache@v4
-              with:
-                  path: ~/.m2
-                  key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-
-            # =========================
-            # 4. Build project
+            # 3. Build project
             # =========================
             - name: Build
               run: mvn -B clean compile
 
             # =========================
-            # 5. Run Tests
+            # 4. Run Tests
             # =========================
             # Tesztek futtatása
             - name: Run Tests
@@ -62,7 +53,7 @@ jobs:
               run: mvn -B verify jacoco:report
 
             # =========================
-            # 6. Generate JaCoCo Badges
+            # 5. Generate JaCoCo Badges
             # =========================
             - name: Generate JaCoCo Badge
               id: jacoco
@@ -73,7 +64,7 @@ jobs:
                   badges-directory: .github/badges
 
             # =========================
-            # 7. Commit and Push the Badges back to repo
+            # 6. Commit and Push the Badges back to repo
             # =========================
             - name: Commit and push badges
               if: ${{ github.event_name == 'push' }}
@@ -85,7 +76,7 @@ jobs:
                   git push
 
             # =========================
-            # 8. Test reports
+            # 7. Test reports
             # =========================
             - name: Upload test reports
               if: always()
@@ -93,4 +84,3 @@ jobs:
               with:
                   name: surefire-reports
                   path: target/surefire-reports
-# TODO egész workflow javítása.
