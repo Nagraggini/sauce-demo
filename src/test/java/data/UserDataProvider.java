@@ -21,15 +21,15 @@ public class UserDataProvider implements ArgumentsProvider {
                 // Formátum: Arguments.of(felhasználónév, jelszó, elvártURL/hibaüzenet,
                 // sikerült-e)
                 Arguments.of(
-                        validUsername, validPassword, baseURL + "inventory.html", true),
-                Arguments.of("problem_user", validPassword, baseURL + "inventory.html", true),
+                        validUsername, validPassword, baseURL + "/inventory.html", true),
+                Arguments.of("problem_user", validPassword, baseURL + "/inventory.html", true),
                 Arguments.of("performance_glitch_user", validPassword, baseURL
-                        + "inventory.html",
+                        + "/inventory.html",
                         true),
                 Arguments.of("error_user", validPassword, baseURL
-                        + "inventory.html", true),
+                        + "/inventory.html", true),
                 Arguments.of("visual_user", validPassword, baseURL
-                        + "inventory.html", true),
+                        + "/inventory.html", true),
                 // Negatív tesztekhez.
                 Arguments.of("locked_out_user", validPassword, "Epic sadface: Sorry, this user has been locked out.",
                         false));
