@@ -76,15 +76,10 @@ public class InventoryPage extends BasePage {
 	}
 
 	public void addToCartOrRemove(String itemName) {
-		By addToCartOrRemoveBtn = By.xpath(
+		By btn = By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
 						+ itemName + "']]//button");
-
-		if (getText(addToCartOrRemoveBtn).equals("Add to Cart")) {
-			click(addToCartOrRemoveBtn);
-		} else {
-			click(addToCartOrRemoveBtn);
-		}
+		click(btn);
 	}
 
 	public String getAddToCartOrRemoveBtnText(String itemName) {

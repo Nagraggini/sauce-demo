@@ -48,16 +48,14 @@ public class CheckoutStepOnePage extends BasePage {
         return getText(errorMessage);
     }
 
-    public CartPage cancel(){
+    public CartPage cancel() {
         click(cancelBtn);
         return new CartPage(driver);
     }
-      
-    public CheckoutStepTwoPage continue() {
+
+    public CheckoutStepTwoPage clickOnContinue() {
         click(continueBtn);
         return new CheckoutStepTwoPage(driver);
     }
-
-    
 
 }

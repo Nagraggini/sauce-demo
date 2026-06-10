@@ -28,7 +28,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
         // Üresen hagyjuk a három input mezőt.
         // Rákattintunk a Continue gombra.
-        checkoutStepOnePage.clickOnContinueBtn();
+        checkoutStepOnePage.clickOnContinue();
 
         String errorMessage = checkoutStepOnePage.getErrorMessage();
 
@@ -59,7 +59,7 @@ public class CheckoutStepOneTest extends BaseTest {
         checkoutStepOnePage.fillPostalCodeInput(testDataUtil.zip());
 
         // Rákattintunk a Continue gombra.
-        checkoutStepOnePage.clickOnContinueBtn();
+        checkoutStepOnePage.clickOnContinue();
 
         String expectedErrorMessage = "Error: First Name is required";
         String actualErrorMessage = checkoutStepOnePage.getErrorMessage();
@@ -88,7 +88,7 @@ public class CheckoutStepOneTest extends BaseTest {
         checkoutStepOnePage.fillPostalCodeInput(testDataUtil.zip());
 
         // Rákattintunk a Continue gombra.
-        checkoutStepOnePage.clickOnContinueBtn();
+        checkoutStepOnePage.clickOnContinue();
 
         String expectedErrorMessage = "Error: Last Name is required";
         String actualErrorMessage = checkoutStepOnePage.getErrorMessage();
@@ -118,7 +118,7 @@ public class CheckoutStepOneTest extends BaseTest {
         checkoutStepOnePage.fillLastNameInput(testDataUtil.lastName());
 
         // Rákattintunk a Continue gombra.
-        checkoutStepOnePage.continue();
+        checkoutStepOnePage.clickOnContinue();
 
         String expectedErrorMessage = "Error: Postal Code is required";
         String actualErrorMessage = checkoutStepOnePage.getErrorMessage();
