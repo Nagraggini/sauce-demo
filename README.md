@@ -62,18 +62,20 @@ JUnit Jupiter (Aggregator)
 ```bash
 saucedemo/
 ├── pom.xml
-└── src/
-    ├── main/
-    │   └── java/
-    │       └── saucedemoPages/        <-- Ide kerülnek a Page Object-ek
-    │           ├── BasePage.java
-    │           ├── LoginPage.java
-    │           └── InventoryPage.java
-    └── test/
-        └── java/
-            └── saucedemoTest/         <-- Ide kerülnek a tesztfájlok 
-                ├── BaseTest.java
-                └── LoginPageTest.java
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       ├── base/          # Közös alapfunkciók (pl. BasePage)
+│   │       ├── pages/         # Page Object osztályok
+│   │       ├── driver/        # WebDriver inicializálás
+│   │       ├── config/        # Konfiguráció olvasás
+│   │       └── utils/         # Segédfunkciók
+│   └── test/
+│       └── java/
+│           ├── base/          # Tesztek alaposztálya (BaseTest)
+│           ├── data/          # Adatszolgáltatók (DataProvider)
+│           └── tests/         # Konkrét tesztesetek
+└── target/                    # Fordított fájlok és riportok (pl. JaCoCo)
 ```
 
 # Xpath
