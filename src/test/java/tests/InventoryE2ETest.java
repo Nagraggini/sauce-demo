@@ -31,9 +31,8 @@ public class InventoryE2ETest extends BaseTest {
                 assertEquals(2, inventoryPage.getShoppingCartBadgeNumber(),
                                 "A kosárban lévő termékek darabszáma nem egyezik az elvárttal.");
 
-                inventoryPage.clickOnShoppingCartBtn();
-
                 CartPage cartPage = inventoryPage.shoppingCart();
+
                 double firstItemPriceOnCartPage = cartPage.getPriceOfAnItem(firstItemName);
                 double secondItemPriceOnCartPage = cartPage.getPriceOfAnItem(secondItemName);
 
@@ -50,16 +49,28 @@ public class InventoryE2ETest extends BaseTest {
                 checkoutStepOnePage.fillLastNameInput(testDataUtil.lastName());
                 checkoutStepOnePage.fillPostalCodeInput(testDataUtil.zip());
 
-                checkoutStepOnePage.clickOnContinue();
-
                 CheckoutStepTwoPage checkoutStepTwoPage = checkoutStepOnePage.clickOnContinue();
 
-                // TODO Árak csekkolása elemenként az utolsó oldalon.
-                double itemTotal = checkoutStepTwoPage.getItemTotal();
+                double firstItemPriceCheckoutStepTwoPage = checkoutStepTwoPage.getPriceOfAnItem(firstItemName);
+                double secondItemPriceCheckoutStepTwoPage = checkoutStepTwoPage.getPriceOfAnItem(secondItemName);
 
-                assertEquals((firstItemPriceOnCartPage + secondItemPriceOnCartPage), itemTotal,
-                                "A kosárban lévő termékek összege nem egyezik a CheckOutStepTwo oldalon lévő termékeknettó végösszegével.");
+                double summarySubtotal = checkoutStepTwoPage.getSummarySubtotal();
 
+                assertEquals(firstItemPriceOnIntentoryPage,
+                                firstItemPriceCheckoutStepTwoPage,
+                                "A " + firstItemName
+                                                + " ára nem egyezik meg az Inventory és a CheckoutStepTwo oldalon.");
+
+                assertEquals(secondItemPriceOnIntentoryPage,
+                                secondItemPriceCheckoutStepTwoPage,
+                                "A " + secondItemName
+                                                + " ára nem egyezik meg az Inventory és a CheckoutStepTwo oldalon.");
+
+                assertEquals((firstItemPriceOnIntentoryPage + secondItemPriceOnIntentoryPage),
+                                summarySubtotal,
+                                "A CheckoutStepTwo oldalon lévő termékek adó nélküli végösszege nem egyezik az oldalon lévő termékek árával.");
+
+                // TODO: getSummaryTotal összeg ellenőrzése.
                 CheckoutCompletePage checkoutCompletePage = checkoutStepTwoPage.finish();
 
                 // TODO kell egy assert ami a thank you szöveget csekkolja.
