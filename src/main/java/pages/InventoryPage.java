@@ -148,4 +148,9 @@ public class InventoryPage extends BasePage {
 		return onlyAllItemName;
 	}
 
+	public CartPage shoppingCart() {
+		click(shoppingCartBtn);
+		return new CartPage(driver);
+	}
+
 }
