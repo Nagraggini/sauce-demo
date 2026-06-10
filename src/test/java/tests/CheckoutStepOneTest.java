@@ -136,9 +136,8 @@ public class CheckoutStepOneTest extends BaseTest {
         // Egy elemez rakunk a kosárba.
         inventoryPage.addToCartOrRemove("Sauce Labs Bike Light");
 
-        // Rákattintunk a koásr ikonra.
-        inventoryPage.clickOnShoppingCartBtn();
-        CartPage cartPage = new CartPage(driver);
+        // Rákattintunk a kosár ikonra.
+        CartPage cartPage = inventoryPage.shoppingCart();
 
         // A Checkout gombra kattintunk.
         cartPage.clickOnCheckout();

@@ -54,10 +54,6 @@ public class InventoryPage extends BasePage {
 		click(resetAppStateBtn);
 	}
 
-	public void clickOnShoppingCartBtn() {
-		click(shoppingCartBtn);
-	}
-
 	public int getShoppingCartBadgeNumber() {
 		// Ha üres a kosár, akkor sem lesz error.
 		if (driver.findElements(shoppingCartBadge).isEmpty()) {
