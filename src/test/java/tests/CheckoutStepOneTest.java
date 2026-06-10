@@ -118,7 +118,7 @@ public class CheckoutStepOneTest extends BaseTest {
         checkoutStepOnePage.fillLastNameInput(testDataUtil.lastName());
 
         // Rákattintunk a Continue gombra.
-        checkoutStepOnePage.clickOnContinueBtn();
+        checkoutStepOnePage.continue();
 
         String expectedErrorMessage = "Error: Postal Code is required";
         String actualErrorMessage = checkoutStepOnePage.getErrorMessage();

@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import base.BasePage;
 
@@ -34,27 +33,31 @@ public class CheckoutStepOnePage extends BasePage {
     private final By continueBtn = By.id("continue");
 
     public void fillFirstNameInput(String firstName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameInput)).sendKeys(firstName);
+        type(firstNameInput, firstName);
     }
 
     public void fillLastNameInput(String lastName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameInput)).sendKeys(lastName);
+        type(lastNameInput, lastName);
     }
 
     public void fillPostalCodeInput(String postalCode) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(postalCodeInput)).sendKeys(postalCode);
+        type(postalCodeInput, postalCode);
     }
 
     public String getErrorMessage() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage)).getText();
+        return getText(errorMessage);
     }
 
-    public void clickOnCancelBtn() {
-        wait.until(ExpectedConditions.elementToBeClickable(cancelBtn)).click();
+    public CartPage cancel(){
+        click(cancelBtn);
+        return new CartPage(driver);
+    }
+      
+    public CheckoutStepTwoPage continue() {
+        click(continueBtn);
+        return new CheckoutStepTwoPage(driver);
     }
 
-    public void clickOnContinueBtn() {
-        wait.until(ExpectedConditions.elementToBeClickable(continueBtn)).click();
-    }
+    
 
 }

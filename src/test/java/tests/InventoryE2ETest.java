@@ -51,7 +51,7 @@ public class InventoryE2ETest extends BaseTest {
                 checkoutStepOnePage.fillLastNameInput(testDataUtil.lastName());
                 checkoutStepOnePage.fillPostalCodeInput(testDataUtil.zip());
 
-                checkoutStepOnePage.clickOnContinueBtn();
+                checkoutStepOnePage.continue();
 
                 CheckoutStepTwoPage checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
 
