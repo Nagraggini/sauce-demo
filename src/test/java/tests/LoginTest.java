@@ -15,8 +15,6 @@ import data.UserDataProvider;
 import pages.InventoryPage;
 import pages.LoginPage;
 
-//https://www.youtube.com/watch?v=XyBxEnyBb0A
-
 class LoginTest extends BaseTest {
 
 	@Test
@@ -202,6 +200,7 @@ class LoginTest extends BaseTest {
 		String expectedErrorMessage = "Epic sadface: You can only access '/inventory.html' when you are logged in.";
 		String actualErrorMessage = loginPage.getErrorMessage();
 
+		assertEquals(ConfigReader.get("BASE_URL"), loginPage.getCurrentUrl(), "Az url cím nem jó!");
 		assertTrue(expectedErrorMessage.equals(actualErrorMessage), "Hibaüzenet nem egyezik meg.");
 	}
 

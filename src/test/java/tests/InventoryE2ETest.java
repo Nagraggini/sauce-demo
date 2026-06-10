@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
 import pages.CartPage;
+import pages.CheckoutCompletePage;
 import pages.CheckoutStepOnePage;
 import pages.CheckoutStepTwoPage;
 import pages.InventoryPage;
@@ -14,7 +15,7 @@ import utils.TestDataUtil;
 public class InventoryE2ETest extends BaseTest {
 
         @Test
-        @DisplayName("Ellenőrizzük, hogy a kosárban is ugyanannyi a két termék ára, mint a főoldalon, meg a legvégén. Felhnév: standard_user")
+        @DisplayName("Ellenőrizzük, hogy a kosárban is ugyanannyi a két termék ára, mint a főoldalon és minden oldalon. Felhnév: standard_user")
         void checkPricesOnThreePages() {
                 InventoryPage inventoryPage = login();
 
@@ -32,7 +33,7 @@ public class InventoryE2ETest extends BaseTest {
 
                 inventoryPage.clickOnShoppingCartBtn();
 
-                CartPage cartPage = new CartPage(driver);
+                CartPage cartPage = inventoryPage.shoppingCart();
                 double firstItemPriceOnCartPage = cartPage.getPriceOfAnItem(firstItemName);
                 double secondItemPriceOnCartPage = cartPage.getPriceOfAnItem(secondItemName);
 
@@ -42,9 +43,7 @@ public class InventoryE2ETest extends BaseTest {
                 assertEquals(secondItemPriceOnIntentoryPage, secondItemPriceOnCartPage,
                                 "A " + secondItemName + " ára nem egyezik meg az Inventory és a Cart oldalon.");
 
-                cartPage.clickOnCheckout();
-
-                CheckoutStepOnePage checkoutStepOnePage = new CheckoutStepOnePage(driver);
+                CheckoutStepOnePage checkoutStepOnePage = cartPage.checkout();
                 TestDataUtil testDataUtil = new TestDataUtil();
 
                 checkoutStepOnePage.fillFirstNameInput(testDataUtil.firstName());
@@ -53,13 +52,17 @@ public class InventoryE2ETest extends BaseTest {
 
                 checkoutStepOnePage.clickOnContinue();
 
-                CheckoutStepTwoPage checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
+                CheckoutStepTwoPage checkoutStepTwoPage = checkoutStepOnePage.clickOnContinue();
 
                 // TODO Árak csekkolása elemenként az utolsó oldalon.
                 double itemTotal = checkoutStepTwoPage.getItemTotal();
 
                 assertEquals((firstItemPriceOnCartPage + secondItemPriceOnCartPage), itemTotal,
                                 "A kosárban lévő termékek összege nem egyezik a CheckOutStepTwo oldalon lévő termékeknettó végösszegével.");
+
+                CheckoutCompletePage checkoutCompletePage = checkoutStepTwoPage.finish();
+
+                // TODO kell egy assert ami a thank you szöveget csekkolja.
 
                 // Kijelentkezés.
                 cleanUp(inventoryPage);
