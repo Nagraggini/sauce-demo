@@ -193,14 +193,14 @@ class LoginTest extends BaseTest {
 
 	@Test
 	@DisplayName("Lecsekkoljuk, hogy betöltödik-e az inventory oldal, ha nem vagyunk belépve.")
-	void checkLockedOutUserLoginRefreshAndErrorMessage() {
+	void checkLockedOutUserLoginErrorMessage() {
 		LoginPage loginPage = new LoginPage(driver);
 		loginPage.openPage(ConfigReader.get("BASE_URL") + "/inventory.html");
 
 		String expectedErrorMessage = "Epic sadface: You can only access '/inventory.html' when you are logged in.";
 		String actualErrorMessage = loginPage.getErrorMessage();
 
-		assertEquals(ConfigReader.get("BASE_URL"), loginPage.getCurrentUrl(), "Az url cím nem jó!");
+		assertEquals(ConfigReader.get("BASE_URL") + "/", loginPage.getCurrentUrl(), "Az url cím nem jó!");
 		assertTrue(expectedErrorMessage.equals(actualErrorMessage), "Hibaüzenet nem egyezik meg.");
 	}
 
