@@ -34,17 +34,7 @@ public class CheckoutStepTwoPage extends BasePage {
         return new InventoryPage(driver);
     }
 
-    public double getPriceOfAnItem(String itemName) {
-        /* .[] -> Pont az aktuálisre hivatkozik a kapcsoszárójelben van a feltétel. */
-        double itemPrice = Double
-                .parseDouble(getText(
-                        By.xpath(
-                                "//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='"
-                                        + itemName + "']]//div[@class='inventory_item_price']"))
-                        .replace("$", ""));
-
-        return itemPrice;
-    }
+    // A getPriceOfAnItem(String itemName) metódus itt is működik.
 
     public CheckoutCompletePage finish() {
         click(finishBtn);
