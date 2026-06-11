@@ -51,8 +51,9 @@ public class InventoryE2ETest extends BaseTest {
 
                 CheckoutStepTwoPage checkoutStepTwoPage = checkoutStepOnePage.clickOnContinue();
 
-                double firstItemPriceCheckoutStepTwoPage = checkoutStepTwoPage.getPriceOfAnItem(firstItemName);
-                double secondItemPriceCheckoutStepTwoPage = checkoutStepTwoPage.getPriceOfAnItem(secondItemName);
+                // A checkoutStepTwoPage-n lévő árak lekérhetőek a cartPage-n lévő metódussal.
+                double firstItemPriceCheckoutStepTwoPage = cartPage.getPriceOfAnItem(firstItemName);
+                double secondItemPriceCheckoutStepTwoPage = cartPage.getPriceOfAnItem(secondItemName);
 
                 double summarySubtotal = checkoutStepTwoPage.getSummarySubtotal();
 
