@@ -2,22 +2,54 @@
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import base.BasePage;
 
 public class CheckoutStepTwoPage extends BasePage {
 
     public CheckoutStepTwoPage(WebDriver driver) {
-<span class="fc" id="L12">        super(driver);</span>
-<span class="fc" id="L13">    }</span>
+<span class="fc" id="L11">        super(driver);</span>
+<span class="fc" id="L12">    }</span>
 
-<span class="fc" id="L15">    private final By itemTotal = By.className(&quot;summary_subtotal_label&quot;);</span>
+<span class="fc" id="L14">    private final By summarySubtotalLbl = By.className(&quot;summary_subtotal_label&quot;);</span>
+<span class="fc" id="L15">    private final By summaryTotalLbl = By.className(&quot;summary_total_label&quot;);</span>
 
-    public double getItemTotal() {
-<span class="fc" id="L18">        return Double.parseDouble(</span>
-<span class="fc" id="L19">                wait.until(ExpectedConditions.visibilityOfElementLocated(itemTotal)).getText().replace(&quot;$&quot;, &quot;&quot;)</span>
-<span class="fc" id="L20">                        .replace(&quot;Item total: &quot;, &quot;&quot;));</span>
+<span class="fc" id="L17">    private final By cancelBtn = By.id(&quot;cancel&quot;);</span>
+<span class="fc" id="L18">    private final By finishBtn = By.id(&quot;finish&quot;);</span>
+
+    public double getSummarySubtotal() {
+<span class="fc" id="L21">        return Double.parseDouble(</span>
+<span class="fc" id="L22">                getText(summarySubtotalLbl).replace(&quot;$&quot;, &quot;&quot;)</span>
+<span class="fc" id="L23">                        .replace(&quot;Item total: &quot;, &quot;&quot;));</span>
     }
+
+    public double getSummaryTotal() {
+<span class="nc" id="L27">        return Double.parseDouble(</span>
+<span class="nc" id="L28">                getText(summaryTotalLbl).replace(&quot;$&quot;, &quot;&quot;)</span>
+<span class="nc" id="L29">                        .replace(&quot;Item total: &quot;, &quot;&quot;));</span>
+    }
+
+    public InventoryPage cancel() {
+<span class="nc" id="L33">        click(cancelBtn);</span>
+<span class="nc" id="L34">        return new InventoryPage(driver);</span>
+    }
+
+    public double getPriceOfAnItem(String itemName) {
+        /* .[] -&gt; Pont az aktuálisre hivatkozik a kapcsoszárójelben van a feltétel. */
+<span class="fc" id="L39">        double itemPrice = Double</span>
+<span class="fc" id="L40">                .parseDouble(getText(</span>
+<span class="fc" id="L41">                        By.xpath(</span>
+                                &quot;//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='&quot;
+                                        + itemName + &quot;']]//div[@class='inventory_item_price']&quot;))
+<span class="fc" id="L44">                        .replace(&quot;$&quot;, &quot;&quot;));</span>
+
+<span class="fc" id="L46">        return itemPrice;</span>
+    }
+
+    public CheckoutCompletePage finish() {
+<span class="fc" id="L50">        click(finishBtn);</span>
+<span class="fc" id="L51">        return new CheckoutCompletePage(driver);</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

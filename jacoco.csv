@@ -1,8 +1,9 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-saucedemo,pages,InventoryPage,50,214,3,5,12,54,5,14,2,13
-saucedemo,pages,CheckoutStepOnePage,9,107,0,0,2,21,1,6,1,6
-saucedemo,pages,CartPage,0,33,0,0,0,12,0,3,0,3
-saucedemo,pages,CheckoutStepTwoPage,0,24,0,0,0,6,0,2,0,2
+saucedemo,pages,InventoryPage,46,213,2,4,11,53,4,14,2,13
+saucedemo,pages,CheckoutCompletePage,10,12,0,0,2,4,1,1,1,1
+saucedemo,pages,CheckoutStepOnePage,10,77,0,0,2,21,1,6,1,6
+saucedemo,pages,CartPage,10,39,0,0,2,13,1,4,1,4
+saucedemo,pages,CheckoutStepTwoPage,22,54,0,0,5,16,2,4,2,4
 saucedemo,pages,LoginPage,0,63,0,0,0,18,0,5,0,5
 saucedemo,driver,DriverFactory,3,46,1,1,1,9,2,1,1,1
 saucedemo,utils,TestDataUtil,0,9,0,0,0,4,0,4,0,4

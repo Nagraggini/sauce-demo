@@ -2,60 +2,61 @@
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import base.BasePage;
 
 public class CheckoutStepOnePage extends BasePage {
 
     public CheckoutStepOnePage(WebDriver driver) {
-<span class="fc" id="L12">        super(driver);</span>
-<span class="fc" id="L13">    }</span>
+<span class="fc" id="L11">        super(driver);</span>
+<span class="fc" id="L12">    }</span>
     // Fejléc.
 
     // Fejléc és logó.
-<span class="fc" id="L17">    private final By appLogo = By.xpath(&quot;//div[@class='app_logo' and contains(text(),'Swag')]&quot;);</span>
-<span class="fc" id="L18">    private final By checkoutLbl = By.cssSelector(&quot;[data-test='title']&quot;);</span>
+<span class="fc" id="L16">    private final By appLogo = By.xpath(&quot;//div[@class='app_logo' and contains(text(),'Swag')]&quot;);</span>
+<span class="fc" id="L17">    private final By checkoutLbl = By.cssSelector(&quot;[data-test='title']&quot;);</span>
 
     // Kosár elemek.
-<span class="fc" id="L21">    private final By shoppingCartBtn = By.className(&quot;shopping_cart_link&quot;);</span>
-<span class="fc" id="L22">    private final By shoppingCartBadge = By.cssSelector(&quot;span[data-test='shopping-cart-badge']&quot;);</span>
+<span class="fc" id="L20">    private final By shoppingCartBtn = By.className(&quot;shopping_cart_link&quot;);</span>
+<span class="fc" id="L21">    private final By shoppingCartBadge = By.cssSelector(&quot;span[data-test='shopping-cart-badge']&quot;);</span>
 
     // Beviteli mezők.
-<span class="fc" id="L25">    private final By firstNameInput = By.id(&quot;first-name&quot;);</span>
-<span class="fc" id="L26">    private final By lastNameInput = By.id(&quot;last-name&quot;);</span>
-<span class="fc" id="L27">    private final By postalCodeInput = By.id(&quot;postal-code&quot;);</span>
+<span class="fc" id="L24">    private final By firstNameInput = By.id(&quot;first-name&quot;);</span>
+<span class="fc" id="L25">    private final By lastNameInput = By.id(&quot;last-name&quot;);</span>
+<span class="fc" id="L26">    private final By postalCodeInput = By.id(&quot;postal-code&quot;);</span>
 
     // Error üzenet.
-<span class="fc" id="L30">    private final By errorMessage = By.className(&quot;error-message-container&quot;);</span>
+<span class="fc" id="L29">    private final By errorMessage = By.className(&quot;error-message-container&quot;);</span>
 
     // Gombok.
-<span class="fc" id="L33">    private final By cancelBtn = By.id(&quot;cancel&quot;);</span>
-<span class="fc" id="L34">    private final By continueBtn = By.id(&quot;continue&quot;);</span>
+<span class="fc" id="L32">    private final By cancelBtn = By.id(&quot;cancel&quot;);</span>
+<span class="fc" id="L33">    private final By continueBtn = By.id(&quot;continue&quot;);</span>
 
     public void fillFirstNameInput(String firstName) {
-<span class="fc" id="L37">        wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameInput)).sendKeys(firstName);</span>
-<span class="fc" id="L38">    }</span>
+<span class="fc" id="L36">        type(firstNameInput, firstName);</span>
+<span class="fc" id="L37">    }</span>
 
     public void fillLastNameInput(String lastName) {
-<span class="fc" id="L41">        wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameInput)).sendKeys(lastName);</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L40">        type(lastNameInput, lastName);</span>
+<span class="fc" id="L41">    }</span>
 
     public void fillPostalCodeInput(String postalCode) {
-<span class="fc" id="L45">        wait.until(ExpectedConditions.visibilityOfElementLocated(postalCodeInput)).sendKeys(postalCode);</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L44">        type(postalCodeInput, postalCode);</span>
+<span class="fc" id="L45">    }</span>
 
     public String getErrorMessage() {
-<span class="fc" id="L49">        return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage)).getText();</span>
+<span class="fc" id="L48">        return getText(errorMessage);</span>
     }
 
-    public void clickOnCancelBtn() {
-<span class="nc" id="L53">        wait.until(ExpectedConditions.elementToBeClickable(cancelBtn)).click();</span>
-<span class="nc" id="L54">    }</span>
+    public CartPage cancel() {
+<span class="nc" id="L52">        click(cancelBtn);</span>
+<span class="nc" id="L53">        return new CartPage(driver);</span>
+    }
 
-    public void clickOnContinueBtn() {
-<span class="fc" id="L57">        wait.until(ExpectedConditions.elementToBeClickable(continueBtn)).click();</span>
-<span class="fc" id="L58">    }</span>
+    public CheckoutStepTwoPage clickOnContinue() {
+<span class="fc" id="L57">        click(continueBtn);</span>
+<span class="fc" id="L58">        return new CheckoutStepTwoPage(driver);</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

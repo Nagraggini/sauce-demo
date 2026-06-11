@@ -2,34 +2,42 @@
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import base.BasePage;
 
 public class CartPage extends BasePage {
 
     public CartPage(WebDriver driver) {
-<span class="fc" id="L12">        super(driver);</span>
-<span class="fc" id="L13">    }</span>
+<span class="fc" id="L11">        super(driver);</span>
+<span class="fc" id="L12">    }</span>
 
-<span class="fc" id="L15">    private final By checkoutBtn = By.cssSelector(&quot;#checkout&quot;);</span>
+<span class="fc" id="L14">    private final By checkoutBtn = By.cssSelector(&quot;#checkout&quot;);</span>
+<span class="fc" id="L15">    private final By continueShoppingBtn = By.id(&quot;continue-shopping&quot;);</span>
 
     public void clickOnCheckout() {
-<span class="fc" id="L18">        wait.until(ExpectedConditions.elementToBeClickable(checkoutBtn)).click();</span>
+<span class="fc" id="L18">        click(checkoutBtn);</span>
 <span class="fc" id="L19">    }</span>
 
     public double getPriceOfAnItem(String itemName) {
         /* .[] -&gt; Pont az aktuálisre hivatkozik a kapcsoszárójelben van a feltétel. */
 <span class="fc" id="L23">        double itemPrice = Double</span>
-<span class="fc" id="L24">                .parseDouble(wait</span>
-<span class="fc" id="L25">                        .until(ExpectedConditions.visibilityOfElementLocated(</span>
-<span class="fc" id="L26">                                By.xpath(</span>
-                                        &quot;//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='&quot;
-                                                + itemName + &quot;']]//div[@class='inventory_item_price']&quot;)))
-<span class="fc" id="L29">                        .getText()</span>
-<span class="fc" id="L30">                        .replace(&quot;$&quot;, &quot;&quot;));</span>
+<span class="fc" id="L24">                .parseDouble(getText(</span>
+<span class="fc" id="L25">                        By.xpath(</span>
+                                &quot;//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='&quot;
+                                        + itemName + &quot;']]//div[@class='inventory_item_price']&quot;))
+<span class="fc" id="L28">                        .replace(&quot;$&quot;, &quot;&quot;));</span>
 
-<span class="fc" id="L32">        return itemPrice;</span>
+<span class="fc" id="L30">        return itemPrice;</span>
+    }
+
+    public InventoryPage continueShopping() {
+<span class="nc" id="L34">        click(continueShoppingBtn);</span>
+<span class="nc" id="L35">        return new InventoryPage(driver);</span>
+    }
+
+    public CheckoutStepOnePage checkout() {
+<span class="fc" id="L39">        click(checkoutBtn);</span>
+<span class="fc" id="L40">        return new CheckoutStepOnePage(driver);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
