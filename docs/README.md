@@ -55,13 +55,15 @@ Egy szögletes zárójelben lehet használni.
 Egy szögletes zárójelben lehet használni.
 //*[@data-test='username' and @placeholder='Username']
 Amúgy and helyett használhatsz láncolást is.
+```bash
 //*[@data-test='username'][@placeholder='Username']
-
+```
 Függvények:
+```bash
 //input[starts-with(@class,'input')]
+```
 
 <!-- TODO paraméterezett tesztek json-el. https://mockaroo.com/-->
-
 
 # Logolás beállítása
 
