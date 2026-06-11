@@ -105,6 +105,11 @@
                             <goal>report</goal>
                         </goals>
                         <configuration>
+                            <excludes>
+                                <exclude>**/utils/**</exclude>
+                                <exclude>**/driver/**</exclude>
+                                <exclude>**/config/**</exclude>
+                            </excludes>
                             <formats>
                                 <format>XML</format>
                                 <format>CSV</format>

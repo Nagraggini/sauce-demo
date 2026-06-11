@@ -54,10 +54,6 @@ public class InventoryPage extends BasePage {
 		click(resetAppStateBtn);
 	}
 
-	public void clickOnShoppingCartBtn() {
-		click(shoppingCartBtn);
-	}
-
 	public int getShoppingCartBadgeNumber() {
 		// Ha üres a kosár, akkor sem lesz error.
 		if (driver.findElements(shoppingCartBadge).isEmpty()) {
@@ -76,15 +72,10 @@ public class InventoryPage extends BasePage {
 	}
 
 	public void addToCartOrRemove(String itemName) {
-		By addToCartOrRemoveBtn = By.xpath(
+		By btn = By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
 						+ itemName + "']]//button");
-
-		if (getText(addToCartOrRemoveBtn).equals("Add to Cart")) {
-			click(addToCartOrRemoveBtn);
-		} else {
-			click(addToCartOrRemoveBtn);
-		}
+		click(btn);
 	}
 
 	public String getAddToCartOrRemoveBtnText(String itemName) {
@@ -146,6 +137,11 @@ public class InventoryPage extends BasePage {
 			onlyAllItemName.add(itemName.getText());
 		}
 		return onlyAllItemName;
+	}
+
+	public CartPage shoppingCart() {
+		click(shoppingCartBtn);
+		return new CartPage(driver);
 	}
 
 }

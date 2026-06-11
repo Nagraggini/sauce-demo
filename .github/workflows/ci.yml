@@ -4,11 +4,14 @@ on:
     push:
         branches:
             - main
+        paths-ignore:
+            - "README.md" # Ez megakadályozza az újra-futtatást a badge frissítés miatt
     pull_request:
         types: [opened, synchronize, reopened]
 
 permissions:
     contents: write
+    actions: write
     pages: write # Ez is kell a Pages-hez
     id-token: write # Ez is szükséges a biztonságos deploy-hoz
 

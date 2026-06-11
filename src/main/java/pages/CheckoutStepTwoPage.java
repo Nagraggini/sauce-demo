@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import base.BasePage;
 
@@ -12,11 +11,34 @@ public class CheckoutStepTwoPage extends BasePage {
         super(driver);
     }
 
-    private final By itemTotal = By.className("summary_subtotal_label");
+    private final By summarySubtotalLbl = By.className("summary_subtotal_label");
+    private final By summaryTotalLbl = By.className("summary_total_label");
 
-    public double getItemTotal() {
+    private final By cancelBtn = By.id("cancel");
+    private final By finishBtn = By.id("finish");
+
+    public double getSummarySubtotal() {
         return Double.parseDouble(
-                wait.until(ExpectedConditions.visibilityOfElementLocated(itemTotal)).getText().replace("$", "")
+                getText(summarySubtotalLbl).replace("$", "")
                         .replace("Item total: ", ""));
     }
+
+    public double getSummaryTotal() {
+        return Double.parseDouble(
+                getText(summaryTotalLbl).replace("$", "")
+                        .replace("Item total: ", ""));
+    }
+
+    public InventoryPage cancel() {
+        click(cancelBtn);
+        return new InventoryPage(driver);
+    }
+
+    // A getPriceOfAnItem(String itemName) metódus itt is működik.
+
+    public CheckoutCompletePage finish() {
+        click(finishBtn);
+        return new CheckoutCompletePage(driver);
+    }
+
 }
