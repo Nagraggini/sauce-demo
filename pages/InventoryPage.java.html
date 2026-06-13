@@ -56,8 +56,8 @@ public class InventoryPage extends BasePage {
 
 	public int getShoppingCartBadgeNumber() {
 		// Ha üres a kosár, akkor sem lesz error.
-<span class="pc bpc" id="L59" title="1 of 2 branches missed.">		if (driver.findElements(shoppingCartBadge).isEmpty()) {</span>
-<span class="nc" id="L60">			return 0;</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">		if (driver.findElements(shoppingCartBadge).isEmpty()) {</span>
+<span class="fc" id="L60">			return 0;</span>
 		}
 
 <span class="fc" id="L63">		return Integer.parseInt(</span>
@@ -97,16 +97,16 @@ public class InventoryPage extends BasePage {
 <span class="fc" id="L97">	}</span>
 
 	public void changeOrderingLowtoHigh() {
-<span class="nc" id="L100">		waitUntilClickable(changeOrderingSelect);</span>
-<span class="nc" id="L101">		Select changeOrderingSel = new Select(find(changeOrderingSelect));</span>
-<span class="nc" id="L102">		changeOrderingSel.selectByValue(&quot;lohi&quot;);</span>
-<span class="nc" id="L103">	}</span>
+<span class="fc" id="L100">		waitUntilClickable(changeOrderingSelect);</span>
+<span class="fc" id="L101">		Select changeOrderingSel = new Select(find(changeOrderingSelect));</span>
+<span class="fc" id="L102">		changeOrderingSel.selectByValue(&quot;lohi&quot;);</span>
+<span class="fc" id="L103">	}</span>
 
 	public void changeOrderingHightoLow() {
-<span class="nc" id="L106">		waitUntilClickable(changeOrderingSelect);</span>
-<span class="nc" id="L107">		Select changeOrderingSel = new Select(find(changeOrderingSelect));</span>
-<span class="nc" id="L108">		changeOrderingSel.selectByValue(&quot;hilo&quot;);</span>
-<span class="nc" id="L109">	}</span>
+<span class="fc" id="L106">		waitUntilClickable(changeOrderingSelect);</span>
+<span class="fc" id="L107">		Select changeOrderingSel = new Select(find(changeOrderingSelect));</span>
+<span class="fc" id="L108">		changeOrderingSel.selectByValue(&quot;hilo&quot;);</span>
+<span class="fc" id="L109">	}</span>
 
 	public LinkedHashMap&lt;String, Double&gt; getAllItemnamesAndTheirPrices() {
 

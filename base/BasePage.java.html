@@ -138,5 +138,25 @@ public abstract class BasePage {
 <span class="nc" id="L138">		return driver.getTitle();</span>
 	}
 
+	// Tabkezelő metódusok:
+	protected String getCurrentTab() {
+<span class="nc" id="L143">		return driver.getWindowHandle();// Az aktuális ablak azonosítójának a lekérése, ami Selenium által generált.</span>
+	}
+
+	/** Átváltás az új fülre. */
+	protected void switchToNewTab() {
+<span class="nc" id="L148">		wait.until(ExpectedConditions.numberOfWindowsToBe(2));</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">		for (String tab : driver.getWindowHandles()) {</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">			if (!tab.equals(driver.getWindowHandle())) {</span>
+<span class="nc" id="L151">				driver.switchTo().window(tab);</span>
+<span class="nc" id="L152">				return;</span>
+			}
+<span class="nc" id="L154">		}</span>
+<span class="nc" id="L155">	}</span>
+
+	protected void closeCurrentTabAndSwitchBack(String originalTab) {
+<span class="nc" id="L158">		driver.close();</span>
+<span class="nc" id="L159">		driver.switchTo().window(originalTab);</span>
+<span class="nc" id="L160">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
