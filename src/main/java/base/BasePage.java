@@ -138,4 +138,24 @@ public abstract class BasePage {
 		return driver.getTitle();
 	}
 
+	// Tabkezelő metódusok:
+	protected String getCurrentTab() {
+		return driver.getWindowHandle();// Az aktuális ablak azonosítójának a lekérése, ami Selenium által generált.
+	}
+
+	/** Átváltás az új fülre. */
+	protected void switchToNewTab() {
+		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+		for (String tab : driver.getWindowHandles()) {
+			if (!tab.equals(driver.getWindowHandle())) {
+				driver.switchTo().window(tab);
+				return;
+			}
+		}
+	}
+
+	protected void closeCurrentTabAndSwitchBack(String originalTab) {
+		driver.close();
+		driver.switchTo().window(originalTab);
+	}
 }

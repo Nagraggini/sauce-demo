@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -143,6 +144,15 @@ class InventoryTest extends BaseTest {
         }
 
         @Test
+        @DisplayName("Leellenőrizzük, hogy a kosár üres-e a bejelentkezéskor.")
+        void checkCartBadgeNumber() {
+                InventoryPage inventoryPage = login();
+                assertEquals(0, inventoryPage.getShoppingCartBadgeNumber(), "A kosár nem üres "
+                                + inventoryPage.getShoppingCartBadgeNumber() + " db elem van benne.");
+                cleanUp(inventoryPage);
+        }
+
+        @Test
         @DisplayName("Legolcsóbb elem megkeresése.")
         void cheapestItem() {
                 InventoryPage inventoryPage = login();
@@ -212,6 +222,55 @@ class InventoryTest extends BaseTest {
                 assertEquals(allItemName, orderedItemName, "A termékek lista nincsen rendezve Z-A-ig.");
                 cleanUp(inventoryPage);
         }
-        // TODO a sorrend változtató gomb kettő árszerinti rendezés opciójának
-        // tesztelése.
+
+        @Test
+        @DisplayName("Leellenőrizzük, hogy az árszerint növekvő sorrend jó-e.")
+        void checkLowToHighSort() {
+                InventoryPage inventoryPage = login();
+
+                inventoryPage.changeOrderingLowtoHigh();
+
+                // 1. Lekérjük az aktuális, rendezettnek szánt listát.
+                LinkedHashMap<String, Double> actualList = inventoryPage.getAllItemnamesAndTheirPrices();
+
+                // 2. Létrehozzuk az elvárt rendezett listát az eredeti lista rendezésével.
+                Map<String, Double> expectedList = actualList.entrySet().stream()
+                                .sorted(Map.Entry.comparingByValue())
+                                .collect(Collectors.toMap(
+                                                Map.Entry::getKey,
+                                                Map.Entry::getValue,
+                                                (e1, e2) -> e1,
+                                                LinkedHashMap::new));
+
+                assertEquals(expectedList,
+                                actualList,
+                                "A termékek lista nincsen rendezve árszerint növekvő sorrendben.");
+                cleanUp(inventoryPage);
+        }
+
+        @Test
+        @DisplayName("Leellenőrizzük, hogy az ár szerinti csökkenő sorrend jó-e.")
+        void checkHighToLowSort() {
+                InventoryPage inventoryPage = login();
+
+                // 1. Átváltjuk az oldalon a sorrendet csökkenőre
+                inventoryPage.changeOrderingHightoLow();
+
+                // 2. Lekérjük az aktuális listát az oldalról
+                LinkedHashMap<String, Double> actualList = inventoryPage.getAllItemnamesAndTheirPrices();
+
+                // 3. Létrehozzuk az elvárt listát, de itt rendezünk fordítva:
+                Map<String, Double> expectedList = actualList.entrySet().stream()
+                                .sorted(Map.Entry.<String, Double>comparingByValue().reversed()) // Növekvő
+                                .collect(Collectors.toMap(
+                                                Map.Entry::getKey,
+                                                Map.Entry::getValue,
+                                                (e1, e2) -> e1,
+                                                LinkedHashMap::new));
+
+                assertEquals(expectedList, actualList,
+                                "A termékek lista nincsen rendezve ár szerint csökkenő sorrendben.");
+
+                cleanUp(inventoryPage);
+        }
 }

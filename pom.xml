@@ -96,20 +96,30 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                        <configuration>
+                            <append>true</append>
+                            <includes>
+                                <include>*</include>
+                            </includes>
+                        </configuration>
                     </execution>
 
                     <execution>
                         <id>report</id>
-                        <phase>test</phase> 
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <excludes>
-                                <exclude>**/utils/**</exclude>
-                                <exclude>**/driver/**</exclude>
-                                <exclude>**/config/**</exclude>
-                            </excludes>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <sourceDirectories>
+                                <sourceDirectory>src/main/java</sourceDirectory>
+                                <sourceDirectory>src/test/java</sourceDirectory>
+                            </sourceDirectories>
+                   
+                            
                             <formats>
                                 <format>XML</format>
                                 <format>CSV</format>
