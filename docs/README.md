@@ -251,3 +251,7 @@ Házi feladat:
 mvn clean test -Dgroups="homework"
 
 <!--TODO Allure Report -->
+<!--TODO: 100 %-os report elérése, hogy minden gombot leellenőrizz.-->
+<!--TODO: tagek beállítása reg meg smoke stb. -->
+<!--TODO: a page-es oldalokon mindegyik metódusba: return this és az aktuális oldal objektumát adja vissza. -->
+<!--TODO: Mindegyik tesztet lehet egyszerűsíteni a fentivel, így csak egy soros assertek lesznek és nem kell lementeni az objektumokat.-->

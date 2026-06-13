@@ -80,5 +80,6 @@ public class InventoryE2ETest extends BaseTest {
                 cleanUp(inventoryPage);
 
         }
+        // TODO: Üres kosárral is végig lehet menni a rendelés folyamatán.
 
 }
