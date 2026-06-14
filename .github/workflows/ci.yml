@@ -50,7 +50,7 @@ jobs:
                   WRONG_PASSWORD: ${{ secrets.WRONG_PASSWORD }}
                   BASE_URL: ${{ secrets.BASE_URL }}
               # -DCI=true-val átadjuk a paramétert.
-              run: mvn -B clean verify -DCI=true
+              run: ./mvnw -B clean verify -DCI=true
 
             # =========================
             # 4. Generate JaCoCo Badges (Directly into README)
