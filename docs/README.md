@@ -250,6 +250,23 @@ Itt találod a fájlt: target/site/jacoco/index.html -> Jobb klikk Open with Liv
 Házi feladat:
 mvn clean test -Dgroups="homework"
 
+# Maven wrapper beállítása és használata
+
+A terminálban navigálj el a projekt mappájáig (pl.: cd GitHub/saucedemo)
+mvn -v
+Ezzel lecsekkoljuk, hogy van-e a gépen maven, ha nem ír verziót, a Mavent telepíteni kell:
+https://maven.apache.org/download.cgi
+pl. apache-maven-3.9.16-bin.zip
+letöltés, kicsomagolás
+környezeti változókhoz felvenni a bin mappáját
+
+Utána ezt futtasd: mvn clean test
+
+Ezután jöhet a csomagolás: „mvn wrapper:wrapper”
+Ezután létrejönnek ezek: mvnw és mvnw.cmd fájlok és .mvn mappa.
+Innentől kezdve nem mvn utasítást kell használni, hanem mvnw utasítást!
+Ezután nem gond, ah nincsen maven a gépen telepítve, simán lehet terminálból is futatni a projektet. 
+
 <!--TODO Allure Report -->
 <!--TODO: 100 %-os report elérése, hogy minden gombot leellenőrizz.-->
 <!--TODO: tagek beállítása reg meg smoke stb. -->
