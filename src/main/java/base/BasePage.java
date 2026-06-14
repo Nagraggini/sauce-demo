@@ -60,6 +60,11 @@ public abstract class BasePage {
 		wait.until(ExpectedConditions.attributeToBe(locator, attribute, value));
 	}
 
+	/** Leellenőrizzük, hogy betöltött-e az adott komponens szövege. */
+	protected Boolean waitUntilTextToBe(By locator, String text) {
+		return wait.until(ExpectedConditions.textToBe(locator, text));
+	}
+
 	// III. kényelmi metódusok, interakciók
 	protected void click(By locator) {
 		logger.info(" --- Clicking on element: {}", locator);
