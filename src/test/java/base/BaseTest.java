@@ -25,7 +25,7 @@ public class BaseTest {
 
 	@BeforeEach
 	void setUp() {
-		driver = DriverFactory.createDriver(true); // headless CI-ben
+		driver = DriverFactory.createDriver(System.getProperty("CI") != null); // headless CI-ben
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 

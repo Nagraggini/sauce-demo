@@ -260,12 +260,20 @@ pl. apache-maven-3.9.16-bin.zip
 letöltés, kicsomagolás
 környezeti változókhoz felvenni a bin mappáját
 
+Linux-on még ez is kell egyszer: sudo apt install maven
+
 Utána ezt futtasd: mvn clean test
 
 Ezután jöhet a csomagolás: „mvn wrapper:wrapper”
 Ezután létrejönnek ezek: mvnw és mvnw.cmd fájlok és .mvn mappa.
 Innentől kezdve nem mvn utasítást kell használni, hanem mvnw utasítást!
 Ezután nem gond, ah nincsen maven a gépen telepítve, simán lehet terminálból is futatni a projektet. 
+
+Futtatás linux-on:
+./mvnw clean test
+
+win-on:
+mvnw clean test
 
 <!--TODO Allure Report -->
 <!--TODO: 100 %-os report elérése, hogy minden gombot leellenőrizz.-->
