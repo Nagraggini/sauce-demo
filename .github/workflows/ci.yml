@@ -43,6 +43,9 @@ jobs:
             # =========================
             # 3. Run Tests & Generate JaCoCo Report
             # =========================
+            - name: Make mvnw executable
+              run: chmod +x mvnw
+
             - name: Run Tests and Coverage
               env:
                   USERNAME: ${{ secrets.USERNAME }}
