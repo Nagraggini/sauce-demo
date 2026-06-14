@@ -7,12 +7,14 @@ import base.BasePage;
 
 public class CartPage extends BasePage {
 
-    public CartPage(WebDriver driver) {
-        super(driver);
-    }
-
+    private final By title = By.className("title");
     private final By checkoutBtn = By.cssSelector("#checkout");
     private final By continueShoppingBtn = By.id("continue-shopping");
+
+    public CartPage(WebDriver driver) {
+        super(driver);
+        waitUntilTextToBe(title, "Your Cart");
+    }
 
     public void clickOnCheckout() {
         click(checkoutBtn);

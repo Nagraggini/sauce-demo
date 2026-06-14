@@ -7,12 +7,17 @@ import base.BasePage;
 
 public class CheckoutCompletePage extends BasePage {
 
+    private By title = By.className("title");
+    private By thanksMessage = By.className("complete-header");
+    private By backHomeBtn = By.id("back-to-products");
+
     public CheckoutCompletePage(WebDriver driver) {
         super(driver);
     }
 
-    private By completeheaderLbl = By.className("complete-header");
-    private By backHomeBtn = By.id("back-to-products");
+    public String getThanksMessage() {
+        return getText(thanksMessage);
+    }
 
     public InventoryPage backHome() {
         click(backHomeBtn);

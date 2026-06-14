@@ -7,14 +7,12 @@ import base.BasePage;
 
 public class CheckoutStepOnePage extends BasePage {
 
-    public CheckoutStepOnePage(WebDriver driver) {
-        super(driver);
-    }
     // Fejléc.
 
     // Fejléc és logó.
     private final By appLogo = By.xpath("//div[@class='app_logo' and contains(text(),'Swag')]");
     private final By checkoutLbl = By.cssSelector("[data-test='title']");
+    private final By title = By.className("title");
 
     // Kosár elemek.
     private final By shoppingCartBtn = By.className("shopping_cart_link");
@@ -32,16 +30,31 @@ public class CheckoutStepOnePage extends BasePage {
     private final By cancelBtn = By.id("cancel");
     private final By continueBtn = By.id("continue");
 
-    public void fillFirstNameInput(String firstName) {
+    public CheckoutStepOnePage(WebDriver driver) {
+        super(driver);
+        waitUntilTextToBe(title, "Checkout: Your Information");
+    }
+
+    public CheckoutStepOnePage fillFirstNameInput(String firstName) {
         type(firstNameInput, firstName);
+        return this;
     }
 
-    public void fillLastNameInput(String lastName) {
+    public CheckoutStepOnePage fillLastNameInput(String lastName) {
         type(lastNameInput, lastName);
+        return this;
     }
 
-    public void fillPostalCodeInput(String postalCode) {
+    public CheckoutStepOnePage fillPostalCodeInput(String postalCode) {
         type(postalCodeInput, postalCode);
+        return this;
+    }
+
+    public CheckoutStepOnePage fillInAll(String first, String last, String zip) {
+        type(firstNameInput, first);
+        type(lastNameInput, last);
+        type(postalCodeInput, zip);
+        return this;
     }
 
     public String getErrorMessage() {
