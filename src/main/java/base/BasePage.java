@@ -143,7 +143,7 @@ public abstract class BasePage {
 		return driver.getTitle();
 	}
 
-	// Tabkezelő metódusok:
+	/** Lekéri az aktuális böngészőablak vagy tab azonosítóját (window handle). */
 	protected String getCurrentTab() {
 		return driver.getWindowHandle();// Az aktuális ablak azonosítójának a lekérése, ami Selenium által generált.
 	}
@@ -159,6 +159,10 @@ public abstract class BasePage {
 		}
 	}
 
+	/**
+	 * A metódus bezárja az aktuálisan megnyitott böngészőtabot vagy ablakot, majd
+	 * visszavált a megadott eredeti tabra.
+	 */
 	protected void closeCurrentTabAndSwitchBack(String originalTab) {
 		driver.close();
 		driver.switchTo().window(originalTab);
