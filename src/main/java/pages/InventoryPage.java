@@ -13,14 +13,6 @@ import base.BasePage;
 
 public class InventoryPage extends BasePage {
 
-	// Hamburger menü elemek.
-	private final By hamburgerBtn = By.id("react-burger-menu-btn");
-	private final By allItemsBtn = By.id("inventory_sidebar_link");
-	private final By aboutBtn = By.id("about_sidebar_link");
-	private final By logoutBtn = By.id("logout_sidebar_link");
-	private final By resetAppStateBtn = By.id("reset_sidebar_link");
-	private final By closeHamburgerMenu = By.id("react-burger-cross-btn");
-
 	// Fejléc és logó.
 	private final By appLogo = By.xpath("//div[@class='app_logo' and contains(text(),'Swag')]");
 	private final By title = By.className("title");
@@ -42,21 +34,6 @@ public class InventoryPage extends BasePage {
 		waitUntilTextToBe(title, "Products");
 	}
 
-	public LoginPage openHamburgerMenu() {
-		click(hamburgerBtn);
-		return new LoginPage(driver);
-	}
-
-	public LoginPage clickOnLogoutBtn() {
-		click(logoutBtn);
-		return new LoginPage(driver);
-	}
-
-	public LoginPage clickOnResetAppStateBtn() {
-		click(resetAppStateBtn);
-		return new LoginPage(driver);
-	}
-
 	public int getShoppingCartBadgeNumber() {
 		// Ha üres a kosár, akkor sem lesz error.
 		if (driver.findElements(shoppingCartBadge).isEmpty()) {
@@ -74,11 +51,12 @@ public class InventoryPage extends BasePage {
 				.substring(1));
 	}
 
-	public void addToCartOrRemove(String itemName) {
+	public InventoryPage addToCartOrRemove(String itemName) {
 		By btn = By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
 						+ itemName + "']]//button");
 		click(btn);
+		return this;
 	}
 
 	public String getAddToCartOrRemoveBtnText(String itemName) {

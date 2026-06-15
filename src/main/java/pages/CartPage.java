@@ -16,10 +16,6 @@ public class CartPage extends BasePage {
         waitUntilTextToBe(title, "Your Cart");
     }
 
-    public void clickOnCheckout() {
-        click(checkoutBtn);
-    }
-
     public double getPriceOfAnItem(String itemName) {
         /* .[] -> Pont az aktuálisre hivatkozik a kapcsoszárójelben van a feltétel. */
         double itemPrice = Double
@@ -37,7 +33,7 @@ public class CartPage extends BasePage {
         return new InventoryPage(driver);
     }
 
-    public CheckoutStepOnePage checkout() {
+    public CheckoutStepOnePage clickOnCheckout() {
         click(checkoutBtn);
         return new CheckoutStepOnePage(driver);
     }
