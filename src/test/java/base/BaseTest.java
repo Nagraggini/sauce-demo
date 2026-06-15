@@ -55,18 +55,6 @@ public class BaseTest {
 		}
 	}
 
-	protected void cleanUp(InventoryPage inventoryPage) {
-		// logger.info("\n -- Before clean up current URL: {}", driver.getCurrentUrl());
-
-		// Takarítás.
-		inventoryPage.openHamburgerMenu();
-		inventoryPage.clickOnResetAppStateBtn();
-
-		// Kijelentkezés
-		inventoryPage.clickOnLogoutBtn();
-
-	}
-
 	protected void onlyForChecking() {
 		// Csak ellenőrzéshez.
 		try {
