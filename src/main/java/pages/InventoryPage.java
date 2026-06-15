@@ -12,11 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 import base.BasePage;
 
 public class InventoryPage extends BasePage {
-	// ctrl+shift+c -> A chromeban megnyílik a dev tools és rögtön lokátort tudsz
-	// keresni.
-	public InventoryPage(WebDriver driver) {
-		super(driver);
-	}
 
 	// Hamburger menü elemek.
 	private final By hamburgerBtn = By.id("react-burger-menu-btn");
@@ -28,7 +23,7 @@ public class InventoryPage extends BasePage {
 
 	// Fejléc és logó.
 	private final By appLogo = By.xpath("//div[@class='app_logo' and contains(text(),'Swag')]");
-	private final By productsLbl = By.xpath("//*/span[contains(text(),'Products')]");
+	private final By title = By.className("title");
 	private final By changeOrderingSelect = By.cssSelector("[class='product_sort_container']");
 
 	// Kosár elemek.
@@ -36,22 +31,30 @@ public class InventoryPage extends BasePage {
 	private final By shoppingCartBadge = By.cssSelector("span[data-test='shopping-cart-badge']");
 
 	// Lábléc.
-	private final By twitterIcon = By.linkText("Twitter");
-	private final By fbIcon = By.cssSelector("[data-test='social-facebook']");
-	private final By linkedinIcon = By.cssSelector("[data-test='social-linkedin']");
+	private final By twitterLink = By.linkText("Twitter");
+	private final By fbLink = By.cssSelector("[data-test='social-facebook']");
+	private final By linkedinLink = By.cssSelector("[data-test='social-linkedin']");
 
 	private final By copyRightlbl = By.className("footer_copy");
 
-	public void openHamburgerMenu() {
+	public InventoryPage(WebDriver driver) {
+		super(driver);
+		waitUntilTextToBe(title, "Products");
+	}
+
+	public LoginPage openHamburgerMenu() {
 		click(hamburgerBtn);
+		return new LoginPage(driver);
 	}
 
-	public void clickOnLogoutBtn() {
+	public LoginPage clickOnLogoutBtn() {
 		click(logoutBtn);
+		return new LoginPage(driver);
 	}
 
-	public void clickOnResetAppStateBtn() {
+	public LoginPage clickOnResetAppStateBtn() {
 		click(resetAppStateBtn);
+		return new LoginPage(driver);
 	}
 
 	public int getShoppingCartBadgeNumber() {
@@ -144,4 +147,23 @@ public class InventoryPage extends BasePage {
 		return new CartPage(driver);
 	}
 
+	public InventoryPage clickOnTwitterlink() {
+		click(twitterLink);
+		return this;
+	}
+
+	public String getCurrentTabHandle() {
+		return getCurrentTab();
+	}
+
+	public InventoryPage switchToTab() {
+		switchToNewTab();
+		return this;
+	}
+
+	/** Bezárja az aktuális tabot és visszavált a megadott értékre. */
+	public InventoryPage closeTabAndReturnTo(String original) {
+		closeCurrentTabAndSwitchBack(original);
+		return this;
+	}
 }

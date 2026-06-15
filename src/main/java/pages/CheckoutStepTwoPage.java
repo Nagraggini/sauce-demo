@@ -7,15 +7,18 @@ import base.BasePage;
 
 public class CheckoutStepTwoPage extends BasePage {
 
-    public CheckoutStepTwoPage(WebDriver driver) {
-        super(driver);
-    }
+    private final By title = By.className("title");
 
     private final By summarySubtotalLbl = By.className("summary_subtotal_label");
     private final By summaryTotalLbl = By.className("summary_total_label");
 
     private final By cancelBtn = By.id("cancel");
     private final By finishBtn = By.id("finish");
+
+    public CheckoutStepTwoPage(WebDriver driver) {
+        super(driver);
+        waitUntilTextToBe(title, "Checkout: Overview");
+    }
 
     public double getSummarySubtotal() {
         return Double.parseDouble(
@@ -29,14 +32,14 @@ public class CheckoutStepTwoPage extends BasePage {
                         .replace("Item total: ", ""));
     }
 
-    public InventoryPage cancel() {
+    public InventoryPage clickOnCancel() {
         click(cancelBtn);
         return new InventoryPage(driver);
     }
 
     // A getPriceOfAnItem(String itemName) metódus itt is működik.
 
-    public CheckoutCompletePage finish() {
+    public CheckoutCompletePage clickOnFinish() {
         click(finishBtn);
         return new CheckoutCompletePage(driver);
     }

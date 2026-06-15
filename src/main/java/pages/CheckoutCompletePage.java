@@ -13,6 +13,7 @@ public class CheckoutCompletePage extends BasePage {
 
     public CheckoutCompletePage(WebDriver driver) {
         super(driver);
+        waitUntilTextToBe(title, "Checkout: Complete!");
     }
 
     public String getThanksMessage() {
