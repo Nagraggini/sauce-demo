@@ -20,10 +20,16 @@ public class MenuComponent extends BasePage {
         super(driver);
     }
 
-    public void openMenu() {
+    public MenuComponent openMenu() {
         click(hamburgerBtn);
         // Várunk egy elemre, ami csak a menü megnyitása után jelenik meg.
         waitUntilVisible(logoutBtn);
+        return this;
+    }
+
+    public MenuComponent closeMenu() {
+        click(closeHamburgerMenu);
+        return this;
     }
 
     public LoginPage logout() {
@@ -32,8 +38,10 @@ public class MenuComponent extends BasePage {
         return new LoginPage(driver);
     }
 
-    public void resetAppState() {
+    public MenuComponent resetAppState() {
         openMenu();
         click(resetAppStateBtn);
+        closeMenu();
+        return this;
     }
 }
