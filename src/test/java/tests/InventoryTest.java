@@ -19,109 +19,93 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import base.BaseTest;
+import config.ConfigReader;
 import pages.InventoryPage;
+import pages.MenuComponent;
 
 class InventoryTest extends BaseTest {
 
         @Test
-        @Tag("shoppingCart")
+        @Tag("ui")
+        @Tag("regression")
         @DisplayName("Ellenőrizzük, hogy a kosárba helyezett elemek darabszáma ugyanannyi-e, mint a kosár ikonon lévők.")
         void checkShoppingCartBadgeNumber() {
-                InventoryPage inventoryPage = login();
-
-                String firstItemName = "Sauce Labs Backpack";
-                String secondItemName = "Sauce Labs Bike Light";
-
-                inventoryPage.addToCartOrRemove(firstItemName);
-                inventoryPage.addToCartOrRemove(secondItemName);
-
-                assertEquals(2, inventoryPage.getShoppingCartBadgeNumber(),
+                assertEquals(2, login().addToCartOrRemove("Sauce Labs Backpack")
+                                .addToCartOrRemove("Sauce Labs Bike Light").getShoppingCartBadgeNumber(),
                                 "A kosárban lévő termékek darabszáma nem egyezik az elvárttal.");
 
-                // Kijelentkezés.
-                cleanUp(inventoryPage);
+                new MenuComponent(driver).resetAppState().logout();
         }
 
         @ParameterizedTest
         @CsvSource({ "Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt",
                         "Sauce Labs Fleece Jacket", "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)" })
-        @Tag("homework")
+        @Tag("ui")
+        @Tag("regression")
+        @Tag("smoke")
         @DisplayName("Leellenőrizzük, hogy az összes terméknél megjelenik-e a Remove gomb.")
         void checkRemoveBtn(String itemName) {
-                InventoryPage inventoryPage = login();
-
-                inventoryPage.addToCartOrRemove(itemName);
-                String expectedRemoveBtnText = "Remove";
-                String actualRemoveBtnText = inventoryPage.getAddToCartOrRemoveBtnText(itemName);
-
-                assertTrue(expectedRemoveBtnText.equals(
-                                actualRemoveBtnText),
+                assertEquals("Remove",
+                                login().addToCartOrRemove(itemName).getAddToCartOrRemoveBtnText(itemName),
                                 "A gomb felirata nem Remove " + itemName + "-nél.");
-                cleanUp(inventoryPage);
+
+                new MenuComponent(driver).resetAppState().logout();
         }
 
         @ParameterizedTest
         @CsvSource({ "Sauce Labs Backpack , 29.99", "Sauce Labs Bike Light , 9.99", "Sauce Labs Bolt T-Shirt , 15.99",
                         "Sauce Labs Fleece Jacket , 49.99", "Sauce Labs Onesie , 7.99",
                         "Test.allTheThings() T-Shirt (Red) , 15.99" })
-        @Tag("homework")
+        @Tag("regression")
         @DisplayName("Leellenőrizzük az összes termék árát.")
         void checkThePriceOfItems(String itemName, double expectedPrice) {
-                InventoryPage inventoryPage = login();
-
-                double actualPrice = inventoryPage.getPriceofAnItem(itemName);
-
                 // 0.01 a tolerancia küszöb.
-                assertEquals(expectedPrice, actualPrice, 0.01,
-                                "A \"" + itemName + "\"-nél nem jó az ár, mert az elvárt ár: " + expectedPrice
-                                                + " , az aktuális ár: "
-                                                + actualPrice);
-                cleanUp(inventoryPage);
+                assertEquals(expectedPrice, login().getPriceofAnItem(itemName), 0.01,
+                                "A \"" + itemName + "\"-nél nem jó az ár, mert az elvárt ár.");
+
+                new MenuComponent(driver).resetAppState().logout();
         }
 
         @Test
+        @Tag("ui")
+        @Tag("regression")
         @DisplayName("Minden termékhez tartozik-e kosárhoz hozzáadás gomb.")
-        void allItemsHaveAButton() {
+        void shouldDisplayAddToCartButtonForAllItems() {
                 InventoryPage inventoryPage = login();
 
-                List<WebElement> items = driver.findElements(By.className("inventory_item"));
+                List<WebElement> items = inventoryPage.getInventoryItemCards();
 
                 // Megoldás1:
                 for (WebElement item : items) {
-
                         WebElement btn = item.findElement(By.tagName("button"));
                         assertTrue(btn.isDisplayed(), "A" + item.getText() + "-nek nincsen hozzáadás gombja.");
-
                 }
 
                 // Megoldás2:
-                List<WebElement> btns = driver.findElements(By.cssSelector("button[data-test^='add-to-cart']"));
+                List<WebElement> btns = inventoryPage.getAddToCartBtns();
                 assertEquals(items.size(), btns.size(),
                                 Math.abs(items.size() - btns.size()) + " db terméknek nincsen hozzáadás gombja.");
-                cleanUp(inventoryPage);
+
+                new MenuComponent(driver).resetAppState().logout();
         }
 
         @Test
+        @Tag("smoke")
         @DisplayName("Megjelenik-e az adott termékhez tartozó hozzáadás gomb.")
         void addToCartBtnIsDisplayed() {
-                InventoryPage inventoryPage = login();
+                assertTrue(login().getAddToCartOrRemoveBtn(
+                                "Sauce Labs Backpack").isDisplayed(),
+                                "Nem jelenik meg az adott termékhez tartozó hozzáadás gomb.");
 
-                String termeknev = "Sauce Labs Backpack";
-
-                WebElement hozzaAdasGomb = driver.findElement(
-                                By.xpath("//div[@class='inventory_item' and .//div[normalize-space()='" + termeknev
-                                                + "']]//button"));
-                assertTrue(hozzaAdasGomb.isDisplayed(), "Nem jelenik meg az adott termékhez tartozó hozzáadás gomb.");
-                cleanUp(inventoryPage);
+                new MenuComponent(driver).resetAppState().logout();
 
         }
 
         @Test
+        @Tag("regression")
         @DisplayName("Legdrágább elem megkeresése.")
         void mostExpensiveItem() {
-                InventoryPage inventoryPage = login();
-
-                var itemsAndPrices = inventoryPage.getAllItemnamesAndTheirPrices();
+                var itemsAndPrices = login().getAllItemnamesAndTheirPrices();
 
                 // Ez, csak akkor működik, hacsak egy termék a legdrágább.
                 String maxItemName = null;
@@ -132,33 +116,24 @@ class InventoryTest extends BaseTest {
                                 maxItemName = entry.getKey();
                         }
                 }
-                String expectedMaxItemName = "Sauce Labs Fleece Jacket";
-                Double expectedMaxItemPrice = 49.99;
-                assertEquals(expectedMaxItemName, maxItemName,
-                                "Nem a " + expectedMaxItemName + " a legdrágább termék.");
 
-                assertEquals(expectedMaxItemPrice,
+                assertEquals("Sauce Labs Fleece Jacket", maxItemName,
+                                "Nem a " + "Sauce Labs Fleece Jacket" + " a legdrágább termék.");
+
+                assertEquals(49.99,
                                 maxItemPrice,
-                                "Nem a $" + maxItemPrice + " értékű termék a legdrágább.");
-                cleanUp(inventoryPage);
+                                "Nem a $" + 49.99 + " értékű termék a legdrágább.");
+
+                new MenuComponent(driver).resetAppState().logout();
         }
 
         @Test
-        @DisplayName("Leellenőrizzük, hogy a kosár üres-e a bejelentkezéskor.")
-        void checkCartBadgeNumber() {
-                InventoryPage inventoryPage = login();
-                assertEquals(0, inventoryPage.getShoppingCartBadgeNumber(), "A kosár nem üres "
-                                + inventoryPage.getShoppingCartBadgeNumber() + " db elem van benne.");
-                cleanUp(inventoryPage);
-        }
-
-        @Test
+        @Tag("regression")
         @DisplayName("Legolcsóbb elem megkeresése.")
         void cheapestItem() {
-                InventoryPage inventoryPage = login();
-                LinkedHashMap<String, Double> itemsAndPrices = inventoryPage.getAllItemnamesAndTheirPrices();
+                LinkedHashMap<String, Double> itemsAndPrices = login().getAllItemnamesAndTheirPrices();
 
-                // Ez, csak akkor működik, hacsak egy termék a legdrágább.
+                // Ez, csak akkor működik, hacsak egy termék a legolcsóbb.
                 String maxItemName = null;
                 // Az első elem értékét adjuk meg neki.
                 Double maxItemPrice = itemsAndPrices.values().stream()
@@ -170,26 +145,35 @@ class InventoryTest extends BaseTest {
                                 maxItemName = entry.getKey();
                         }
                 }
-                String expectedMaxItemName = "Sauce Labs Onesie";
-                Double expectedMaxItemPrice = 7.99;
-                assertEquals(expectedMaxItemName, maxItemName,
-                                "Nem a " + expectedMaxItemName + " a legolcsóbb termék.");
 
-                assertEquals(expectedMaxItemPrice,
+                assertEquals("Sauce Labs Onesie", maxItemName,
+                                "Nem a " + "Sauce Labs Onesie" + " a legolcsóbb termék.");
+
+                assertEquals(7.99,
                                 maxItemPrice,
                                 "Nem a $" + maxItemPrice + " értékű termék a legolcsóbb.");
-                cleanUp(inventoryPage);
+
+                new MenuComponent(driver).resetAppState().logout();
         }
 
         @Test
+        @Tag("ui")
+        @Tag("regression")
+        @DisplayName("Leellenőrizzük, hogy a kosár üres-e a bejelentkezéskor.")
+        void checkCartBadgeNumber() {
+                assertEquals(0, login().getShoppingCartBadgeNumber(), "A kosár nem üres "
+                                + login().getShoppingCartBadgeNumber() + " db elem van benne.");
+
+                new MenuComponent(driver).resetAppState().logout();
+        }
+
+        @Test
+        @Tag("ui")
+        @Tag("regression")
         @DisplayName("Leellenőrizzük, hogy az ABC sorrend jó-e.")
-        void checkABCSort() {
-                InventoryPage inventoryPage = login();
-
-                inventoryPage.changeOrderingAtoZ();
-
-                // Lekérjük az aktuális listát.
-                List<String> allItemName = inventoryPage.getAllItemName();
+        void shouldSortItemsAlphabetically() {
+                // Sorrend átállítás és lekérjük az aktuális listát.
+                List<String> allItemName = login().changeOrderingAtoZ().getAllItemName();
 
                 // Hacsak az egyenlőség jel után teszed a változót, akkor nem hozol létre új
                 // listát.
@@ -199,18 +183,17 @@ class InventoryTest extends BaseTest {
                 Collections.sort(orderedItemName);
 
                 assertEquals(allItemName, orderedItemName, "A termékek lista nincsen rendezve A-Z-ig.");
-                cleanUp(inventoryPage);
+
+                new MenuComponent(driver).resetAppState().logout();
         }
 
         @Test
+        @Tag("ui")
+        @Tag("regression")
         @DisplayName("Leellenőrizzük, hogy az ABC csökkenő sorrend jó-e.")
         void checkACSReverseSort() {
-                InventoryPage inventoryPage = login();
-
-                inventoryPage.changeOrderingZtoA();
-
-                // Lekérjük az aktuális listát.
-                List<String> allItemName = inventoryPage.getAllItemName();
+                // Sorrend átállítás és lekérjük az aktuális listát.
+                List<String> allItemName = login().changeOrderingZtoA().getAllItemName();
 
                 // Hacsak az egyenlőség jel után teszed a változót, akkor nem hozol létre új
                 // listát.
@@ -220,18 +203,18 @@ class InventoryTest extends BaseTest {
                 Collections.sort(orderedItemName, Comparator.reverseOrder());
 
                 assertEquals(allItemName, orderedItemName, "A termékek lista nincsen rendezve Z-A-ig.");
-                cleanUp(inventoryPage);
+
+                new MenuComponent(driver).resetAppState().logout();
         }
 
         @Test
+        @Tag("ui")
+        @Tag("regression")
         @DisplayName("Leellenőrizzük, hogy az árszerint növekvő sorrend jó-e.")
         void checkLowToHighSort() {
-                InventoryPage inventoryPage = login();
-
-                inventoryPage.changeOrderingLowtoHigh();
-
                 // 1. Lekérjük az aktuális, rendezettnek szánt listát.
-                LinkedHashMap<String, Double> actualList = inventoryPage.getAllItemnamesAndTheirPrices();
+                LinkedHashMap<String, Double> actualList = login().changeOrderingLowtoHigh()
+                                .getAllItemnamesAndTheirPrices();
 
                 // 2. Létrehozzuk az elvárt rendezett listát az eredeti lista rendezésével.
                 Map<String, Double> expectedList = actualList.entrySet().stream()
@@ -245,23 +228,22 @@ class InventoryTest extends BaseTest {
                 assertEquals(expectedList,
                                 actualList,
                                 "A termékek lista nincsen rendezve árszerint növekvő sorrendben.");
-                cleanUp(inventoryPage);
+
+                new MenuComponent(driver).resetAppState().logout();
         }
 
         @Test
+        @Tag("ui")
+        @Tag("regression")
         @DisplayName("Leellenőrizzük, hogy az ár szerinti csökkenő sorrend jó-e.")
         void checkHighToLowSort() {
-                InventoryPage inventoryPage = login();
+                // Sorrend átállítás és lekérjük az aktuális listát az oldalról
+                LinkedHashMap<String, Double> actualList = login().changeOrderingHightoLow()
+                                .getAllItemnamesAndTheirPrices();
 
-                // 1. Átváltjuk az oldalon a sorrendet csökkenőre
-                inventoryPage.changeOrderingHightoLow();
-
-                // 2. Lekérjük az aktuális listát az oldalról
-                LinkedHashMap<String, Double> actualList = inventoryPage.getAllItemnamesAndTheirPrices();
-
-                // 3. Létrehozzuk az elvárt listát, de itt rendezünk fordítva:
+                // Létrehozzuk az elvárt listát, de itt rendezünk fordítva:
                 Map<String, Double> expectedList = actualList.entrySet().stream()
-                                .sorted(Map.Entry.<String, Double>comparingByValue().reversed()) // Növekvő
+                                .sorted(Map.Entry.<String, Double>comparingByValue().reversed()) // Csökkenő
                                 .collect(Collectors.toMap(
                                                 Map.Entry::getKey,
                                                 Map.Entry::getValue,
@@ -271,6 +253,25 @@ class InventoryTest extends BaseTest {
                 assertEquals(expectedList, actualList,
                                 "A termékek lista nincsen rendezve ár szerint csökkenő sorrendben.");
 
-                cleanUp(inventoryPage);
+                new MenuComponent(driver).resetAppState().logout();
+        }
+
+        @Test
+        @Tag("ui")
+        @Tag("regression")
+        @DisplayName("Twitter link ellenőrzése.")
+        void shouldOpenTwitterInNewTab() {
+                InventoryPage inventoryPage = login();
+
+                String originalTab = inventoryPage.getCurrentTabHandle();
+                inventoryPage.clickOnTwitterlink().switchToTab();
+                assertTrue(driver.getCurrentUrl().contains("x.com"));
+                inventoryPage.closeTabAndReturnTo(originalTab);
+
+                new MenuComponent(driver).resetAppState().logout();
+                assertEquals(driver.getCurrentUrl().substring(0,
+                                driver.getCurrentUrl().length() - 1),
+                                ConfigReader.get("BASE_URL"),
+                                "Az url cím hibás.");
         }
 }
