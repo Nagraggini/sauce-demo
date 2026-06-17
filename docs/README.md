@@ -241,14 +241,15 @@ Aztán meg fog jelenni felül a linket.
 
 # Futtatás
 
-Terminálba: mvn clean test
+Ha windows-on futtatod, akkor "./" jeleket hagyd el.
+Terminálba: ./mvnw clean test
 
-Egy konkrét teszt futtatása: mvn -Dtest=CheckoutStepOnePageTest#shouldDisplayErrorMessageForPostalCode test
+Egy konkrét teszt futtatása: ./mvnw -Dtest=CheckoutStepOnePageTest#shouldDisplayErrorMessageForPostalCode test
 
 Itt találod a fájlt: target/site/jacoco/index.html -> Jobb klikk Open with Live Server
 
 Házi feladat:
-mvn clean test -Dgroups="homework"
+./mvnw clean test -Dgroups="ui"
 
 # Maven wrapper beállítása és használata
 
@@ -274,6 +275,19 @@ Futtatás linux-on:
 
 win-on:
 mvnw clean test
+
+# Tagek
+
+| Tag	     | Mikor használd?
+|------------|---------------------------
+| smoke	     | A legfontosabb funkciók gyors ellenőrzése
+| regression | Bármely teszt, amit rendszeresen újrafuttatsz változtatások után
+| functional | Egy konkrét üzleti funkció helyes működését ellenőrzi
+| end-to-end | Teljes felhasználói folyamatot fed le több oldalon keresztül
+| ui	     | Felületi elemek, megjelenés, hibaszövegek, láthatóság
+
+Egy teszten lehet több tag is.
+
 
 <!--TODO Allure Report -->
 <!--TODO: 100 %-os report elérése, hogy minden gombot leellenőrizz.-->

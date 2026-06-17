@@ -39,7 +39,17 @@ Prerequisites:
 - Maven 3.x
 - Chrome/Firefox WebDriver (or use WebDriverManager as included)
 
-Terminal: mvn clean test
+Terminal: ./mvnw clean test
+./mvnw clean test -Dtest=InventoryTest
+./mvnw clean test -Dtest=InventoryTest#checkShoppingCartBadgeNumber
+./mvnw test -Dgroups=regression
+
+My tags:
+smoke
+regression
+functional
+end-to-end
+ui
 
 ## Tech Stack
 
