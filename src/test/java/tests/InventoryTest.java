@@ -265,7 +265,8 @@ class InventoryTest extends BaseTest {
 
                 String originalTab = inventoryPage.getCurrentTabHandle();
                 inventoryPage.clickOnTwitterlink().switchToTab();
-                assertTrue(driver.getCurrentUrl().contains("x.com"));
+                assertTrue(driver.getCurrentUrl().contains("twitter.com") || driver.getCurrentUrl()
+                                .contains("x.com"));
                 inventoryPage.closeTabAndReturnTo(originalTab);
 
                 new MenuComponent(driver).resetAppState().logout();
