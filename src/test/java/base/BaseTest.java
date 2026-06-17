@@ -36,19 +36,12 @@ public class BaseTest {
 	 * Visszaadja az InventoryPage-et a könnyebb láncolhatóságért.
 	 */
 	public InventoryPage login() {
-		LoginPage loginPage = new LoginPage(driver);
-		loginPage.openPage(ConfigReader.get("BASE_URL"));
-
-		String username = ConfigReader.get("USERNAME"); // Érdemes ezt is configból olvasni
-		String password = ConfigReader.get("PASSWORD");
-
-		// A LoginPage saját beépített logikáját hívjuk meg!
-		return loginPage.login(username, password);
+		return new LoginPage(driver).openPage(ConfigReader.getBaseUrl()).login(ConfigReader.getUsername(),
+				ConfigReader.getPassword());
 	}
 
 	@AfterEach
 	void tearDown() {
-
 		// Bezárja az összes ablakot és teljesen leállítja a WebDriver-t.
 		if (driver != null) {
 			driver.quit();

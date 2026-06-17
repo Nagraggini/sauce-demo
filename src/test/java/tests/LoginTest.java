@@ -22,7 +22,8 @@ class LoginTest extends BaseTest {
 	@Tag("regression")
 	@DisplayName("Üresen hagyott input mezőkkel történi bejelentkezés.")
 	void emptyInputFieldsAndTryToLogin() {
-		assertEquals("Epic sadface: Username is required", new LoginPage(driver).openPage(ConfigReader.get("BASE_URL"))
+		assertEquals("Epic sadface: Username is required", new LoginPage(driver).openPage(ConfigReader
+				.getBaseUrl())
 				.clickOnLogin().getErrorMessage(), "Hibaüzenet nem egyezik meg.");
 	}
 
@@ -32,8 +33,9 @@ class LoginTest extends BaseTest {
 	@DisplayName("Csak felhasználónévvel történő belépési kísérlet.")
 	void tryToLoginWithOnlyUsername() {
 		assertEquals("Epic sadface: Password is required",
-				new LoginPage(driver).openPage(ConfigReader.get("BASE_URL")).fillInputs(ConfigReader
-						.get("USERNAME"), "")
+				new LoginPage(driver).openPage(ConfigReader
+						.getBaseUrl()).fillInputs(ConfigReader
+								.getUsername(), "")
 						.clickOnLogin().getErrorMessage(),
 				"Hibaüzenet nem egyezik meg.");
 	}
@@ -44,8 +46,9 @@ class LoginTest extends BaseTest {
 	@DisplayName("Csak jelszóval törtéső belépési kísérlet.")
 	void tryToLoginWithOnlyPassword() {
 		assertEquals("Epic sadface: Username is required",
-				new LoginPage(driver).openPage(ConfigReader.get("BASE_URL")).fillInputs("", ConfigReader
-						.get("PASSWORD"))
+				new LoginPage(driver).openPage(ConfigReader
+						.getBaseUrl()).fillInputs("", ConfigReader
+								.get("PASSWORD"))
 						.clickOnLogin().getErrorMessage(),
 				"Hibaüzenet nem egyezik meg.");
 	}
@@ -56,8 +59,9 @@ class LoginTest extends BaseTest {
 	@DisplayName("Hibás felhasználónévvel történő belépés.")
 	void tryToLoginWithIncorrectUsername() {
 		assertEquals("Epic sadface: Username and password do not match any user in this service",
-				new LoginPage(driver).openPage(ConfigReader.get("BASE_URL")).fillInputs("12345", ConfigReader
-						.get("PASSWORD"))
+				new LoginPage(driver).openPage(ConfigReader
+						.getBaseUrl()).fillInputs("12345", ConfigReader
+								.getPassword())
 						.clickOnLogin().getErrorMessage(),
 				"Hibaüzenet nem egyezik meg, ha hibás a felhasználónév.");
 	}
@@ -68,10 +72,11 @@ class LoginTest extends BaseTest {
 	@DisplayName("Hibás jelszóval történő belépés.")
 	void tryToLoginWithIncorrectPassword() {
 		assertEquals("Epic sadface: Username and password do not match any user in this service",
-				new LoginPage(driver).openPage(ConfigReader.get("BASE_URL")).fillInputs(ConfigReader
-						.get("USERNAME"),
-						ConfigReader.get(
-								"WRONG_PASSWORD"))
+				new LoginPage(driver).openPage(ConfigReader
+						.getBaseUrl()).fillInputs(ConfigReader
+								.get("USERNAME"),
+								ConfigReader.get(
+										"WRONG_PASSWORD"))
 						.clickOnLogin().getErrorMessage(),
 				"Hibaüzenet nem egyezik meg, ha hibás a felhasználónév.");
 	}
@@ -79,15 +84,15 @@ class LoginTest extends BaseTest {
 	@ParameterizedTest
 	@CsvSource({ "standard_user", "problem_user", "performance_glitch_user", "error_user", "visual_user" })
 	@Tag("regression")
+	@Tag("smoke")
 	@DisplayName("Összes felhasználónév ellenőrzése.")
 	void succesfulLoginWithAllUsernamesAndPws(String username) {
-		assertEquals(ConfigReader.get("BASE_URL") + "/inventory.html", new LoginPage(driver).openPage(ConfigReader
-				.get("BASE_URL")).login(username, ConfigReader.get(
-						"PASSWORD"))
+		assertEquals(ConfigReader.getBaseUrl() + "/inventory.html", new LoginPage(driver).openPage(ConfigReader
+				.getBaseUrl()).login(username, ConfigReader
+						.getPassword())
 				.getCurrentUrl(),
 				"Nem sikerült bejelentkezni.");
 
-		// Cleanup minden teszt végén.
 		new MenuComponent(driver).resetAppState().logout();
 	}
 
@@ -100,15 +105,18 @@ class LoginTest extends BaseTest {
 			// Ha sikeresnek kell lennie, az URL-t ellenőrizzük
 			assertEquals(expectedResult,
 					new LoginPage(driver).openPage(
-							ConfigReader.get("BASE_URL")).login(username, password).getCurrentUrl(),
+							ConfigReader
+									.getBaseUrl())
+							.login(username, password).getCurrentUrl(),
 					"Nem sikerült a bejelentkezés: " + username);
 
-			// Cleanup minden teszt végén.
 			new MenuComponent(driver).resetAppState().logout();
 		} else {
 			// Ha sikertelen (pl. locked_out_user), a hibaüzenetet ellenőrizzük
 			assertEquals(expectedResult, new LoginPage(driver).openPage(
-					ConfigReader.get("BASE_URL")).fillInputs(username, password).clickOnLogin()
+					ConfigReader
+							.getBaseUrl())
+					.fillInputs(username, password).clickOnLogin()
 					.getErrorMessage(),
 					"Nem a várt hibaüzenet jelent meg ennél a felhasználónál: " + username);
 		}
@@ -118,7 +126,8 @@ class LoginTest extends BaseTest {
 	@Tag("regression")
 	@DisplayName("Zárolt felhasználó ellenőrzése.")
 	void lockedOutUserShouldNotBeAbleToLogin() {
-		assertFalse(new LoginPage(driver).openPage(ConfigReader.get("BASE_URL"))
+		assertFalse(new LoginPage(driver).openPage(ConfigReader
+				.getBaseUrl())
 				.fillInputs("locked_out_user", ConfigReader.get("PASSWORD")).clickOnLogin().getCurrentUrl()
 				.contains(
 						"inventory"),
@@ -131,7 +140,9 @@ class LoginTest extends BaseTest {
 	@DisplayName("Zárolt felhasználó belépési kísérlet esetén megjelenik-e a hibaüzenet.")
 	void checkErrorMessageLockedOutUserLogin() {
 		assertEquals("Epic sadface: Sorry, this user has been locked out.", new LoginPage(driver).openPage(
-				ConfigReader.get("BASE_URL")).fillInputs("locked_out_user", ConfigReader.get("PASSWORD")).clickOnLogin()
+				ConfigReader
+						.getBaseUrl())
+				.fillInputs("locked_out_user", ConfigReader.get("PASSWORD")).clickOnLogin()
 				.getErrorMessage(),
 				"Nem jelent meg a hibaüzenet, amikor a zárolt felhasználóval próbált belépni.");
 	}
@@ -144,7 +155,7 @@ class LoginTest extends BaseTest {
 		assertEquals(
 				"Epic sadface: You can only access '/inventory.html' when you are logged in.", new LoginPage(driver)
 						.openPage(
-								ConfigReader.get("BASE_URL")
+								ConfigReader.getBaseUrl()
 										+ "/inventory.html")
 						.getErrorMessage(),
 				"Hibaüzenet nem egyezik meg.");
