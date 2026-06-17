@@ -13,6 +13,9 @@ public class DriverFactory {
         options.addArguments("--incognito");
         options.addArguments("--remote-allow-origins=*");
 
+        // Így localban, sem fog megnyílni a böngésző.
+        headless = true;
+
         if (headless) {
             options.addArguments("--headless=new");
         }
