@@ -67,7 +67,7 @@ public abstract class BasePage {
 
 	// III. kényelmi metódusok, interakciók
 	protected void click(By locator) {
-		logger.info(" --- Clicking on element: {}", locator);
+		logger.info(" Clicking on element: {}", locator);
 		waitUntilClickable(locator).click();
 	}
 
