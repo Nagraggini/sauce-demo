@@ -22,6 +22,9 @@ public class InventoryPage extends BasePage {
 	private final By shoppingCartBtn = By.className("shopping_cart_link");
 	private final By shoppingCartBadge = By.cssSelector("span[data-test='shopping-cart-badge']");
 
+	private final By inventoryItemCards = By.className("inventory_item");
+	private final By addToCartBtns = By.cssSelector("button[data-test^='add-to-cart']");
+
 	// Lábléc.
 	private final By twitterLink = By.linkText("Twitter");
 	private final By fbLink = By.cssSelector("[data-test='social-facebook']");
@@ -44,6 +47,48 @@ public class InventoryPage extends BasePage {
 				getText(shoppingCartBadge));
 	}
 
+	public InventoryPage changeOrderingAtoZ() {
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
+		changeOrderingSel.selectByValue("az");
+		return this;
+	}
+
+	public InventoryPage changeOrderingZtoA() {
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
+		changeOrderingSel.selectByValue("za");
+		return this;
+	}
+
+	public InventoryPage changeOrderingLowtoHigh() {
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
+		changeOrderingSel.selectByValue("lohi");
+		return this;
+	}
+
+	public InventoryPage changeOrderingHightoLow() {
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
+		changeOrderingSel.selectByValue("hilo");
+		return this;
+	}
+
+	public List<WebElement> getInventoryItemCards() {
+		return findAll(inventoryItemCards);
+	}
+
+	public List<WebElement> getAddToCartBtns() {
+		return findAll(addToCartBtns);
+	}
+
+	public WebElement getAddToCartOrRemoveBtn(String itemName) {
+		return this.find(By.xpath(
+				"//div[@class='inventory_item' and .//div[normalize-space()='"
+						+ itemName + "']]//button"));
+	}
+
 	public double getPriceofAnItem(String itemName) {
 		return Double.parseDouble(getText(By.xpath(
 				"//div[@class='inventory_item' and .//div[text()='" + itemName
@@ -63,30 +108,6 @@ public class InventoryPage extends BasePage {
 		return getText(By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
 						+ itemName + "']]//button"));
-	}
-
-	public void changeOrderingAtoZ() {
-		waitUntilClickable(changeOrderingSelect);
-		Select changeOrderingSel = new Select(find(changeOrderingSelect));
-		changeOrderingSel.selectByValue("az");
-	}
-
-	public void changeOrderingZtoA() {
-		waitUntilClickable(changeOrderingSelect);
-		Select changeOrderingSel = new Select(find(changeOrderingSelect));
-		changeOrderingSel.selectByValue("za");
-	}
-
-	public void changeOrderingLowtoHigh() {
-		waitUntilClickable(changeOrderingSelect);
-		Select changeOrderingSel = new Select(find(changeOrderingSelect));
-		changeOrderingSel.selectByValue("lohi");
-	}
-
-	public void changeOrderingHightoLow() {
-		waitUntilClickable(changeOrderingSelect);
-		Select changeOrderingSel = new Select(find(changeOrderingSelect));
-		changeOrderingSel.selectByValue("hilo");
 	}
 
 	public LinkedHashMap<String, Double> getAllItemnamesAndTheirPrices() {
