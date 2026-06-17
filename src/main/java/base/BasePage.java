@@ -123,10 +123,11 @@ public abstract class BasePage {
 	}
 
 	// V. URL műveletek
-	public void openPage(String url) {
-		this.driver.get(url);
-	}
-
+	/*
+	 * public void openPage(String url) {
+	 * this.driver.get(url);
+	 * }
+	 */
 	public void clearCookies() {
 		driver.manage().deleteAllCookies();
 	}
