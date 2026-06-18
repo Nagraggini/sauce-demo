@@ -24,6 +24,6 @@ public class CartTest extends BaseTest {
                 cartPage.getCurrentUrl(),
                 "A CartPage-n a Continue Shopping gomb kiválasztása után, nem kerültünk vissza az Inventory oldalra.");
 
-        cleanUp(inventoryPage);
+        // cleanUp(inventoryPage);
     }
 }
