@@ -35,4 +35,60 @@ public class ConfigReader {
         // Ha nincs, akkor config.properties
         return properties.getProperty(key);
     }
+
+    public static String getBaseUrl() {
+
+        String key = "BASE_URL";
+        // Először környezeti változó (GitHub Secrets)
+        String envValue = System.getenv(key);
+
+        if (envValue != null && !envValue.isBlank()) {
+            return envValue;
+        }
+
+        // Ha nincs, akkor config.properties
+        return properties.getProperty(key);
+    }
+
+    public static String getUsername() {
+
+        String key = "USERNAME";
+        // Először környezeti változó (GitHub Secrets)
+        String envValue = System.getenv(key);
+
+        if (envValue != null && !envValue.isBlank()) {
+            return envValue;
+        }
+
+        // Ha nincs, akkor config.properties
+        return properties.getProperty(key);
+    }
+
+    public static String getPassword() {
+
+        String key = "PASSWORD";
+        // Először környezeti változó (GitHub Secrets)
+        String envValue = System.getenv(key);
+
+        if (envValue != null && !envValue.isBlank()) {
+            return envValue;
+        }
+
+        // Ha nincs, akkor config.properties
+        return properties.getProperty(key);
+    }
+
+    public static String getWrongPassword() {
+
+        String key = "WRONG_PASSWORD";
+        // Először környezeti változó (GitHub Secrets)
+        String envValue = System.getenv(key);
+
+        if (envValue != null && !envValue.isBlank()) {
+            return envValue;
+        }
+
+        // Ha nincs, akkor config.properties
+        return properties.getProperty(key);
+    }
 }

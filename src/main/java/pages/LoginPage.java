@@ -23,13 +23,20 @@ public class LoginPage extends BasePage {
 	private final By errorMessage = By
 			.xpath("//div/form/div[@class='error-message-container error']/h3[@data-test='error']");
 
-	public void fillInputs(String username, String password) {
-		type(usernameInput, username);
-		type(passwordInput, password);
+	public LoginPage openPage(String url) {
+		driver.get(url);
+		return this;
 	}
 
-	public void clickOnLoginBtn() {
+	public LoginPage fillInputs(String username, String password) {
+		type(usernameInput, username);
+		type(passwordInput, password);
+		return this;
+	}
+
+	public LoginPage clickOnLogin() {
 		click(loginBtn);
+		return this;
 	}
 
 	public String getErrorMessage() {

@@ -12,46 +12,29 @@ import org.openqa.selenium.support.ui.Select;
 import base.BasePage;
 
 public class InventoryPage extends BasePage {
-	// ctrl+shift+c -> A chromeban megnyílik a dev tools és rögtön lokátort tudsz
-	// keresni.
-	public InventoryPage(WebDriver driver) {
-		super(driver);
-	}
-
-	// Hamburger menü elemek.
-	private final By hamburgerBtn = By.id("react-burger-menu-btn");
-	private final By allItemsBtn = By.id("inventory_sidebar_link");
-	private final By aboutBtn = By.id("about_sidebar_link");
-	private final By logoutBtn = By.id("logout_sidebar_link");
-	private final By resetAppStateBtn = By.id("reset_sidebar_link");
-	private final By closeHamburgerMenu = By.id("react-burger-cross-btn");
 
 	// Fejléc és logó.
 	private final By appLogo = By.xpath("//div[@class='app_logo' and contains(text(),'Swag')]");
-	private final By productsLbl = By.xpath("//*/span[contains(text(),'Products')]");
+	private final By title = By.className("title");
 	private final By changeOrderingSelect = By.cssSelector("[class='product_sort_container']");
 
 	// Kosár elemek.
 	private final By shoppingCartBtn = By.className("shopping_cart_link");
 	private final By shoppingCartBadge = By.cssSelector("span[data-test='shopping-cart-badge']");
 
+	private final By inventoryItemCards = By.className("inventory_item");
+	private final By addToCartBtns = By.cssSelector("button[data-test^='add-to-cart']");
+
 	// Lábléc.
-	private final By twitterIcon = By.linkText("Twitter");
-	private final By fbIcon = By.cssSelector("[data-test='social-facebook']");
-	private final By linkedinIcon = By.cssSelector("[data-test='social-linkedin']");
+	private final By twitterLink = By.linkText("Twitter");
+	private final By fbLink = By.cssSelector("[data-test='social-facebook']");
+	private final By linkedinLink = By.cssSelector("[data-test='social-linkedin']");
 
 	private final By copyRightlbl = By.className("footer_copy");
 
-	public void openHamburgerMenu() {
-		click(hamburgerBtn);
-	}
-
-	public void clickOnLogoutBtn() {
-		click(logoutBtn);
-	}
-
-	public void clickOnResetAppStateBtn() {
-		click(resetAppStateBtn);
+	public InventoryPage(WebDriver driver) {
+		super(driver);
+		waitUntilTextToBe(title, "Products");
 	}
 
 	public int getShoppingCartBadgeNumber() {
@@ -64,6 +47,48 @@ public class InventoryPage extends BasePage {
 				getText(shoppingCartBadge));
 	}
 
+	public InventoryPage changeOrderingAtoZ() {
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
+		changeOrderingSel.selectByValue("az");
+		return this;
+	}
+
+	public InventoryPage changeOrderingZtoA() {
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
+		changeOrderingSel.selectByValue("za");
+		return this;
+	}
+
+	public InventoryPage changeOrderingLowtoHigh() {
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
+		changeOrderingSel.selectByValue("lohi");
+		return this;
+	}
+
+	public InventoryPage changeOrderingHightoLow() {
+		waitUntilClickable(changeOrderingSelect);
+		Select changeOrderingSel = new Select(find(changeOrderingSelect));
+		changeOrderingSel.selectByValue("hilo");
+		return this;
+	}
+
+	public List<WebElement> getInventoryItemCards() {
+		return findAll(inventoryItemCards);
+	}
+
+	public List<WebElement> getAddToCartBtns() {
+		return findAll(addToCartBtns);
+	}
+
+	public WebElement getAddToCartOrRemoveBtn(String itemName) {
+		return this.find(By.xpath(
+				"//div[@class='inventory_item' and .//div[normalize-space()='"
+						+ itemName + "']]//button"));
+	}
+
 	public double getPriceofAnItem(String itemName) {
 		return Double.parseDouble(getText(By.xpath(
 				"//div[@class='inventory_item' and .//div[text()='" + itemName
@@ -71,41 +96,18 @@ public class InventoryPage extends BasePage {
 				.substring(1));
 	}
 
-	public void addToCartOrRemove(String itemName) {
+	public InventoryPage addToCartOrRemove(String itemName) {
 		By btn = By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
 						+ itemName + "']]//button");
 		click(btn);
+		return this;
 	}
 
 	public String getAddToCartOrRemoveBtnText(String itemName) {
 		return getText(By.xpath(
 				"//div[@class='inventory_item' and .//div[normalize-space()='"
 						+ itemName + "']]//button"));
-	}
-
-	public void changeOrderingAtoZ() {
-		waitUntilClickable(changeOrderingSelect);
-		Select changeOrderingSel = new Select(find(changeOrderingSelect));
-		changeOrderingSel.selectByValue("az");
-	}
-
-	public void changeOrderingZtoA() {
-		waitUntilClickable(changeOrderingSelect);
-		Select changeOrderingSel = new Select(find(changeOrderingSelect));
-		changeOrderingSel.selectByValue("za");
-	}
-
-	public void changeOrderingLowtoHigh() {
-		waitUntilClickable(changeOrderingSelect);
-		Select changeOrderingSel = new Select(find(changeOrderingSelect));
-		changeOrderingSel.selectByValue("lohi");
-	}
-
-	public void changeOrderingHightoLow() {
-		waitUntilClickable(changeOrderingSelect);
-		Select changeOrderingSel = new Select(find(changeOrderingSelect));
-		changeOrderingSel.selectByValue("hilo");
 	}
 
 	public LinkedHashMap<String, Double> getAllItemnamesAndTheirPrices() {
@@ -144,4 +146,23 @@ public class InventoryPage extends BasePage {
 		return new CartPage(driver);
 	}
 
+	public InventoryPage clickOnTwitterlink() {
+		click(twitterLink);
+		return this;
+	}
+
+	public String getCurrentTabHandle() {
+		return getCurrentTab();
+	}
+
+	public InventoryPage switchToTab() {
+		switchToNewTab();
+		return this;
+	}
+
+	/** Bezárja az aktuális tabot és visszavált a megadott értékre. */
+	public InventoryPage closeTabAndReturnTo(String original) {
+		closeCurrentTabAndSwitchBack(original);
+		return this;
+	}
 }

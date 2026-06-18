@@ -13,6 +13,7 @@
         <maven.compiler.release>21</maven.compiler.release>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>   
+        <allure.version>2.29.1</allure.version>
     </properties>
 
     <dependencies>
@@ -69,6 +70,11 @@
             <version>2.24.1</version>
         </dependency>
         
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -145,10 +151,21 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
-
-                <!--Ezzel a src/test/java mappában lévő teszteket is figyelni fogja a kód lefedettség mutatásánál.-->
                 <configuration>
+                    <!--Ezzel a hagyományos classpath-t fogja használni.-->
+                    <useModulePath>false</useModulePath>
+                
+                    <!--Ezzel a src/test/java mappában lévő teszteket is figyelni fogja a kód lefedettség mutatásánál.-->
+             
                     <argLine>${argLine}</argLine>
+
+                    <!--Allure teszteredmények mentési helye. A target mappán belül.-->
+                    <systemPropertyVariables>
+                        <allure.results.directory>
+                            ${project.build.directory}/allure-results
+                        </allure.results.directory>
+                    </systemPropertyVariables>
+
                 </configuration>               
             </plugin>
 

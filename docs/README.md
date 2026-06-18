@@ -241,14 +241,15 @@ Aztán meg fog jelenni felül a linket.
 
 # Futtatás
 
-Terminálba: mvn clean test
+Ha windows-on futtatod, akkor "./" jeleket hagyd el.
+Terminálba: ./mvnw clean test
 
-Egy konkrét teszt futtatása: mvn -Dtest=CheckoutStepOnePageTest#shouldDisplayErrorMessageForPostalCode test
+Egy konkrét teszt futtatása: ./mvnw -Dtest=CheckoutStepOnePageTest#shouldDisplayErrorMessageForPostalCode test
 
 Itt találod a fájlt: target/site/jacoco/index.html -> Jobb klikk Open with Live Server
 
 Házi feladat:
-mvn clean test -Dgroups="homework"
+./mvnw clean test -Dgroups="ui"
 
 # Maven wrapper beállítása és használata
 
@@ -260,6 +261,8 @@ pl. apache-maven-3.9.16-bin.zip
 letöltés, kicsomagolás
 környezeti változókhoz felvenni a bin mappáját
 
+Linux-on még ez is kell egyszer: sudo apt install maven
+
 Utána ezt futtasd: mvn clean test
 
 Ezután jöhet a csomagolás: „mvn wrapper:wrapper”
@@ -267,7 +270,93 @@ Ezután létrejönnek ezek: mvnw és mvnw.cmd fájlok és .mvn mappa.
 Innentől kezdve nem mvn utasítást kell használni, hanem mvnw utasítást!
 Ezután nem gond, ah nincsen maven a gépen telepítve, simán lehet terminálból is futatni a projektet. 
 
+Futtatás linux-on:
+./mvnw clean test
+
+win-on:
+mvnw clean test
+
+# Tagek
+
+| Tag	     | Mikor használd?
+|------------|---------------------------
+| smoke	     | A legfontosabb funkciók gyors ellenőrzése
+| regression | Bármely teszt, amit rendszeresen újrafuttatsz változtatások után
+| functional | Egy konkrét üzleti funkció helyes működését ellenőrzi
+| end-to-end | Teljes felhasználói folyamatot fed le több oldalon keresztül
+| ui	     | Felületi elemek, megjelenés, hibaszövegek, láthatóság
+
+Egy teszten lehet több tag is.
+
+# Allure Report
+
+Telepítsd: https://nodejs.org/
+Terminálba: npm install -g allure
+Aztán csekkold, hogy tuti sikerült-e: allure --version
+
+pom.xml-be:
+
+properties részbe:
+```xml
+    <allure.version>2.29.1</allure.version>
+```
+
+dependencies részbe:
+```xml
+    <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-junit5</artifactId>
+        <version>${allure.version}</version>
+    </dependency>
+```
+
+configuration részbe:
+```xml
+ <systemPropertyVariables>
+        <allure.results.directory>
+            ${project.build.directory}/allure-results
+        </allure.results.directory>
+    </systemPropertyVariables>
+```
+
+## Opcionális
+
+Nem kötelező, de szebb lesz a riport.
+
+```java
+import io.qameta.allure.*;
+
+@Epic("SauceDemo")
+@Feature("Login")
+class LoginTest {
+
+    @Test
+    @Story("Standard user login")
+    @Severity(SeverityLevel.CRITICAL)
+    void successfulLogin() {
+        ...
+    }
+}
+```
+
+## Report ellenőrzése
+
+Windowsnál a "./"-t töröld.
+
+Futtasd le a teszteket: ./mvnw clean test
+Ezzel megjelenik a report: allure serve target/allure-results
+
+De ez, csak offline látszik.
+
+Online verzióhoz:
+rm -rf allure-report
+allure generate target/allure-results -o allure-report
+
+Lokálban is le tudod csekkolni, az allure-report mappában lévi index.html-en jobb klikk és Open with Live Server.
 <!--TODO Allure Report -->
+
+
+
 <!--TODO: 100 %-os report elérése, hogy minden gombot leellenőrizz.-->
 <!--TODO: tagek beállítása reg meg smoke stb. -->
 <!--TODO: a page-es oldalokon mindegyik metódusba: return this és az aktuális oldal objektumát adja vissza. -->

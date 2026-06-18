@@ -25,7 +25,7 @@ public class BaseTest {
 
 	@BeforeEach
 	void setUp() {
-		driver = DriverFactory.createDriver(true); // headless CI-ben
+		driver = DriverFactory.createDriver(System.getProperty("CI") != null); // headless CI-ben
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 
@@ -36,35 +36,16 @@ public class BaseTest {
 	 * Visszaadja az InventoryPage-et a könnyebb láncolhatóságért.
 	 */
 	public InventoryPage login() {
-		LoginPage loginPage = new LoginPage(driver);
-		loginPage.openPage(ConfigReader.get("BASE_URL"));
-
-		String username = ConfigReader.get("USERNAME"); // Érdemes ezt is configból olvasni
-		String password = ConfigReader.get("PASSWORD");
-
-		// A LoginPage saját beépített logikáját hívjuk meg!
-		return loginPage.login(username, password);
+		return new LoginPage(driver).openPage(ConfigReader.getBaseUrl()).login(ConfigReader.getUsername(),
+				ConfigReader.getPassword());
 	}
 
 	@AfterEach
 	void tearDown() {
-
 		// Bezárja az összes ablakot és teljesen leállítja a WebDriver-t.
 		if (driver != null) {
 			driver.quit();
 		}
-	}
-
-	protected void cleanUp(InventoryPage inventoryPage) {
-		// logger.info("\n -- Before clean up current URL: {}", driver.getCurrentUrl());
-
-		// Takarítás.
-		inventoryPage.openHamburgerMenu();
-		inventoryPage.clickOnResetAppStateBtn();
-
-		// Kijelentkezés
-		inventoryPage.clickOnLogoutBtn();
-
 	}
 
 	protected void onlyForChecking() {

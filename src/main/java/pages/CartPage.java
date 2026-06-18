@@ -7,15 +7,13 @@ import base.BasePage;
 
 public class CartPage extends BasePage {
 
-    public CartPage(WebDriver driver) {
-        super(driver);
-    }
-
+    private final By title = By.className("title");
     private final By checkoutBtn = By.cssSelector("#checkout");
     private final By continueShoppingBtn = By.id("continue-shopping");
 
-    public void clickOnCheckout() {
-        click(checkoutBtn);
+    public CartPage(WebDriver driver) {
+        super(driver);
+        waitUntilTextToBe(title, "Your Cart");
     }
 
     public double getPriceOfAnItem(String itemName) {
@@ -35,7 +33,7 @@ public class CartPage extends BasePage {
         return new InventoryPage(driver);
     }
 
-    public CheckoutStepOnePage checkout() {
+    public CheckoutStepOnePage clickOnCheckout() {
         click(checkoutBtn);
         return new CheckoutStepOnePage(driver);
     }
