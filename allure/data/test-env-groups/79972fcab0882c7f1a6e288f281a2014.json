@@ -1,0 +1,1 @@
+{"id":"79972fcab0882c7f1a6e288f281a2014","fullName":"tests.InventoryE2ETest.checkPricesOnThreePages","name":"Ellenőrizzük, hogy a kosárban is ugyanannyi a két termék ára, mint a főoldalon és minden oldalon. Felhnév: standard_user","status":"passed","testResultsByEnv":{"default":"48cf3419871df6bf0863c24911e6f678"}}

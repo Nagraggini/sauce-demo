@@ -1,0 +1,1 @@
+{"id":"07027a861941907626bafaafd8b8994c","fullName":"tests.InventoryTest.checkShoppingCartBadgeNumber","name":"Ellenőrizzük, hogy a kosárba helyezett elemek darabszáma ugyanannyi-e, mint a kosár ikonon lévők.","status":"passed","testResultsByEnv":{"default":"c3222af4a3482d68f847c121cff3adc0"}}

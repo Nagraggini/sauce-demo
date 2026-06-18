@@ -1,0 +1,1 @@
+{"id":"6d725f357692f57b5f906551ce37b4ff","fullName":"tests.LoginTest.checkErrorMessageLockedOutUserLogin","name":"Zárolt felhasználó belépési kísérlet esetén megjelenik-e a hibaüzenet.","status":"passed","testResultsByEnv":{"default":"bb1d43eb539f9753c410e5a1a1960ee8"}}

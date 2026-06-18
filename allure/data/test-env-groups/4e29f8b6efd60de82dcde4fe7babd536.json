@@ -1,0 +1,1 @@
+{"id":"4e29f8b6efd60de82dcde4fe7babd536","fullName":"tests.CartTest.checkContinueShoppingBtn","name":"Leellenőrizzük, hogy a Continue Shopping gomb kiválasztása után vissza kerülünk-e az Inventory oldalra.","status":"passed","testResultsByEnv":{"default":"b3509a59b94c457570e795afe26eea1c"}}

@@ -1,0 +1,1 @@
+{"id":"85ad47abb8943187e9a37702839328cd","fullName":"tests.CheckoutStepOneTest.shouldDisplayErrorMessageForPostalCode","name":"Ellenőrizzük a hibaüzenet szövegét irányítószám beviteli mező kihagyása esetén.","status":"passed","testResultsByEnv":{"default":"496dc889349ff5b05ccb73e47d5db28b"}}
