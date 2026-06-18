@@ -1,1 +1,0 @@
-{"id":"385a03318e0faf199cfbbff501acd314","fullName":"tests.CheckoutStepOneTest.shouldDisplayErrorMessageForFirstName","name":"Ellenőrizzük a hibaüzenet szövegét keresztnév beviteli mező kihagyása esetén.","status":"passed","testResultsByEnv":{"default":"fb7ec41c82ce2127605e738d83a58626"}}
