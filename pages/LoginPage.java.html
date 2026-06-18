@@ -23,27 +23,34 @@ public class LoginPage extends BasePage {
 <span class="fc" id="L23">	private final By errorMessage = By</span>
 <span class="fc" id="L24">			.xpath(&quot;//div/form/div[@class='error-message-container error']/h3[@data-test='error']&quot;);</span>
 
-	public void fillInputs(String username, String password) {
-<span class="fc" id="L27">		type(usernameInput, username);</span>
-<span class="fc" id="L28">		type(passwordInput, password);</span>
-<span class="fc" id="L29">	}</span>
+	public LoginPage openPage(String url) {
+<span class="fc" id="L27">		driver.get(url);</span>
+<span class="fc" id="L28">		return this;</span>
+	}
 
-	public void clickOnLoginBtn() {
-<span class="fc" id="L32">		click(loginBtn);</span>
-<span class="fc" id="L33">	}</span>
+	public LoginPage fillInputs(String username, String password) {
+<span class="fc" id="L32">		type(usernameInput, username);</span>
+<span class="fc" id="L33">		type(passwordInput, password);</span>
+<span class="fc" id="L34">		return this;</span>
+	}
+
+	public LoginPage clickOnLogin() {
+<span class="fc" id="L38">		click(loginBtn);</span>
+<span class="fc" id="L39">		return this;</span>
+	}
 
 	public String getErrorMessage() {
-<span class="fc" id="L36">		return getText(errorMessage);</span>
+<span class="fc" id="L43">		return getText(errorMessage);</span>
 	}
 
 	// POM alapelve szerint az oldalváltó műveletek adják vissza eredményül a
 	// következő oldal Page objektumát.
 
 	public InventoryPage login(String username, String password) {
-<span class="fc" id="L43">		fillInputs(username, password);</span>
-<span class="fc" id="L44">		click(loginBtn);</span>
+<span class="fc" id="L50">		fillInputs(username, password);</span>
+<span class="fc" id="L51">		click(loginBtn);</span>
 
-<span class="fc" id="L46">		return new InventoryPage(driver);</span>
+<span class="fc" id="L53">		return new InventoryPage(driver);</span>
 	}
 
 }

@@ -13,18 +13,21 @@ import org.openqa.selenium.chrome.ChromeOptions;
 <span class="fc" id="L13">        options.addArguments(&quot;--incognito&quot;);</span>
 <span class="fc" id="L14">        options.addArguments(&quot;--remote-allow-origins=*&quot;);</span>
 
-<span class="pc bpc" id="L16" title="1 of 2 branches missed.">        if (headless) {</span>
-<span class="fc" id="L17">            options.addArguments(&quot;--headless=new&quot;);</span>
+        // Így localban, sem fog megnyílni a böngésző.
+<span class="fc" id="L17">        headless = true;</span>
+
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        if (headless) {</span>
+<span class="fc" id="L20">            options.addArguments(&quot;--headless=new&quot;);</span>
         }
 
         // Teljesen elnémítja a CDP verziókereső hibaüzeneteit
-<span class="fc" id="L21">        java.util.logging.Logger.getLogger(&quot;org.openqa.selenium.devtools.CdpVersionFinder&quot;)</span>
-<span class="fc" id="L22">                .setLevel(java.util.logging.Level.OFF);</span>
+<span class="fc" id="L24">        java.util.logging.Logger.getLogger(&quot;org.openqa.selenium.devtools.CdpVersionFinder&quot;)</span>
+<span class="fc" id="L25">                .setLevel(java.util.logging.Level.OFF);</span>
 
         // Az összes Selenium figyelmeztetés elnémítása
-<span class="fc" id="L25">        java.util.logging.Logger.getLogger(&quot;org.openqa.selenium&quot;).setLevel(java.util.logging.Level.SEVERE);</span>
+<span class="fc" id="L28">        java.util.logging.Logger.getLogger(&quot;org.openqa.selenium&quot;).setLevel(java.util.logging.Level.SEVERE);</span>
 
-<span class="fc" id="L27">        return new ChromeDriver(options);</span>
+<span class="fc" id="L30">        return new ChromeDriver(options);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MenuComponent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">saucedemo</a> &gt; <a href="index.source.html" class="el_package">pages</a> &gt; <span class="el_source">MenuComponent.java</span></div><h1>MenuComponent.java</h1><pre class="source lang-java linenums">package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import base.BasePage;
+
+/** Menüpontok. */
+public class MenuComponent extends BasePage {
+
+    // Hamburger menü elemek.
+<span class="fc" id="L12">    private final By hamburgerBtn = By.id(&quot;react-burger-menu-btn&quot;);</span>
+<span class="fc" id="L13">    private final By allItemsBtn = By.id(&quot;inventory_sidebar_link&quot;);</span>
+<span class="fc" id="L14">    private final By aboutBtn = By.id(&quot;about_sidebar_link&quot;);</span>
+<span class="fc" id="L15">    private final By logoutBtn = By.id(&quot;logout_sidebar_link&quot;);</span>
+<span class="fc" id="L16">    private final By resetAppStateBtn = By.id(&quot;reset_sidebar_link&quot;);</span>
+<span class="fc" id="L17">    private final By closeHamburgerMenu = By.id(&quot;react-burger-cross-btn&quot;);</span>
+
+    public MenuComponent(WebDriver driver) {
+<span class="fc" id="L20">        super(driver);</span>
+<span class="fc" id="L21">    }</span>
+
+    public MenuComponent openMenu() {
+<span class="fc" id="L24">        click(hamburgerBtn);</span>
+        // Várunk egy elemre, ami csak a menü megnyitása után jelenik meg.
+<span class="fc" id="L26">        waitUntilVisible(logoutBtn);</span>
+<span class="fc" id="L27">        return this;</span>
+    }
+
+    public MenuComponent closeMenu() {
+<span class="fc" id="L31">        click(closeHamburgerMenu);</span>
+<span class="fc" id="L32">        return this;</span>
+    }
+
+    public LoginPage logout() {
+<span class="fc" id="L36">        openMenu();</span>
+<span class="fc" id="L37">        click(logoutBtn);</span>
+<span class="fc" id="L38">        return new LoginPage(driver);</span>
+    }
+
+    public MenuComponent resetAppState() {
+<span class="fc" id="L42">        openMenu();</span>
+<span class="fc" id="L43">        click(resetAppStateBtn);</span>
+<span class="fc" id="L44">        closeMenu();</span>
+<span class="fc" id="L45">        return this;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -35,5 +35,61 @@ import java.util.Properties;
         // Ha nincs, akkor config.properties
 <span class="nc" id="L36">        return properties.getProperty(key);</span>
     }
+
+    public static String getBaseUrl() {
+
+<span class="fc" id="L41">        String key = &quot;BASE_URL&quot;;</span>
+        // Először környezeti változó (GitHub Secrets)
+<span class="fc" id="L43">        String envValue = System.getenv(key);</span>
+
+<span class="pc bpc" id="L45" title="2 of 4 branches missed.">        if (envValue != null &amp;&amp; !envValue.isBlank()) {</span>
+<span class="fc" id="L46">            return envValue;</span>
+        }
+
+        // Ha nincs, akkor config.properties
+<span class="nc" id="L50">        return properties.getProperty(key);</span>
+    }
+
+    public static String getUsername() {
+
+<span class="fc" id="L55">        String key = &quot;USERNAME&quot;;</span>
+        // Először környezeti változó (GitHub Secrets)
+<span class="fc" id="L57">        String envValue = System.getenv(key);</span>
+
+<span class="pc bpc" id="L59" title="2 of 4 branches missed.">        if (envValue != null &amp;&amp; !envValue.isBlank()) {</span>
+<span class="fc" id="L60">            return envValue;</span>
+        }
+
+        // Ha nincs, akkor config.properties
+<span class="nc" id="L64">        return properties.getProperty(key);</span>
+    }
+
+    public static String getPassword() {
+
+<span class="fc" id="L69">        String key = &quot;PASSWORD&quot;;</span>
+        // Először környezeti változó (GitHub Secrets)
+<span class="fc" id="L71">        String envValue = System.getenv(key);</span>
+
+<span class="pc bpc" id="L73" title="2 of 4 branches missed.">        if (envValue != null &amp;&amp; !envValue.isBlank()) {</span>
+<span class="fc" id="L74">            return envValue;</span>
+        }
+
+        // Ha nincs, akkor config.properties
+<span class="nc" id="L78">        return properties.getProperty(key);</span>
+    }
+
+    public static String getWrongPassword() {
+
+<span class="nc" id="L83">        String key = &quot;WRONG_PASSWORD&quot;;</span>
+        // Először környezeti változó (GitHub Secrets)
+<span class="nc" id="L85">        String envValue = System.getenv(key);</span>
+
+<span class="nc bnc" id="L87" title="All 4 branches missed.">        if (envValue != null &amp;&amp; !envValue.isBlank()) {</span>
+<span class="nc" id="L88">            return envValue;</span>
+        }
+
+        // Ha nincs, akkor config.properties
+<span class="nc" id="L92">        return properties.getProperty(key);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
