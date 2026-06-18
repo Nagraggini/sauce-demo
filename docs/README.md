@@ -353,8 +353,27 @@ rm -rf allure-report
 allure generate target/allure-results -o allure-report
 
 Lokálban is le tudod csekkolni, az allure-report mappában lévi index.html-en jobb klikk és Open with Live Server.
-<!--TODO Allure Report -->
 
+## Allure Report beállítása weboldalként a jacoco mellett
+
+Terminálba:
+git checkout gh-pages
+ls
+
+Utána rendezzük a mappákat, terminálba:
+mkdir -p jacoco
+mkdir -p allure
+
+Ezzel átmásoljuk az allure riportot:
+cp -r allure-report/* allure/
+
+Töltsd fel az új verziót ezzel:
+git add allure
+git commit -m "Add Allure report"
+git push origin gh-pages
+
+Itt fogod látni a reportot (felhasznalonev.github.io/repo-neve/allure):
+https://nagraggini.github.io/sauce-demo/allure/
 
 
 <!--TODO: 100 %-os report elérése, hogy minden gombot leellenőrizz.-->
