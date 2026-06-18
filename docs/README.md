@@ -288,8 +288,75 @@ mvnw clean test
 
 Egy teszten lehet több tag is.
 
+# Allure Report
 
+Telepítsd: https://nodejs.org/
+Terminálba: npm install -g allure
+Aztán csekkold, hogy tuti sikerült-e: allure --version
+
+pom.xml-be:
+
+properties részbe:
+```xml
+    <allure.version>2.29.1</allure.version>
+```
+
+dependencies részbe:
+```xml
+    <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-junit5</artifactId>
+        <version>${allure.version}</version>
+    </dependency>
+```
+
+configuration részbe:
+```xml
+ <systemPropertyVariables>
+        <allure.results.directory>
+            ${project.build.directory}/allure-results
+        </allure.results.directory>
+    </systemPropertyVariables>
+```
+
+## Opcionális
+
+Nem kötelező, de szebb lesz a riport.
+
+```java
+import io.qameta.allure.*;
+
+@Epic("SauceDemo")
+@Feature("Login")
+class LoginTest {
+
+    @Test
+    @Story("Standard user login")
+    @Severity(SeverityLevel.CRITICAL)
+    void successfulLogin() {
+        ...
+    }
+}
+```
+
+## Report ellenőrzése
+
+Windowsnál a "./"-t töröld.
+
+Futtasd le a teszteket: ./mvnw clean test
+Ezzel megjelenik a report: allure serve target/allure-results
+
+De ez, csak offline látszik.
+
+Online verzióhoz:
+rm -rf allure-report
+allure generate target/allure-results -o allure-report
+
+Lokálban is le tudod csekkolni, az allure-report mappában lévi index.html-en jobb klikk és Open with Live Server.
 <!--TODO Allure Report -->
+
+
+
 <!--TODO: 100 %-os report elérése, hogy minden gombot leellenőrizz.-->
 <!--TODO: tagek beállítása reg meg smoke stb. -->
 <!--TODO: a page-es oldalokon mindegyik metódusba: return this és az aktuális oldal objektumát adja vissza. -->
