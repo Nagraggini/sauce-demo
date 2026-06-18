@@ -379,18 +379,33 @@ https://nagraggini.github.io/sauce-demo/allure/
 
 A .github/workflows/ci.yml végé
 ```yml
-
             # =========================
-            # 8. Generate Allure Report
+            # 7. Generate Allure Report
             # =========================
             - name: Generate Allure Report
               run: ./mvnw allure:report
-            - name: Upload Allure report
-              if: always()
-              uses: actions/upload-artifact@v4
+
+            # =========================
+            # 8. Prepare GitHub Pages folder
+            # =========================
+            - name: Prepare GitHub Pages folder
+              run: |
+                  rm -rf public
+                  mkdir -p public
+                  cp -r target/site/jacoco public/jacoco
+                  cp -r target/site/allure-maven-plugin public/allure-report 2>/dev/null || true
+                  cp -r target/site/allure-report public/allure-report 2>/dev/null || true
+                  echo "<h1>Reports</h1><a href='jacoco/index.html'>JaCoCo</a><br><a href='allure-report/index.html'>Allure</a>" > public/index.html
+
+            # =========================
+            # 9. Deploy to GitHub Pages
+            # =========================
+            - name: Deploy to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@v4
               with:
-                name: allure-report
-                path: target/site/allure-maven-plugin
+                  folder: public
+                  branch: gh-pages
+
 ```
 
 pom.xml-ben a plugins részre:
