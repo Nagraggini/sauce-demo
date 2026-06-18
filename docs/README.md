@@ -375,6 +375,33 @@ git push origin gh-pages
 Itt fogod látni a reportot (felhasznalonev.github.io/repo-neve/allure):
 https://nagraggini.github.io/sauce-demo/allure/
 
+## CI-ben való beállítás
+
+A .github/workflows/ci.yml végé
+```yml
+
+            # =========================
+            # 8. Generate Allure Report
+            # =========================
+            - name: Generate Allure Report
+              run: ./mvnw allure:report
+            - name: Upload Allure report
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                name: allure-report
+                path: target/site/allure-maven-plugin
+```
+
+pom.xml-ben a plugins részre:
+```xml
+<plugin>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-maven</artifactId>
+    <version>2.12.0</version>
+</plugin>
+```
+
 
 <!--TODO: 100 %-os report elérése, hogy minden gombot leellenőrizz.-->
 <!--TODO: tagek beállítása reg meg smoke stb. -->

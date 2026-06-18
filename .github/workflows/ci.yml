@@ -51,7 +51,7 @@ jobs:
                   WRONG_PASSWORD: ${{ secrets.WRONG_PASSWORD }}
                   BASE_URL: ${{ secrets.BASE_URL }}
               # -DCI=true-val átadjuk a paramétert.
-              run: ./mvnw -B clean verify -DCI=true
+              run: ./mvnw -B clean test -DCI=true
 
             # =========================
             # 4. Generate JaCoCo Badges (Directly into README)
@@ -93,3 +93,15 @@ jobs:
               with:
                   folder: target/site/jacoco # A mappa, amit publikálni szeretnél
                   branch: gh-pages
+
+            # =========================
+            # 8. Generate Allure Report
+            # =========================
+            - name: Generate Allure Report
+              run: ./mvnw allure:report
+            - name: Upload Allure report
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: allure-report
+                  path: target/site/allure-maven-plugin

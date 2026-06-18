@@ -15,9 +15,12 @@
 
 ## Test Report
 
-![Test Report](docs/images/report.png)
+![Test Report](docs/images/allure-report.png)
+📊 [View the Allure Report](https://nagraggini.github.io/sauce-demo/allure/)
 
+![Test Report](docs/images/jacoco-report.png)
 📊 [View the JaCoCo Coverage Report](https://nagraggini.github.io/sauce-demo/)
+
 
 ## Project Overview
 
