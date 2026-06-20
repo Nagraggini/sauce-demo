@@ -12,12 +12,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 import base.BaseTest;
 import config.ConfigReader;
 import data.UserDataProvider;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import pages.LoginPage;
 import pages.MenuComponent;
 
 class LoginTest extends BaseTest {
 
 	@Test
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Invalid Login")
 	@Tag("ui")
 	@Tag("regression")
 	@DisplayName("Üresen hagyott input mezőkkel történi bejelentkezés.")
@@ -28,6 +34,9 @@ class LoginTest extends BaseTest {
 	}
 
 	@Test
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Invalid Login")
 	@Tag("ui")
 	@Tag("regression")
 	@DisplayName("Csak felhasználónévvel történő belépési kísérlet.")
@@ -41,6 +50,9 @@ class LoginTest extends BaseTest {
 	}
 
 	@Test
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Invalid Login")
 	@Tag("ui")
 	@Tag("regression")
 	@DisplayName("Csak jelszóval törtéső belépési kísérlet.")
@@ -54,6 +66,9 @@ class LoginTest extends BaseTest {
 	}
 
 	@Test
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Invalid Login")
 	@Tag("ui")
 	@Tag("regression")
 	@DisplayName("Hibás felhasználónévvel történő belépés.")
@@ -67,6 +82,9 @@ class LoginTest extends BaseTest {
 	}
 
 	@Test
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Invalid Login")
 	@Tag("ui")
 	@Tag("regression")
 	@DisplayName("Hibás jelszóval történő belépés.")
@@ -83,6 +101,9 @@ class LoginTest extends BaseTest {
 
 	@ParameterizedTest
 	@CsvSource({ "standard_user", "problem_user", "performance_glitch_user", "error_user", "visual_user" })
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Successful Login")
 	@Tag("regression")
 	@Tag("smoke")
 	@DisplayName("Összes felhasználónév ellenőrzése.")
@@ -98,6 +119,9 @@ class LoginTest extends BaseTest {
 
 	@ParameterizedTest
 	@ArgumentsSource(UserDataProvider.class)
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Successful Login")
 	@Tag("regression")
 	@DisplayName("Bejelentkezések ellenőrzése UserDataProvider segítségével.")
 	void loginWithProvider(String username, String password, String expectedResult, boolean shouldSucceed) {
@@ -123,6 +147,9 @@ class LoginTest extends BaseTest {
 	}
 
 	@Test
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Locked User Login")
 	@Tag("regression")
 	@DisplayName("Zárolt felhasználó ellenőrzése.")
 	void lockedOutUserShouldNotBeAbleToLogin() {
@@ -135,6 +162,9 @@ class LoginTest extends BaseTest {
 	}
 
 	@Test
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Locked User Login")
 	@Tag("ui")
 	@Tag("regression")
 	@DisplayName("Zárolt felhasználó belépési kísérlet esetén megjelenik-e a hibaüzenet.")
@@ -148,6 +178,9 @@ class LoginTest extends BaseTest {
 	}
 
 	@Test
+	@Epic("E-Commerce Application")
+	@Feature("Authentication")
+	@Story("Invalid Login")
 	@Tag("ui")
 	@Tag("regression")
 	@DisplayName("Lecsekkoljuk, hogy betöltödik-e az inventory oldal, ha nem vagyunk belépve.")
