@@ -16,10 +16,10 @@
 ## Test Report
 
 ![Test Report](docs/images/allure-report.png)
-📊 [View the Allure Report](https://nagraggini.github.io/sauce-demo/allure/)
+📊 [View the Allure Report](https://nagraggini.github.io/sauce-demo/allure-report/)
 
 ![Test Report](docs/images/jacoco-report.png)
-📊 [View the JaCoCo Coverage Report](https://nagraggini.github.io/sauce-demo/)
+📊 [View the JaCoCo Coverage Report](https://nagraggini.github.io/sauce-demo/jacoco/)
 
 
 ## Project Overview
@@ -42,7 +42,8 @@ Prerequisites:
 - Maven 3.x
 - Chrome/Firefox WebDriver (or use WebDriverManager as included)
 
-Terminal: ./mvnw clean test
+Terminal: 
+./mvnw clean test
 ./mvnw clean test -Dtest=InventoryTest
 ./mvnw clean test -Dtest=InventoryTest#checkShoppingCartBadgeNumber
 ./mvnw test -Dgroups=regression

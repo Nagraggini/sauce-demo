@@ -416,9 +416,51 @@ pom.xml-ben a plugins részre:
     <version>2.12.0</version>
 </plugin>
 ```
+## gh-pages branch
 
+A másik ágon létrehozott index.html-nek tudsz adni szép dizájnt egy css fájlal.
+
+## Epic
+
+Ha az Allure riportot szeretnéd informatívabbá és "enterprise" kinézetűvé tenni, akkor érdemes használni az Epic → Feature → Story hierarchiát.
+
+Például a SauceDemo projektnél:
+```java
+    @Epic("E-Commerce Application")
+    @Feature("Authentication")
+    @Story("Successful Login")
+    @Test
+    void shouldLoginWithValidCredentials() {
+    }
+```
+
+### Struktúra
+
+Epic: E-Commerce Application
+Feature: Authentication
+Successful Login
+Invalid Login
+Locked User Login
+
+Feature: Inventory
+Product Listing
+Product Details
+
+Feature: Shopping Cart
+Add Product
+Remove Product
+Cart Persistence
+
+Feature: Social Media Links
+Twitter Redirect
+Facebook Redirect
+LinkedIn Redirect
+
+Feature: Checkout
+Checkout Information
+Checkout Overview
+Order Completion
 
 <!--TODO: 100 %-os report elérése, hogy minden gombot leellenőrizz.-->
-<!--TODO: tagek beállítása reg meg smoke stb. -->
 <!--TODO: a page-es oldalokon mindegyik metódusba: return this és az aktuális oldal objektumát adja vissza. -->
 <!--TODO: Mindegyik tesztet lehet egyszerűsíteni a fentivel, így csak egy soros assertek lesznek és nem kell lementeni az objektumokat.-->
