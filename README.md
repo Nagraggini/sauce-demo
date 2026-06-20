@@ -35,6 +35,13 @@ Key features:
 - Environment-based configuration
 - Logging with Log4j2
 
+# Application Under Test
+
+The target application for this automation suite is [SauceDemo](https://www.saucedemo.com/), which is a standard React.js based e-commerce demo site.
+
+URL: https://www.saucedemo.com/
+Development Environment: The suite was created and tested on Linux Mint using Visual Studio Code.
+
 ## Getting Started
 
 Prerequisites:
