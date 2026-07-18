@@ -312,11 +312,16 @@ dependencies részbe:
 
 configuration részbe:
 ```xml
- <systemPropertyVariables>
-        <allure.results.directory>
-            ${project.build.directory}/allure-results
-        </allure.results.directory>
-    </systemPropertyVariables>
+<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+            <systemPropertyVariables>
+                <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+            </systemPropertyVariables>
+        </configuration>
+    </plugin>
 ```
 
 ## Opcionális
