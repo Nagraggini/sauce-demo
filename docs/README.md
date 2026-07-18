@@ -354,11 +354,11 @@ Windowsnál a "./"-t töröld.
 Futtasd le a teszteket: ./mvnw clean test
 Ezzel megjelenik a report: allure serve target/allure-results
 
-De ez, csak offline látszik.
-
-Online verzióhoz:
-rm -rf allure-report
-allure generate target/allure-results -o allure-report
+De ez, csak offline látszik.        
+        
+Online verzióhoz:            
+rm -rf allure-report            
+allure generate target/allure-results -o allure-report        
 
 Lokálban is le tudod csekkolni, az allure-report mappában lévi index.html-en jobb klikk és Open with Live Server.
 
