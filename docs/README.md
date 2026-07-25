@@ -253,28 +253,25 @@ Házi feladat:
 
 # Maven wrapper beállítása és használata
 
-A terminálban navigálj el a projekt mappájáig (pl.: cd GitHub/saucedemo)
-mvn -v
-Ezzel lecsekkoljuk, hogy van-e a gépen maven, ha nem ír verziót, a Mavent telepíteni kell:
-https://maven.apache.org/download.cgi
-pl. apache-maven-3.9.16-bin.zip
-letöltés, kicsomagolás
+A terminálban navigálj el a projekt mappájáig (pl.: cd GitHub/saucedemo) 
+`mvn -v` 
+Ezzel lecsekkoljuk, hogy van-e a gépen maven, ha nem ír verziót, a Mavent telepíteni kell: 
+https://maven.apache.org/download.cgi 
+
+pl. apache-maven-3.9.16-bin.zip letöltés, kicsomagolás 
 környezeti változókhoz felvenni a bin mappáját
 
 Linux-on még ez is kell egyszer: sudo apt install maven
 
-Utána ezt futtasd: mvn clean test
+Utána ezt futtasd: `mvn clean test`
 
-Ezután jöhet a csomagolás: „mvn wrapper:wrapper”
-Ezután létrejönnek ezek: mvnw és mvnw.cmd fájlok és .mvn mappa.
-Innentől kezdve nem mvn utasítást kell használni, hanem mvnw utasítást!
-Ezután nem gond, ah nincsen maven a gépen telepítve, simán lehet terminálból is futatni a projektet. 
+Ezután jöhet a csomagolás: `mvn wrapper:wrapper` Ezután létrejönnek ezek: mvnw és mvnw.cmd fájlok és .mvn mappa. Innentől kezdve nem mvn utasítást kell használni, hanem mvnw utasítást! Ezután nem gond, ah nincsen maven a gépen telepítve, simán lehet terminálból is futatni a projektet.
 
-Futtatás linux-on:
-./mvnw clean test
+Futtatás linux-on: 
+`./mvnw clean test`
 
-win-on:
-mvnw clean test
+win-on: 
+`mvnw clean test`
 
 # Tagek
 
