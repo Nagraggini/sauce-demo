@@ -7,42 +7,53 @@ import base.BasePage;
 
 public class CheckoutStepTwoPage extends BasePage {
 
-<span class="nc" id="L10">    private final By title = By.className(&quot;title&quot;);</span>
+<span class="fc" id="L10">    private final By title = By.className(&quot;title&quot;);</span>
 
-<span class="nc" id="L12">    private final By summarySubtotalLbl = By.className(&quot;summary_subtotal_label&quot;);</span>
-<span class="nc" id="L13">    private final By summaryTotalLbl = By.className(&quot;summary_total_label&quot;);</span>
+<span class="fc" id="L12">    private final By summarySubtotalLbl = By.className(&quot;summary_subtotal_label&quot;);</span>
+<span class="fc" id="L13">    private final By summaryTotalLbl = By.className(&quot;summary_total_label&quot;);</span>
 
-<span class="nc" id="L15">    private final By cancelBtn = By.id(&quot;cancel&quot;);</span>
-<span class="nc" id="L16">    private final By finishBtn = By.id(&quot;finish&quot;);</span>
+<span class="fc" id="L15">    private final By cancelBtn = By.id(&quot;cancel&quot;);</span>
+<span class="fc" id="L16">    private final By finishBtn = By.id(&quot;finish&quot;);</span>
 
     public CheckoutStepTwoPage(WebDriver driver) {
-<span class="nc" id="L19">        super(driver);</span>
-<span class="nc" id="L20">        waitUntilTextToBe(title, &quot;Checkout: Overview&quot;);</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L19">        super(driver);</span>
+<span class="fc" id="L20">        waitUntilTextToBe(title, &quot;Checkout: Overview&quot;);</span>
+<span class="fc" id="L21">    }</span>
 
     public double getSummarySubtotal() {
-<span class="nc" id="L24">        return Double.parseDouble(</span>
-<span class="nc" id="L25">                getText(summarySubtotalLbl).replace(&quot;$&quot;, &quot;&quot;)</span>
-<span class="nc" id="L26">                        .replace(&quot;Item total: &quot;, &quot;&quot;));</span>
+<span class="fc" id="L24">        return Double.parseDouble(</span>
+<span class="fc" id="L25">                getText(summarySubtotalLbl)</span>
+<span class="fc" id="L26">                        .replace(&quot;Item total: &quot;, &quot;&quot;)</span>
+<span class="fc" id="L27">                        .replace(&quot;$&quot;, &quot;&quot;)</span>
+<span class="fc" id="L28">                        .trim());</span>
     }
 
     public double getSummaryTotal() {
-<span class="nc" id="L30">        return Double.parseDouble(</span>
-<span class="nc" id="L31">                getText(summaryTotalLbl).replace(&quot;$&quot;, &quot;&quot;)</span>
-<span class="nc" id="L32">                        .replace(&quot;Item total: &quot;, &quot;&quot;));</span>
+<span class="fc" id="L32">        return Double.parseDouble(</span>
+<span class="fc" id="L33">                getText(summaryTotalLbl)</span>
+<span class="fc" id="L34">                        .replace(&quot;Total: &quot;, &quot;&quot;)</span>
+<span class="fc" id="L35">                        .replace(&quot;$&quot;, &quot;&quot;)</span>
+<span class="fc" id="L36">                        .trim());</span>
     }
 
     public InventoryPage clickOnCancel() {
-<span class="nc" id="L36">        click(cancelBtn);</span>
-<span class="nc" id="L37">        return new InventoryPage(driver);</span>
+<span class="nc" id="L40">        click(cancelBtn);</span>
+<span class="nc" id="L41">        return new InventoryPage(driver);</span>
     }
 
     // A getPriceOfAnItem(String itemName) metódus itt is működik.
 
     public CheckoutCompletePage clickOnFinish() {
-<span class="nc" id="L43">        click(finishBtn);</span>
-<span class="nc" id="L44">        return new CheckoutCompletePage(driver);</span>
+<span class="fc" id="L47">        click(finishBtn);</span>
+<span class="fc" id="L48">        return new CheckoutCompletePage(driver);</span>
     }
 
+    public double getPriceOfAnItem(String itemName) {
+<span class="fc" id="L52">        return Double.parseDouble(</span>
+<span class="fc" id="L53">                getText(By.xpath(</span>
+                        &quot;//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='&quot;
+                                + itemName + &quot;']]//div[@class='inventory_item_price']&quot;))
+<span class="fc" id="L56">                        .replace(&quot;$&quot;, &quot;&quot;));</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

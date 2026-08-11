@@ -18,14 +18,14 @@ public class CartPage extends BasePage {
 
     public double getPriceOfAnItem(String itemName) {
         /* .[] -&gt; Pont az aktuálisre hivatkozik a kapcsoszárójelben van a feltétel. */
-<span class="nc" id="L21">        double itemPrice = Double</span>
-<span class="nc" id="L22">                .parseDouble(getText(</span>
-<span class="nc" id="L23">                        By.xpath(</span>
+<span class="fc" id="L21">        double itemPrice = Double</span>
+<span class="fc" id="L22">                .parseDouble(getText(</span>
+<span class="fc" id="L23">                        By.xpath(</span>
                                 &quot;//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='&quot;
                                         + itemName + &quot;']]//div[@class='inventory_item_price']&quot;))
-<span class="nc" id="L26">                        .replace(&quot;$&quot;, &quot;&quot;));</span>
+<span class="fc" id="L26">                        .replace(&quot;$&quot;, &quot;&quot;));</span>
 
-<span class="nc" id="L28">        return itemPrice;</span>
+<span class="fc" id="L28">        return itemPrice;</span>
     }
 
     public InventoryPage continueShopping() {
@@ -34,8 +34,8 @@ public class CartPage extends BasePage {
     }
 
     public CheckoutStepOnePage clickOnCheckout() {
-<span class="nc" id="L37">        click(checkoutBtn);</span>
-<span class="nc" id="L38">        return new CheckoutStepOnePage(driver);</span>
+<span class="fc" id="L37">        click(checkoutBtn);</span>
+<span class="fc" id="L38">        return new CheckoutStepOnePage(driver);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
