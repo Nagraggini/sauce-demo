@@ -32,7 +32,7 @@ public class CheckoutStepOnePage extends BasePage {
 
     public CheckoutStepOnePage(WebDriver driver) {
         super(driver);
-        waitUntilTextToBe(title, "Products");
+        waitUntilTextToBe(title, "Checkout: Your Information");
     }
 
     public CheckoutStepOnePage fillFirstNameInput(String firstName) {
