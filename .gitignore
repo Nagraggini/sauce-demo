@@ -78,4 +78,3 @@ jacoco.exec
 # =========================
 .env
 .secrets
-config.properties
