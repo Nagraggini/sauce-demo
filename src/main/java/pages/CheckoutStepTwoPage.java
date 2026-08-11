@@ -22,14 +22,18 @@ public class CheckoutStepTwoPage extends BasePage {
 
     public double getSummarySubtotal() {
         return Double.parseDouble(
-                getText(summarySubtotalLbl).replace("$", "")
-                        .replace("Item total: ", ""));
+                getText(summarySubtotalLbl)
+                        .replace("Item total: ", "")
+                        .replace("$", "")
+                        .trim());
     }
 
     public double getSummaryTotal() {
         return Double.parseDouble(
-                getText(summaryTotalLbl).replace("$", "")
-                        .replace("Item total: ", ""));
+                getText(summaryTotalLbl)
+                        .replace("Total: ", "")
+                        .replace("$", "")
+                        .trim());
     }
 
     public InventoryPage clickOnCancel() {
@@ -44,4 +48,11 @@ public class CheckoutStepTwoPage extends BasePage {
         return new CheckoutCompletePage(driver);
     }
 
+    public double getPriceOfAnItem(String itemName) {
+        return Double.parseDouble(
+                getText(By.xpath(
+                        "//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='"
+                                + itemName + "']]//div[@class='inventory_item_price']"))
+                        .replace("$", ""));
+    }
 }
