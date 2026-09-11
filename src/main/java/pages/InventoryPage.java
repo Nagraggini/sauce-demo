@@ -26,7 +26,7 @@ public class InventoryPage extends BasePage {
 	private final By addToCartBtns = By.cssSelector("button[data-test^='add-to-cart']");
 
 	// Lábléc.
-	private final By twitterLink = By.linkText("Twitter");
+	private final By twitterLink = By.cssSelector("a[data-test='social-x']");
 	private final By fbLink = By.cssSelector("[data-test='social-facebook']");
 	private final By linkedinLink = By.cssSelector("[data-test='social-linkedin']");
 
