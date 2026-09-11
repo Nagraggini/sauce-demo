@@ -26,7 +26,7 @@ public class InventoryPage extends BasePage {
 <span class="fc" id="L26">	private final By addToCartBtns = By.cssSelector(&quot;button[data-test^='add-to-cart']&quot;);</span>
 
 	// Lábléc.
-<span class="fc" id="L29">	private final By twitterLink = By.linkText(&quot;Twitter&quot;);</span>
+<span class="fc" id="L29">	private final By twitterLink = By.cssSelector(&quot;a[data-test='social-x']&quot;);</span>
 <span class="fc" id="L30">	private final By fbLink = By.cssSelector(&quot;[data-test='social-facebook']&quot;);</span>
 <span class="fc" id="L31">	private final By linkedinLink = By.cssSelector(&quot;[data-test='social-linkedin']&quot;);</span>
 
@@ -165,5 +165,6 @@ public class InventoryPage extends BasePage {
 <span class="fc" id="L165">		closeCurrentTabAndSwitchBack(original);</span>
 <span class="fc" id="L166">		return this;</span>
 	}
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

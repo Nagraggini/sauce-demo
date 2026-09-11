@@ -1,10 +1,10 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 saucedemo,pages,CheckoutCompletePage,10,27,0,0,2,7,1,2,1,2
 saucedemo,pages,MenuComponent,0,70,0,0,0,20,0,5,0,5
-saucedemo,pages,CheckoutStepTwoPage,10,76,0,0,2,23,1,5,1,5
+saucedemo,pages,CheckoutStepTwoPage,10,113,0,0,2,31,1,10,1,10
 saucedemo,pages,LoginPage,0,72,0,0,0,20,0,6,0,6
 saucedemo,pages,InventoryPage,10,263,1,5,2,63,1,21,0,19
-saucedemo,pages,CheckoutStepOnePage,36,81,0,0,9,20,5,3,5,3
+saucedemo,pages,CheckoutStepOnePage,31,92,0,0,8,23,4,5,4,5
 saucedemo,pages,CartPage,0,54,0,0,0,15,0,4,0,4
 saucedemo,driver,DriverFactory,3,48,1,1,1,10,2,1,1,1
 saucedemo,utils,TestDataUtil,0,9,0,0,0,4,0,4,0,4

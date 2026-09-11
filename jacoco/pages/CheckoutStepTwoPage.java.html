@@ -10,50 +10,73 @@ public class CheckoutStepTwoPage extends BasePage {
 <span class="fc" id="L10">    private final By title = By.className(&quot;title&quot;);</span>
 
 <span class="fc" id="L12">    private final By summarySubtotalLbl = By.className(&quot;summary_subtotal_label&quot;);</span>
-<span class="fc" id="L13">    private final By summaryTotalLbl = By.className(&quot;summary_total_label&quot;);</span>
+<span class="fc" id="L13">    private final By summaryTaxLbl = By.className(&quot;summary_tax_label&quot;);</span>
+<span class="fc" id="L14">    private final By summaryTotalLbl = By.className(&quot;summary_total_label&quot;);</span>
+<span class="fc" id="L15">    private final By paymentInfoLbl = By.cssSelector(&quot;[data-test='payment-info-value']&quot;);</span>
+<span class="fc" id="L16">    private final By shippingInfoLbl = By.cssSelector(&quot;[data-test='shipping-info-value']&quot;);</span>
 
-<span class="fc" id="L15">    private final By cancelBtn = By.id(&quot;cancel&quot;);</span>
-<span class="fc" id="L16">    private final By finishBtn = By.id(&quot;finish&quot;);</span>
+<span class="fc" id="L18">    private final By cancelBtn = By.id(&quot;cancel&quot;);</span>
+<span class="fc" id="L19">    private final By finishBtn = By.id(&quot;finish&quot;);</span>
 
     public CheckoutStepTwoPage(WebDriver driver) {
-<span class="fc" id="L19">        super(driver);</span>
-<span class="fc" id="L20">        waitUntilTextToBe(title, &quot;Checkout: Overview&quot;);</span>
-<span class="fc" id="L21">    }</span>
+<span class="fc" id="L22">        super(driver);</span>
+<span class="fc" id="L23">        waitUntilTextToBe(title, &quot;Checkout: Overview&quot;);</span>
+<span class="fc" id="L24">    }</span>
 
     public double getSummarySubtotal() {
-<span class="fc" id="L24">        return Double.parseDouble(</span>
-<span class="fc" id="L25">                getText(summarySubtotalLbl)</span>
-<span class="fc" id="L26">                        .replace(&quot;Item total: &quot;, &quot;&quot;)</span>
-<span class="fc" id="L27">                        .replace(&quot;$&quot;, &quot;&quot;)</span>
-<span class="fc" id="L28">                        .trim());</span>
+<span class="fc" id="L27">        return Double.parseDouble(</span>
+<span class="fc" id="L28">                getText(summarySubtotalLbl)</span>
+<span class="fc" id="L29">                        .replace(&quot;Item total: &quot;, &quot;&quot;)</span>
+<span class="fc" id="L30">                        .replace(&quot;$&quot;, &quot;&quot;)</span>
+<span class="fc" id="L31">                        .trim());</span>
     }
 
     public double getSummaryTotal() {
-<span class="fc" id="L32">        return Double.parseDouble(</span>
-<span class="fc" id="L33">                getText(summaryTotalLbl)</span>
-<span class="fc" id="L34">                        .replace(&quot;Total: &quot;, &quot;&quot;)</span>
-<span class="fc" id="L35">                        .replace(&quot;$&quot;, &quot;&quot;)</span>
-<span class="fc" id="L36">                        .trim());</span>
+<span class="fc" id="L35">        return Double.parseDouble(</span>
+<span class="fc" id="L36">                getText(summaryTotalLbl)</span>
+<span class="fc" id="L37">                        .replace(&quot;Total: &quot;, &quot;&quot;)</span>
+<span class="fc" id="L38">                        .replace(&quot;$&quot;, &quot;&quot;)</span>
+<span class="fc" id="L39">                        .trim());</span>
+    }
+
+    public String getPaymentInfo() {
+<span class="fc" id="L43">        return getText(paymentInfoLbl);</span>
+    }
+
+    public String getShippingInfo() {
+<span class="fc" id="L47">        return getText(shippingInfoLbl);</span>
+    }
+
+    public String getItemTotalText() {
+<span class="fc" id="L51">        return getText(summarySubtotalLbl);</span>
+    }
+
+    public String getTaxText() {
+<span class="fc" id="L55">        return getText(summaryTaxLbl);</span>
+    }
+
+    public String getTotalPriceText() {
+<span class="fc" id="L59">        return getText(summaryTotalLbl);</span>
     }
 
     public InventoryPage clickOnCancel() {
-<span class="nc" id="L40">        click(cancelBtn);</span>
-<span class="nc" id="L41">        return new InventoryPage(driver);</span>
+<span class="nc" id="L63">        click(cancelBtn);</span>
+<span class="nc" id="L64">        return new InventoryPage(driver);</span>
     }
 
     // A getPriceOfAnItem(String itemName) metódus itt is működik.
 
     public CheckoutCompletePage clickOnFinish() {
-<span class="fc" id="L47">        click(finishBtn);</span>
-<span class="fc" id="L48">        return new CheckoutCompletePage(driver);</span>
+<span class="fc" id="L70">        click(finishBtn);</span>
+<span class="fc" id="L71">        return new CheckoutCompletePage(driver);</span>
     }
 
     public double getPriceOfAnItem(String itemName) {
-<span class="fc" id="L52">        return Double.parseDouble(</span>
-<span class="fc" id="L53">                getText(By.xpath(</span>
+<span class="fc" id="L75">        return Double.parseDouble(</span>
+<span class="fc" id="L76">                getText(By.xpath(</span>
                         &quot;//div[@class='cart_item'][.//div[@class='inventory_item_name' and normalize-space()='&quot;
                                 + itemName + &quot;']]//div[@class='inventory_item_price']&quot;))
-<span class="fc" id="L56">                        .replace(&quot;$&quot;, &quot;&quot;));</span>
+<span class="fc" id="L79">                        .replace(&quot;$&quot;, &quot;&quot;));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
