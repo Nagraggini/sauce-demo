@@ -61,6 +61,13 @@ public class CheckoutStepOnePage extends BasePage {
         return getText(errorMessage);
     }
 
+    /** Elküldi az űrlapot, de az aktuális oldalon marad.
+     * Hibás adatok validációjához használandó. */
+    public CheckoutStepOnePage submit() {
+        click(continueBtn);
+        return this;
+    }
+
     public CartPage cancel() {
         click(cancelBtn);
         return new CartPage(driver);

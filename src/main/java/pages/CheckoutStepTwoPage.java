@@ -10,7 +10,10 @@ public class CheckoutStepTwoPage extends BasePage {
     private final By title = By.className("title");
 
     private final By summarySubtotalLbl = By.className("summary_subtotal_label");
+    private final By summaryTaxLbl = By.className("summary_tax_label");
     private final By summaryTotalLbl = By.className("summary_total_label");
+    private final By paymentInfoLbl = By.cssSelector("[data-test='payment-info-value']");
+    private final By shippingInfoLbl = By.cssSelector("[data-test='shipping-info-value']");
 
     private final By cancelBtn = By.id("cancel");
     private final By finishBtn = By.id("finish");
@@ -34,6 +37,26 @@ public class CheckoutStepTwoPage extends BasePage {
                         .replace("Total: ", "")
                         .replace("$", "")
                         .trim());
+    }
+
+    public String getPaymentInfo() {
+        return getText(paymentInfoLbl);
+    }
+
+    public String getShippingInfo() {
+        return getText(shippingInfoLbl);
+    }
+
+    public String getItemTotalText() {
+        return getText(summarySubtotalLbl);
+    }
+
+    public String getTaxText() {
+        return getText(summaryTaxLbl);
+    }
+
+    public String getTotalPriceText() {
+        return getText(summaryTotalLbl);
     }
 
     public InventoryPage clickOnCancel() {

@@ -48,6 +48,7 @@ public class BaseTest {
 		}
 	}
 
+	// Utility/Debug
 	protected void onlyForChecking() {
 		// Csak ellenőrzéshez.
 		try {

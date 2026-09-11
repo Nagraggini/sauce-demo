@@ -165,4 +165,5 @@ public class InventoryPage extends BasePage {
 		closeCurrentTabAndSwitchBack(original);
 		return this;
 	}
+
 }
