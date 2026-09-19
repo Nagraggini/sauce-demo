@@ -15,6 +15,8 @@
 
 ## Test Report
 
+The automated test results and execution reports are generated and published automatically via GitHub Actions:
+
 ![Test Report](docs/images/allure-report.png)
 📊 [View the Allure Report](https://nagraggini.github.io/sauce-demo/allure-report/)
 
